@@ -28,7 +28,7 @@ public class EJ1_A1UD1 {
             num1_input = entrada.readLine();
 
             if(!esEntero(num1_input)) {
-                System.out.println("El número no es un entero. Inténtalo de nuevo.");
+                System.out.println("El número no es un número entero. Inténtalo de nuevo.");
             }
             else {
                 num1_esCorrecto = true;
