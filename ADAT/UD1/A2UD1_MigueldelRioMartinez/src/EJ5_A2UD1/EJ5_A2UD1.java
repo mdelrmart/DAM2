@@ -1,7 +1,6 @@
 package EJ5_A2UD1;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;

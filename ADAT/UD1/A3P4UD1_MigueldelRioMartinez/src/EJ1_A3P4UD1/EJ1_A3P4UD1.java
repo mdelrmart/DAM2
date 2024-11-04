@@ -5,7 +5,6 @@
 package EJ1_A3P4UD1;
 
 import java.io.*;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class EJ1_A3P4UD1 {
