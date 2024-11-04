@@ -1,0 +1,7 @@
+                      RESULTADOS
+                    --------------
+ cadena: Miguel
+ el caracter tecleado: M
+ entero: 9
+ numero real double: 9.5
+ entero positivo: 8

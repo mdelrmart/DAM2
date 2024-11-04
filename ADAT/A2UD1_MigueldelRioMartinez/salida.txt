@@ -1,0 +1,4 @@
+Unidad C:\
+   Espacio libre: 58.471.813.120 bytes (54,46 GB)
+   Espacio ocupado: 48.229.478.400 bytes (44,92 GB)
+   Espacio total: 106.701.291.520 bytes (99,37 GB)
