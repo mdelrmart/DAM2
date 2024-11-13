@@ -22,7 +22,7 @@ public class Votacion extends AppCompatActivity {
 
     AsistenteBD asistenteBD;
 
-    int numVotosPermitidos = 3;
+    int numVotosMaxPermitidos = 3;
 
     private Spinner candidato;
     private Button btnVotar;
@@ -41,7 +41,8 @@ public class Votacion extends AppCompatActivity {
 
         cargarCandidatosEnSpinner();
 
-        // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez, no se puede guardar en la BBDD por seguridad.
+        // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez,
+        // no se puede guardar en la BBDD por secreto electoral.
         ArrayList<Integer> candidatosVotados = new ArrayList<>();
 
         btnVotar.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +54,7 @@ public class Votacion extends AppCompatActivity {
                 int codCandidatoSeleccionado;
 
                 // Si el tamaño del ArrayList es diferente al de numVotosPermitidos
-                if (candidatosVotados.size() != numVotosPermitidos) {
+                if (candidatosVotados.size() != numVotosMaxPermitidos) {
                     // Si el candidato seleccionado no es null obtenemos el codCandidato y lo añadimos al ArrayList
                     if (candidatoSeleccionado != null) {
                         codCandidatoSeleccionado = candidatoSeleccionado.getCodCandidato();
