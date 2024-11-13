@@ -145,18 +145,20 @@ public class AsistenteBD extends SQLiteOpenHelper {
         Cursor datos = db.rawQuery(consulta, null);
 
         //Agregamos a la lista un objeto Candidato vacío
-        candidatos.add(0,null);
+        //candidatos.add(0,null);
 
         if (datos.moveToFirst()) {
             do {
                 int codCandidato = datos.getInt(0);
                 String nombreCandidato = datos.getString(2);
-                candidatos.add(new Candidato(codCandidato, nombreCandidato));
+                int codPartido = datos.getInt(1);
+                candidatos.add(new Candidato(codCandidato, nombreCandidato, codPartido));
             } while (datos.moveToNext());
         }
         datos.close();
         db.close();
 
+        System.out.println(candidatos.toString());
         return candidatos;
     }
 }

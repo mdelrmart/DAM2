@@ -32,6 +32,9 @@ public class Votacion extends AppCompatActivity {
 
     Bundle usuarioPasado;
 
+    // Arrays de imágenes y textos
+    int[] logos = {R.drawable.pp, R.drawable.psoe, R.drawable.sumar, R.drawable.vox};
+
     // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez,
     // no se puede guardar en la BBDD por secreto electoral.
     ArrayList<Integer> candidatosVotados = new ArrayList<>();
@@ -43,7 +46,7 @@ public class Votacion extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        candidato =  findViewById(R.id.candidato);
+        candidato = findViewById(R.id.candidato);
         btnVotar = findViewById(R.id.btnVotar);
 
         asistenteBD = new AsistenteBD(this);
@@ -55,7 +58,8 @@ public class Votacion extends AppCompatActivity {
         String usuarioObtenido = usuarioPasado.getString("usuario");
 
         if (getSupportActionBar() != null) {
-            if (usuarioPasado != null) getSupportActionBar().setTitle("Elecciones - " + usuarioObtenido);
+            if (usuarioPasado != null)
+                getSupportActionBar().setTitle("Elecciones - " + usuarioObtenido);
         }
 
         btnVotar.setText("Votar 0/" + numVotosMaxPermitidos);
@@ -119,7 +123,8 @@ public class Votacion extends AppCompatActivity {
         List<Candidato> candidatos = asistenteBD.obtenerCandidatos();
 
         // Crear un ArrayAdapter usando la lista de nombres y un layout predefinido para el Spinner
-        ArrayAdapter<Candidato> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, candidatos);
+        //ArrayAdapter<Candidato> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, candidatos);
+        SpinnerCandidato adapter = new SpinnerCandidato(this, candidatos, logos);
 
         // Especificar el layout para cuando el menú del Spinner esté desplegado
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

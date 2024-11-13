@@ -3,10 +3,12 @@ package com.example.elecciones;
 public class Candidato {
     private int codCandidato;
     private String nombre;
+    private int codPartido;
 
-    public Candidato(int codCandidato, String nombre) {
+    public Candidato(int codCandidato, String nombre, int codPartido) {
         this.codCandidato = codCandidato;
         this.nombre = nombre;
+        this.codPartido = codPartido;
     }
 
     public int getCodCandidato() {
@@ -15,6 +17,10 @@ public class Candidato {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public int getCodPartido() {
+        return codPartido;
     }
 
     @Override
