@@ -73,7 +73,7 @@ public class Votacion extends AppCompatActivity {
 
                 // Agregamos el voto y comprobamos el límite
                 registrarVoto(candidatoSeleccionado);
-                verificarLimiteVotos(usuarioObtenido);
+                comprobarLimiteVotos(usuarioObtenido);
             }
         });
 
@@ -82,14 +82,23 @@ public class Votacion extends AppCompatActivity {
     private void registrarVoto(Candidato candidatoSeleccionado) {
         // Obtenemos el código del candidato y lo añadimos a la lista
         int codCandidatoSeleccionado = candidatoSeleccionado.getCodCandidato();
+
+        // Verificamos si el candidato ya ha sido votado comprobando si el objecto que hemos seleccionado está presente en el ArrayList
+        if (candidatosVotados.contains(codCandidatoSeleccionado)) {
+            mensajeSnackbarAceptar("No se puede votar al mismo candidato más de una vez.");
+            return;
+        }
+
         candidatosVotados.add(codCandidatoSeleccionado);
 
-        // Actualizamos el texto del botón para mostrar el progreso
+        // Actualizamos el texto del botón para ir mostrando el progreso
         btnVotar.setText("Votar " + candidatosVotados.size() + "/" + numVotosMaxPermitidos);
+
+        // Volvemos a cargar los candidatos para quitar los que ya votamos
         cargarCandidatosEnSpinner();
     }
 
-    private void verificarLimiteVotos(String usuario) {
+    private void comprobarLimiteVotos(String usuario) {
         if (candidatosVotados.size() == numVotosMaxPermitidos) {
             // Deshabilitamos el botón
             btnVotar.setEnabled(false);

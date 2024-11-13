@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AsistenteBD extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "elecciones.db";
-    private static final int VERSION_BD = 1;
+    private static final int VERSION_BD = 5;
     public AsistenteBD(Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
     }
