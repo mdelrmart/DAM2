@@ -1,7 +1,5 @@
 package com.example.elecciones;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.navigation.ui.AppBarConfiguration;
@@ -36,6 +32,10 @@ public class Votacion extends AppCompatActivity {
 
     Bundle usuarioPasado;
 
+    // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez,
+    // no se puede guardar en la BBDD por secreto electoral.
+    ArrayList<Integer> candidatosVotados = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +58,7 @@ public class Votacion extends AppCompatActivity {
             if (usuarioPasado != null) getSupportActionBar().setTitle("Elecciones - " + usuarioObtenido);
         }
 
-        // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez,
-        // no se puede guardar en la BBDD por secreto electoral.
-        ArrayList<Integer> candidatosVotados = new ArrayList<>();
+        btnVotar.setText("Votar 0/" + numVotosMaxPermitidos);
 
         btnVotar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,27 +66,43 @@ public class Votacion extends AppCompatActivity {
                 // Obtenemos el objeto candidato seleccionado
                 Candidato candidatoSeleccionado = (Candidato) candidato.getSelectedItem();
 
-                int codCandidatoSeleccionado;
-
-                // Si el tamaño del ArrayList es diferente al de numVotosPermitidos
-                if (candidatosVotados.size() != numVotosMaxPermitidos) {
-                    // Si el candidato seleccionado no es null obtenemos el codCandidato y lo añadimos al ArrayList
-                    if (candidatoSeleccionado != null) {
-                        codCandidatoSeleccionado = candidatoSeleccionado.getCodCandidato();
-                        candidatosVotados.add(codCandidatoSeleccionado);
-                    }
-                } else {
-                    // Al llegar al limite de numVotosPermitidos vamos añadiendolos a la BBDD
-                    for (int i = 0; i < candidatosVotados.size(); i++) {
-                        asistenteBD.anhadirVotoCandidato(candidatosVotados.get(i));
-                    }
-                    //asistenteBD.anhadirUsuarioHaVotado(codCandidatoSeleccionado);
-                    asistenteBD.setHaVotado(usuarioObtenido);
-                    asistenteBD.close();
+                // Si el candidatoSeleccionado es null no seguimos
+                if (candidatoSeleccionado == null) {
+                    return;
                 }
+
+                // Agregamos el voto y comprobamos el límite
+                registrarVoto(candidatoSeleccionado);
+                verificarLimiteVotos(usuarioObtenido);
             }
         });
 
+    }
+
+    private void registrarVoto(Candidato candidatoSeleccionado) {
+        // Obtenemos el código del candidato y lo añadimos a la lista
+        int codCandidatoSeleccionado = candidatoSeleccionado.getCodCandidato();
+        candidatosVotados.add(codCandidatoSeleccionado);
+
+        // Actualizamos el texto del botón para mostrar el progreso
+        btnVotar.setText("Votar " + candidatosVotados.size() + "/" + numVotosMaxPermitidos);
+        cargarCandidatosEnSpinner();
+    }
+
+    private void verificarLimiteVotos(String usuario) {
+        if (candidatosVotados.size() == numVotosMaxPermitidos) {
+            // Deshabilitamos el botón
+            btnVotar.setEnabled(false);
+
+            System.out.println("Límite de votos alcanzado");
+
+            // Registrar los votos en la BBDD y marcar como ha votado
+            for (int codCandidato : candidatosVotados) {
+                asistenteBD.anhadirVotoCandidato(codCandidato);
+            }
+            asistenteBD.setHaVotado(usuario);
+            asistenteBD.close();
+        }
     }
 
     private void cargarCandidatosEnSpinner() {
@@ -104,10 +118,6 @@ public class Votacion extends AppCompatActivity {
         // Asignar el adaptador al Spinner
         candidato.setAdapter(adapter);
     }
-
-    //region *** Operaciones BBDD ***
-
-    //endregion
 
     //region *** Métodos para sacar mensajes por pantalla ***
     private void mensajeToast(String mensaje) {

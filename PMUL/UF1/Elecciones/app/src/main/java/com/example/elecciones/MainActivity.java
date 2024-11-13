@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         asistenteBD = new AsistenteBD(this);
+        // Creamos la BBDD
+        asistenteBD.getWritableDatabase();
 
         usuario = findViewById(R.id.usuario);
         contrasenha = findViewById(R.id.password);
@@ -47,25 +49,29 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usuarioString = usuario.getText().toString();
+                String usuarioString = usuario.getText().toString().toUpperCase();
                 String contrasenhaString = contrasenha.getText().toString();
 
+                // Comprobamos si vienen vacios los campos de usuario y contraseña
                 if (usuarioString.isBlank() || contrasenhaString.isBlank()) {
                     mensajeSnackbar("No se ha introducido el usuario y/o contraseña");
                     return;
                 }
 
+                // Consultamos en la BBDD si ese usuario ya ha votado y no permitimos el acceso
                 if (getHaVotado(usuarioString)) {
                     mensajeSnackbarAceptar("Ya has votado, no se puede acceder.");
                     return;
                 }
 
+                // Consultamos en la BBDD si los datos del usuario son correctos y accedemos a la votación
                 if (comprobarContrasenha(usuarioString,contrasenhaString)) {
                     Intent intentVotacion = new Intent(MainActivity.this, Votacion.class);
                     intentVotacion.putExtra("usuario", usuarioString);
                     startActivity(intentVotacion);
 
                     // Un poco chapuza, finalizamos el intent actual para no guardar los datos en los campos
+                    // TODO mejorar ?
                     finish();
                 }
                 else {

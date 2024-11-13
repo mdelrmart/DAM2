@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AsistenteBD extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "elecciones.db";
-    private static final int VERSION_BD = 4;
+    private static final int VERSION_BD = 1;
     public AsistenteBD(Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
     }
@@ -159,22 +159,4 @@ public class AsistenteBD extends SQLiteOpenHelper {
 
         return candidatos;
     }
-
-
-
-    /*
-    public Cursor obtenerDatos() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String consulta = "SELECT * FROM CLIENTES";
-        Cursor datos = db.rawQuery(consulta, null);
-        return datos;
-    }
-
-   public Cursor obtenerCodCliente(String nombre) {
-        SQLiteDatabase db= this.getWritableDatabase();
-        String consulta = "SELECT codCliente FROM CLIENTE WHERE codCliente=" + nombre;
-        Cursor datos = db.rawQuery(consulta, null);
-        return datos;
-    }
-    */
 }
