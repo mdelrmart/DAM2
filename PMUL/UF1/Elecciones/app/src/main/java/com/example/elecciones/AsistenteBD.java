@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AsistenteBD extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "elecciones.db";
-    private static final int VERSION_BD = 1;
+    private static final int VERSION_BD = 4;
     public AsistenteBD(Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
     }
@@ -28,10 +28,9 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL(sqlCreateCandidatos);
 
         // Insertar datos en la tabla usuarios
-        //bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123."));
-        //bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('87654321X','" + Utiles.generateHash("abc123.,"));
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','abc123.')");
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('87654321X','abc123.')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('53614816E','" + Utiles.generateHash("abc123") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('52492165R','" + Utiles.generateHash("abc123.") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123,") + "')");
 
         // Insertar datos en la tabla partidos (solo nombre y color)
         bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', 1)");
@@ -73,8 +72,9 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL(sqlCreateCandidatos);
 
         // Insertar datos en la tabla usuarios
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123."));
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('87654321X','" + Utiles.generateHash("abc123.,"));
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('53614816E','" + Utiles.generateHash("abc123") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('52492165R','" + Utiles.generateHash("abc123.") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123.,") + "')");
 
         // Insertar datos en la tabla partidos (solo nombre y color)
         bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', 1)");
@@ -103,14 +103,15 @@ public class AsistenteBD extends SQLiteOpenHelper {
     public void anhadirVotoCandidato(int codCandidato) {
         SQLiteDatabase bd = this.getWritableDatabase();
 
+        // Consulta parametrizada
         bd.execSQL("UPDATE candidatos SET votos = votos + 1 WHERE codCandidato = ?", new String[]{String.valueOf(codCandidato)});
-/*
-        if (resultado == -1) {
-            return false;
-        }
-        else {
-            return true;
-        }*/
+    }
+
+    public void setHaVotado(String nif) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+
+        // Consulta parametrizada
+        bd.execSQL("UPDATE usuarios SET haVotado = 1 WHERE nif = ?", new String[]{nif});
     }
 
     public boolean modificarDatos(int codCliente, String nombre, String apellidos, String dni, int codProvincia, int vip, String latitud, String longitud) {
