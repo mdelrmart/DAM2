@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     /*
     public void poblarLista() {
         listaClientes.setAdapter(new ArrayAdapter<ClienteEnLista>(this, android.R.layout.simple_list_item_1,getDatosClientes()));
@@ -112,10 +111,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    */
 
-   /*
-   private void poblarLista() {
+    private void poblarLista() {
         Cursor datos = asistenteBD.obtenerDatos();
 
         ArrayList<String> listaDatos = new ArrayList<>();
