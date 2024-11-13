@@ -19,6 +19,6 @@ public class Provincia {
 
     @Override
     public String toString() {
-        return nombre != "" ? nombre : "Selecciona una provincia";
+        return nombre;
     }
 }

@@ -160,13 +160,13 @@ public class FichaCliente extends AppCompatActivity {
                     return;
                 }
 
+                // Por defecto la provincia seleccionada es -1 (no seleccionada)
+                int codProvinciaSeleccionada = -1;
                 // Obtenemos el objeto provincia seleccionado
                 Provincia provinciaSeleccionada = (Provincia) provincia.getSelectedItem();
-                // Por defecto la provincia seleccionada es -1
-                int codProvinciaSeleccionada = -1;
 
-                // Si la provinciaSeleccionada no es null obtenemos el codProvincia
-                if (provinciaSeleccionada != null) {
+                // Si la provinciaSeleccionada no es -1 obtenemos el codProvincia
+                if (provinciaSeleccionada.getCodProvincia() != -1) {
                     codProvinciaSeleccionada = provinciaSeleccionada.getCodProvincia();
                 }
 
@@ -174,7 +174,7 @@ public class FichaCliente extends AppCompatActivity {
                 String latitudString = latitud.getText().toString();
                 String longitudString = longitud.getText().toString();
 
-                if (dniCorrecto == false) {
+                if (!dniCorrecto) {
                     mensajeToast("El DNI no contiene el formato correcto.");
                     return;
                 }
@@ -232,7 +232,7 @@ public class FichaCliente extends AppCompatActivity {
         for (int i = 0; i < provincia.getCount(); i++) {
             Provincia provinciaItem = (Provincia) provincia.getItemAtPosition(i);
 
-            if (provinciaItem != null && provinciaItem.getCodProvincia() == idProvinciaGuardada) {
+            if (provinciaItem.getCodProvincia() == idProvinciaGuardada) {
                 // Seleccionamos el elemento en el Spinner
                 provincia.setSelection(i);
                 break;

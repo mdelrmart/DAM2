@@ -98,7 +98,7 @@ public class AsistenteBD extends SQLiteOpenHelper {
         Cursor datos = db.rawQuery(consulta, null);
 
         //Agregamos a la lista un objeto Provincia vacío
-        provincias.add(0,null);
+        provincias.add(0,new Provincia(-1, "Selecciona una provincia"));
 
         if (datos.moveToFirst()) {
             do {
