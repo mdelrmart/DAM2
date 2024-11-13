@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Mantenimiento Clientes</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="guardar">Guardar</string>
+    <string name="vip">VIP</string>
+    <string name="nombre">Nombre *</string>
+    <string name="apellidos">Apellidos *</string>
+    <string name="dni">DNI *</string>
+    <string name="latitud">Latitud</string>
+    <string name="longitud">Longitud</string>
+    <string name="ver_en_el_mapa">Ver en el mapa</string>
+
+</resources>
