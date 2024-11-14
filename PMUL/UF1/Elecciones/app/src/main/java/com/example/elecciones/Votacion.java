@@ -26,7 +26,7 @@ public class Votacion extends AppCompatActivity {
 
     int numVotosMaxPermitidos = 3;
 
-    private Spinner candidato;
+    private Spinner spCandidato;
 
     private Button btnVotar;
 
@@ -46,7 +46,7 @@ public class Votacion extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        candidato = findViewById(R.id.candidato);
+        spCandidato = findViewById(R.id.candidato);
         btnVotar = findViewById(R.id.btnVotar);
 
         asistenteBD = new AsistenteBD(this);
@@ -68,10 +68,10 @@ public class Votacion extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Obtenemos el objeto candidato seleccionado
-                Candidato candidatoSeleccionado = (Candidato) candidato.getSelectedItem();
+                Candidato candidatoSeleccionado = (Candidato) spCandidato.getSelectedItem();
 
-                // Si el candidatoSeleccionado es null no seguimos
-                if (candidatoSeleccionado == null) {
+                // Si el codCandidato del candidatoSeleccionado es -1 no seguimos
+                if (candidatoSeleccionado.getCodCandidato() == -1) {
                     return;
                 }
 
@@ -122,15 +122,11 @@ public class Votacion extends AppCompatActivity {
         // Obtener todos los nombres de la base de datos
         List<Candidato> candidatos = asistenteBD.obtenerCandidatos();
 
-        // Crear un ArrayAdapter usando la lista de nombres y un layout predefinido para el Spinner
-        //ArrayAdapter<Candidato> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, candidatos);
-        SpinnerCandidato adapter = new SpinnerCandidato(this, candidatos, logos);
-
-        // Especificar el layout para cuando el menú del Spinner esté desplegado
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Crear un adaptador personalizado para mostrar logo y nombre
+        CandidatoAdapter adapter = new CandidatoAdapter(this, candidatos);
 
         // Asignar el adaptador al Spinner
-        candidato.setAdapter(adapter);
+        spCandidato.setAdapter(adapter);
     }
 
     //region *** Métodos para sacar mensajes por pantalla ***
