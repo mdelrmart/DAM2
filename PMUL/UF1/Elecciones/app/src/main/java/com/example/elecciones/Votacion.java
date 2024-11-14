@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.example.elecciones.databinding.ActivityVotacionBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Votacion extends AppCompatActivity {
@@ -26,8 +28,8 @@ public class Votacion extends AppCompatActivity {
 
     int numVotosMaxPermitidos = 3;
 
+    private ListView lvResultados;
     private Spinner spCandidato;
-
     private Button btnVotar;
 
     Bundle usuarioPasado;
@@ -44,6 +46,7 @@ public class Votacion extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         spCandidato = findViewById(R.id.candidato);
+        lvResultados = findViewById(R.id.listaResultados);
         btnVotar = findViewById(R.id.btnVotar);
 
         asistenteBD = new AsistenteBD(this);
@@ -59,7 +62,7 @@ public class Votacion extends AppCompatActivity {
                 getSupportActionBar().setTitle("Elecciones - " + usuarioObtenido);
         }
 
-        btnVotar.setText("Votar 0/" + numVotosMaxPermitidos);
+        //btnVotar.setText("Votar 0/" + numVotosMaxPermitidos);
 
         btnVotar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,7 @@ public class Votacion extends AppCompatActivity {
 
                 // Si el codCandidato del candidatoSeleccionado es -1 no seguimos
                 if (candidatoSeleccionado.getCodCandidato() == -1) {
+                    mensajeSnackbar("Seleccione un candidato de la lista para votar");
                     return;
                 }
 
@@ -93,7 +97,7 @@ public class Votacion extends AppCompatActivity {
         candidatosVotados.add(codCandidatoSeleccionado);
 
         // Actualizamos el texto del botón para ir mostrando el progreso
-        btnVotar.setText("Votar " + candidatosVotados.size() + "/" + numVotosMaxPermitidos);
+        //btnVotar.setText("Votar " + candidatosVotados.size() + "/" + numVotosMaxPermitidos);
 
         // Volvemos a cargar los candidatos para quitar los que ya votamos
         cargarCandidatosEnSpinner();
@@ -101,25 +105,30 @@ public class Votacion extends AppCompatActivity {
 
     private void comprobarLimiteVotos(String usuario) {
         if (candidatosVotados.size() == numVotosMaxPermitidos) {
-            // Deshabilitamos el botón
             btnVotar.setEnabled(false);
-
-            System.out.println("Límite de votos alcanzado");
+            mensajeSnackbar("Votación finalizada");
 
             // Registrar los votos en la BBDD y marcar como ha votado
             for (int codCandidato : candidatosVotados) {
                 CandidatoDAO.anhadirVotoCandidato(codCandidato);
             }
+
             UsuarioDAO.setHaVotado(usuario);
             asistenteBD.close();
+
+            listaVotos();
         }
     }
 
+    private void listaVotos() {
+
+    }
+
     private void cargarCandidatosEnSpinner() {
-        // Obtener todos los nombres de la base de datos
+        // Obtenemos los candidatos de la BBDD
         List<Candidato> candidatos = CandidatoDAO.obtenerCandidatos();
 
-        // Crear un adaptador personalizado para mostrar logo y nombre
+        // Crear un adaptador personalizado que muestra logo y nombre
         CandidatoAdapter adapter = new CandidatoAdapter(this, candidatos);
 
         // Asignar el adaptador al Spinner
