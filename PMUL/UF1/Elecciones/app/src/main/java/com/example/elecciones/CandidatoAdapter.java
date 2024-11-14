@@ -1,6 +1,7 @@
 package com.example.elecciones;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,13 @@ public class CandidatoAdapter extends ArrayAdapter<Candidato> {
         Candidato candidato = getItem(position);
         ImageView logoPartido = convertView.findViewById(R.id.logoPartido);
         TextView nombreCandidato = convertView.findViewById(R.id.nombreCandidato);
+        TextView nombrePartido = convertView.findViewById(R.id.nombrePartido);
 
         if (candidato != null) {
             logoPartido.setImageResource(candidato.getLogoPartido()); // Establece el logo del partido
             nombreCandidato.setText(candidato.getNombre()); // Establece el nombre del candidato
+            nombrePartido.setText(candidato.getNombrePartido()); // Establece el nombre del partido
+            nombrePartido.setTextColor(candidato.getColorPartido()); // Establece el color del texto del candidato
         }
 
         return convertView;

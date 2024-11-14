@@ -32,9 +32,6 @@ public class Votacion extends AppCompatActivity {
 
     Bundle usuarioPasado;
 
-    // Arrays de imágenes y textos
-    int[] logos = {R.drawable.pp, R.drawable.psoe, R.drawable.sumar, R.drawable.vox};
-
     // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez,
     // no se puede guardar en la BBDD por secreto electoral.
     ArrayList<Integer> candidatosVotados = new ArrayList<>();

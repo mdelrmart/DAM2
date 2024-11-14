@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AsistenteBD extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "elecciones.db";
-    private static final int VERSION_BD = 7;
+    private static final int VERSION_BD = 2;
     public AsistenteBD(Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
     }
@@ -33,14 +33,14 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123,") + "')");
 
         // Insertar datos en la tabla partidos (solo nombre y color)
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', 1)");
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PSOE', 2)");
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('Sumar', 3)");
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('VOX', 4)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', -12418845)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PSOE', -1891806)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('Sumar', -65364)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('VOX', -15340231)");
 
         // Insertar datos en la tabla candidatos (codPartido corresponde al ID del partido)
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'Alberto Nuñez Feijoó')");
-        bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'José Luis Martínez-Almeida Navasqüés')");
+        bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'José Luis Martínez-Almeida')");
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'Isabel Díaz Ayuso')");
 
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (2, 'Pedro Sánchez')");
@@ -77,14 +77,14 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123.,") + "')");
 
         // Insertar datos en la tabla partidos (solo nombre y color)
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', 1)");
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PSOE', 2)");
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('Sumar', 3)");
-        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('VOX', 4)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', -12418845)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PSOE', -1891806)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('Sumar', -65364)");
+        bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('VOX', -15340231)");
 
         // Insertar datos en la tabla candidatos (codPartido corresponde al ID del partido)
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'Alberto Nuñez Feijoó')");
-        bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'José Luis Martínez-Almeida Navasqüés')");
+        bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'José Luis Martínez-Almeida')");
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (1, 'Isabel Díaz Ayuso')");
 
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (2, 'Pedro Sánchez')");
@@ -100,6 +100,14 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (4, 'Pepa Millán Parro')");
     }
 
+    // Array de IDs de los logos en drawable, cada posición debe corresponder con el código del partido
+    private final int[] logosPartidos = {
+            R.drawable.pp, // codPartido = 1
+            R.drawable.psoe, // codPartido = 2
+            R.drawable.sumar, // codPartido = 3
+            R.drawable.vox // codPartido = 4
+    };
+
     public void anhadirVotoCandidato(int codCandidato) {
         SQLiteDatabase bd = this.getWritableDatabase();
 
@@ -114,32 +122,31 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL("UPDATE usuarios SET haVotado = 1 WHERE nif = ?", new String[]{nif});
     }
 
-    // Array de IDs de los logos en drawable, cada posición debe corresponder con el código del partido
-    private final int[] logosPartidos = {
-            R.drawable.pp, // codPartido = 1
-            R.drawable.psoe, // codPartido = 2
-            R.drawable.sumar, // codPartido = 3
-            R.drawable.vox // codPartido = 4
-    };
-
     public List<Candidato> obtenerCandidatos() {
         List<Candidato> candidatos = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String consulta = "SELECT * FROM candidatos";
+        //String consulta = "SELECT * FROM candidatos INNER JOIN partidos on candidatos.codPartido=partidos.codPartido";
+        String consulta = "SELECT candidatos.codCandidato, candidatos.codPartido, candidatos.nombre, partidos.color, partidos.nombre " +
+                          "FROM candidatos INNER JOIN partidos ON candidatos.codPartido=partidos.codPartido";
         Cursor datos = db.rawQuery(consulta, null);
 
-        candidatos.add(0, new Candidato(-1,"Selecciona un candidato",0,0));
+        candidatos.add(0, new Candidato(-1,"Selecciona un candidato",0,0,0, ""));
 
         if (datos.moveToFirst()) {
             do {
                 int codCandidato = datos.getInt(0);
-                String nombreCandidato = datos.getString(2);
                 int codPartido = datos.getInt(1);
+                String nombreCandidato = datos.getString(2);
 
                 // Asignamos el logo correspondiente usando el código del partido
                 // Restamos 1 ya que los índices de los array empiezan en el valor 0
                 int logoPartido = logosPartidos[codPartido - 1];
-                candidatos.add(new Candidato(codCandidato, nombreCandidato, codPartido, logoPartido));
+
+                int colorPartido = datos.getInt(3);
+
+                String nombrePartido = datos.getString(4);
+
+                candidatos.add(new Candidato(codCandidato, nombreCandidato, codPartido, logoPartido, colorPartido, nombrePartido));
             } while (datos.moveToNext());
         }
         datos.close();
