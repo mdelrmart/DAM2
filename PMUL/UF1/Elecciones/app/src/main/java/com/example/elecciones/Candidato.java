@@ -4,17 +4,11 @@ public class Candidato {
     private int codCandidato;
     private String nombre;
     private int codPartido;
-    private int logoPartido;
-    private int colorPartido;
-    private String nombrePartido;
 
-    public Candidato(int codCandidato, String nombre, int codPartido, int logoPartido, int colorPartido, String nombrePartido) {
+    public Candidato(int codCandidato, String nombre, int codPartido) {
         this.codCandidato = codCandidato;
         this.nombre = nombre;
         this.codPartido = codPartido;
-        this.logoPartido = logoPartido;
-        this.colorPartido = colorPartido;
-        this.nombrePartido = nombrePartido;
     }
 
     public int getCodCandidato() {
@@ -29,15 +23,10 @@ public class Candidato {
         return codPartido;
     }
 
-    public int getLogoPartido() {
-        return logoPartido;
+    public Partido getPartido()
+    {
+        return PartidoDAO.select(codPartido);
     }
-
-    public int getColorPartido() {
-        return colorPartido;
-    }
-
-    public String getNombrePartido() { return nombrePartido; }
 
     @Override
     public String toString() {

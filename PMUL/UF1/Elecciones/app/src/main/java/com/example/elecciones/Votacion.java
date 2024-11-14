@@ -108,16 +108,16 @@ public class Votacion extends AppCompatActivity {
 
             // Registrar los votos en la BBDD y marcar como ha votado
             for (int codCandidato : candidatosVotados) {
-                asistenteBD.anhadirVotoCandidato(codCandidato);
+                CandidatoDAO.anhadirVotoCandidato(codCandidato);
             }
-            asistenteBD.setHaVotado(usuario);
+            UsuarioDAO.setHaVotado(usuario);
             asistenteBD.close();
         }
     }
 
     private void cargarCandidatosEnSpinner() {
         // Obtener todos los nombres de la base de datos
-        List<Candidato> candidatos = asistenteBD.obtenerCandidatos();
+        List<Candidato> candidatos = CandidatoDAO.obtenerCandidatos();
 
         // Crear un adaptador personalizado para mostrar logo y nombre
         CandidatoAdapter adapter = new CandidatoAdapter(this, candidatos);

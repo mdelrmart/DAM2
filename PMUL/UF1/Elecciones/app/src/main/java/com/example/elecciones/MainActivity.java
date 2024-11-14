@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        asistenteBD = new AsistenteBD(this);
-        // Creamos la BBDD
-        asistenteBD.getWritableDatabase();
+        Database.init(this);
 
         usuario = findViewById(R.id.usuario);
         contrasenha = findViewById(R.id.password);
