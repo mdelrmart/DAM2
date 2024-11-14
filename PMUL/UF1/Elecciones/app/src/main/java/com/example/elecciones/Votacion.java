@@ -17,7 +17,6 @@ import com.example.elecciones.databinding.ActivityVotacionBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Votacion extends AppCompatActivity {
@@ -116,12 +115,26 @@ public class Votacion extends AppCompatActivity {
             UsuarioDAO.setHaVotado(usuario);
             asistenteBD.close();
 
-            listaVotos();
+            listarVotos();
         }
     }
 
-    private void listaVotos() {
+    private void listarVotos() {
+        List<Candidato> candidatos = CandidatoDAO.obtenerCandidatos();
 
+        ArrayList<String> candidatosConVotos = new ArrayList<>();
+
+        for (Candidato candidato : candidatos) {
+            // Excluimos el primer elemento "Selecciona un candidato" y los candidatos con cero votos
+            if (candidato.getCodCandidato() != -1 && candidato.getVotos() != 0) {
+                //System.out.println("Nombre: " + candidato.getNombre() + ", Votos: " + candidato.getVotos());
+                candidatosConVotos.add(candidato.getNombre() + " - " + candidato.getVotos() + " votos");
+            }
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, candidatosConVotos);
+
+        lvResultados.setAdapter(adapter);
     }
 
     private void cargarCandidatosEnSpinner() {

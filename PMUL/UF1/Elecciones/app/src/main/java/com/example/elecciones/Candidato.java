@@ -37,10 +37,4 @@ public class Candidato {
     public String toString() {
         return nombre;
     }
-
-    public static void obtenerCandidatosYVotos(Candidato[] candidatos) {
-        for (Candidato candidato : candidatos) {
-            System.out.println(candidato.getNombre() + " - Votos: " + candidato.getVotos());
-        }
-    }
 }

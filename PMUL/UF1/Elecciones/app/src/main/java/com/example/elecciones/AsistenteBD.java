@@ -1,17 +1,12 @@
 package com.example.elecciones;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AsistenteBD extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "elecciones.db";
-    private static final int VERSION_BD = 4;
+    private static final int VERSION_BD = 1;
 
     public AsistenteBD(Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
@@ -29,9 +24,9 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL(sqlCreateCandidatos);
 
         // Insertar datos en la tabla usuarios
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('53614816E','" + Utiles.generateHash("abc123") + "')");
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('52492165R','" + Utiles.generateHash("abc123.") + "')");
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123,") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123.") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('87654321X','" + Utiles.generateHash("abc123.") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('55555555K','" + Utiles.generateHash("abc123.") + "')");
 
         // Insertar datos en la tabla partidos (solo nombre y color)
         bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', -12418845)");
@@ -73,9 +68,9 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL(sqlCreateCandidatos);
 
         // Insertar datos en la tabla usuarios
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('53614816E','" + Utiles.generateHash("abc123") + "')");
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('52492165R','" + Utiles.generateHash("abc123.") + "')");
-        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123.,") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('12345678Z','" + Utiles.generateHash("abc123.") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('87654321X','" + Utiles.generateHash("abc123.") + "')");
+        bd.execSQL("INSERT INTO usuarios (nif, password) VALUES('55555555K','" + Utiles.generateHash("abc123.") + "')");
 
         // Insertar datos en la tabla partidos (solo nombre y color)
         bd.execSQL("INSERT INTO partidos (nombre, color) VALUES ('PP', -12418845)");

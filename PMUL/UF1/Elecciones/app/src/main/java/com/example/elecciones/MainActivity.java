@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Ocultar teclado si está desplegado
+                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
+
                 String usuarioString = usuario.getText().toString().toUpperCase();
                 String contrasenhaString = contrasenha.getText().toString();
 
@@ -68,13 +76,15 @@ public class MainActivity extends AppCompatActivity {
                     intentVotacion.putExtra("usuario", usuarioString);
                     startActivity(intentVotacion);
 
-                    // Un poco chapuza, finalizamos el intent actual para no guardar los datos en los campos
-                    // TODO mejorar ?
-                    finish();
                 }
                 else {
                     mensajeSnackbarAceptar("El usuario y/o contraseña no son correctos");
+                    contrasenha.setText("");
+                    return;
                 }
+
+                usuario.setText("");
+                contrasenha.setText("");
             }
         });
     }
