@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.example.elecciones.DAO.AsistenteBD;
+import com.example.elecciones.DAO.CandidatoDAO;
+import com.example.elecciones.DAO.UsuarioDAO;
 import com.example.elecciones.databinding.ActivityVotacionBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -125,9 +128,8 @@ public class Votacion extends AppCompatActivity {
         ArrayList<String> candidatosConVotos = new ArrayList<>();
 
         for (Candidato candidato : candidatos) {
-            // Excluimos el primer elemento "Selecciona un candidato" y los candidatos con cero votos
+            // Evitamos el primer elemento "Selecciona un candidato" y los candidatos con cero votos
             if (candidato.getCodCandidato() != -1 && candidato.getVotos() != 0) {
-                //System.out.println("Nombre: " + candidato.getNombre() + ", Votos: " + candidato.getVotos());
                 candidatosConVotos.add(candidato.getNombre() + " - " + candidato.getVotos() + " votos");
             }
         }

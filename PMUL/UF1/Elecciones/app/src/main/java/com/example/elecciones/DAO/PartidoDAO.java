@@ -1,7 +1,9 @@
-package com.example.elecciones;
+package com.example.elecciones.DAO;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.elecciones.Partido;
 
 public class PartidoDAO {
 

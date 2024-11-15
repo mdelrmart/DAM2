@@ -1,17 +1,19 @@
-package com.example.elecciones;
+package com.example.elecciones.DAO;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.elecciones.Candidato;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CandidatoDAO {
     public static void anhadirVotoCandidato(int codCandidato) {
-        SQLiteDatabase bd = Database.getInstance().getConexion();
+        SQLiteDatabase db = Database.getInstance().getConexion();
 
         // Consulta parametrizada
-        bd.execSQL("UPDATE candidatos SET votos = votos + 1 WHERE codCandidato = ?", new String[]{String.valueOf(codCandidato)});
+        db.execSQL("UPDATE candidatos SET votos = votos + 1 WHERE codCandidato = ?", new String[]{String.valueOf(codCandidato)});
     }
 
     public static List<Candidato> obtenerCandidatos() {

@@ -1,8 +1,9 @@
 package com.example.elecciones;
 
+import static com.example.elecciones.DAO.UsuarioDAO.*;
+import static com.example.elecciones.Utiles.NifOk;
+
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -16,6 +17,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.elecciones.DAO.AsistenteBD;
+import com.example.elecciones.DAO.Database;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 //Ocultar teclado si está desplegado
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
+                    imm.hideSoftInputFromWindow((getCurrentFocus()).getWindowToken(), 0);
                 } catch (Exception e) {
                 }
 
@@ -64,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 // Comprobamos si vienen vacios los campos de usuario y contraseña
                 if (usuarioString.isBlank() || contrasenhaString.isBlank()) {
                     mensajeSnackbar("No se ha introducido el usuario y/o contraseña");
+                    return;
+                }
+
+                // Comprobamos si el DNI es válido
+                if (!NifOk(usuarioString)) {
+                    mensajeSnackbar("El NIF no es válido");
                     return;
                 }
 
@@ -80,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intentVotacion);
 
                 } else {
-                    mensajeSnackbarAceptar("El usuario y/o contraseña no son correctos");
+                    mensajeSnackbarAceptar("El usuario (NIF) y/o contraseña no son correctos");
                     contrasenha.setText("");
                     return;
                 }
@@ -90,44 +99,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    //region *** Operaciones BBDD ***
-    public boolean comprobarContrasenha(String usuario, String contrasenha) {
-        String contrasenhaHash = Utiles.generateHash(contrasenha);
-
-        SQLiteDatabase bd = new AsistenteBD(this).getReadableDatabase();
-        Cursor consulta = bd.rawQuery("SELECT * FROM usuarios WHERE nif = " + "'" + usuario + "'", null);
-
-        if (consulta.moveToFirst()) {
-            int colIndexContrasenha = consulta.getColumnIndex("password");
-            String contrasenhaBBDD = consulta.getString(colIndexContrasenha);
-
-            if (contrasenhaHash.equals(contrasenhaBBDD)) {
-                return true;
-            }
-        }
-        consulta.close();
-        bd.close();
-        return false;
-    }
-
-    public boolean getHaVotado(String usuario) {
-        SQLiteDatabase bd = new AsistenteBD(this).getReadableDatabase();
-        Cursor consulta = bd.rawQuery("SELECT * FROM usuarios WHERE nif = " + "'" + usuario + "' AND haVotado = 1", null);
-
-        if (consulta.moveToFirst()) {
-            int colIndexNIF = consulta.getColumnIndex("nif");
-            String nifBBDD = consulta.getString(colIndexNIF);
-
-            if (usuario.equals(nifBBDD)) {
-                return true;
-            }
-        }
-        consulta.close();
-        bd.close();
-        return false;
-    }
-    //endregion
 
     //region *** Métodos para sacar mensajes por pantalla ***
     private void mensajeToast(String mensaje) {

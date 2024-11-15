@@ -1,4 +1,4 @@
-package com.example.elecciones;
+package com.example.elecciones.DAO;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

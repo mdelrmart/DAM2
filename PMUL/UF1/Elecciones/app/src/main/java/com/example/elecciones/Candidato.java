@@ -1,5 +1,7 @@
 package com.example.elecciones;
 
+import com.example.elecciones.DAO.PartidoDAO;
+
 public class Candidato {
     private int codCandidato;
     private String nombre;

@@ -1,8 +1,10 @@
-package com.example.elecciones;
+package com.example.elecciones.DAO;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.elecciones.Utiles;
 
 public class AsistenteBD extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "elecciones.db";
@@ -95,4 +97,5 @@ public class AsistenteBD extends SQLiteOpenHelper {
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (4, 'Javier Ortega Smith')");
         bd.execSQL("INSERT INTO candidatos (codPartido, nombre) VALUES (4, 'Pepa Millán Parro')");
     }
+
 }
