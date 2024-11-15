@@ -21,8 +21,6 @@ import com.example.elecciones.DAO.AsistenteBD;
 import com.example.elecciones.DAO.Database;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
 
     AsistenteBD asistenteBD;
