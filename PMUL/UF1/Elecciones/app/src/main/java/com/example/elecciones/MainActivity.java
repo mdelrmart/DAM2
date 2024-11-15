@@ -52,8 +52,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //Ocultar teclado si está desplegado
-                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
+                } catch (Exception e) {
+                }
 
                 String usuarioString = usuario.getText().toString().toUpperCase();
                 String contrasenhaString = contrasenha.getText().toString();
@@ -71,13 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // Consultamos en la BBDD si los datos del usuario son correctos y accedemos a la votación
-                if (comprobarContrasenha(usuarioString,contrasenhaString)) {
+                if (comprobarContrasenha(usuarioString, contrasenhaString)) {
                     Intent intentVotacion = new Intent(MainActivity.this, Votacion.class);
                     intentVotacion.putExtra("usuario", usuarioString);
                     startActivity(intentVotacion);
 
-                }
-                else {
+                } else {
                     mensajeSnackbarAceptar("El usuario y/o contraseña no son correctos");
                     contrasenha.setText("");
                     return;
