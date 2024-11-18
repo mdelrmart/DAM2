@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,18 +22,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Votacion extends AppCompatActivity {
+
     private AppBarConfiguration appBarConfiguration;
     private ActivityVotacionBinding binding;
 
     AsistenteBD asistenteBD;
 
+    // Datos a pasar al Fragment
     int numVotosMaxPermitidos = 3;
+    String textoBoton = "Votar";
 
     private ListView lvResultados;
     private Spinner spCandidato;
-    private Button btnVotar;
 
     Bundle usuarioPasado;
+    String usuarioObtenido;
 
     // Almacenamos en memoria los candidatos que han sido votados para evitar que se pueda votar al mismo más de una vez,
     // no se puede guardar en la BBDD por secreto electoral.
@@ -47,9 +49,27 @@ public class Votacion extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
+        // Instanciamos el Fragment
+        BotonClicsLimitados botonClicsLimitados;
+
+        botonClicsLimitados = (BotonClicsLimitados) getSupportFragmentManager().findFragmentById(R.id.btnVotarFrg);
+        botonClicsLimitados.setOnClickListener(
+                new BotonClicsLimitados.OnClickListener() {
+                    @Override
+                    public boolean onClick(int numClic, int maxClics) {
+                        return Vota(numClic);
+                    }
+
+                    @Override
+                    public void ultimoClic() {
+                        finVotacion();
+                    }
+                },
+                numVotosMaxPermitidos,
+                getString(Integer.parseInt(textoBoton)));
+
         spCandidato = findViewById(R.id.candidato);
         lvResultados = findViewById(R.id.listaResultados);
-        btnVotar = findViewById(R.id.btnVotar);
 
         asistenteBD = new AsistenteBD(this);
 
@@ -57,33 +77,22 @@ public class Votacion extends AppCompatActivity {
 
         // Obtenemos usuario y lo ponemos en la cabecera, comprobando antes que no sea null
         usuarioPasado = getIntent().getExtras();
-        String usuarioObtenido = usuarioPasado.getString("usuario");
+        usuarioObtenido = usuarioPasado.getString("usuario");
 
         if (getSupportActionBar() != null) {
             if (usuarioPasado != null)
                 getSupportActionBar().setTitle("Elecciones - " + usuarioObtenido);
         }
 
-        //btnVotar.setText("Votar 0/" + numVotosMaxPermitidos);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.btnVotarFrg, botonClicsLimitados) // Asegúrate de que `fragment_container` existe en el layout de la actividad
+                .commit();
+    }
 
-        btnVotar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Obtenemos el objeto candidato seleccionado
-                Candidato candidatoSeleccionado = (Candidato) spCandidato.getSelectedItem();
-
-                // Si el codCandidato del candidatoSeleccionado es -1 no seguimos
-                if (candidatoSeleccionado.getCodCandidato() == -1) {
-                    mensajeSnackbar("Seleccione un candidato de la lista para votar");
-                    return;
-                }
-
-                // Agregamos el voto y comprobamos el límite
-                registrarVoto(candidatoSeleccionado);
-                comprobarLimiteVotos(usuarioObtenido);
-            }
-        });
-
+    public void finVotacion() {
+        mensajeSnackbar("Votación finalizada");
+        listarVotos();
     }
 
     private void registrarVoto(Candidato candidatoSeleccionado) {
@@ -107,7 +116,7 @@ public class Votacion extends AppCompatActivity {
 
     private void comprobarLimiteVotos(String usuario) {
         if (candidatosVotados.size() == numVotosMaxPermitidos) {
-            btnVotar.setEnabled(false);
+            //btnVotar.setEnabled(false);
             mensajeSnackbar("Votación finalizada");
 
             // Registrar los votos en la BBDD y marcar como ha votado
