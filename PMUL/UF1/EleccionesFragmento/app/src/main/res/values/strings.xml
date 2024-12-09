@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Elecciones</string>
-    <string name="usuario">NIF</string>
-    <string name="votar">Votar</string>
-    <string name="password">Contraseña</string>
-    <string name="login">Iniciar sesión</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-</resources>
