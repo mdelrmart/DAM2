@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Lunas Descripcion="Fases Lunares" Estado="Cuarto menguante" Servicio="MeteoGalicia">
+    <Luna Estado="Luna nueva">
+        <Fecha>01/11/2024</Fecha>
+        <Hora>13:48</Hora>
+    </Luna>
+    <Luna Estado="Cuarto creciente">
+        <Fecha>09/11/2024</Fecha>
+        <Hora>06:56</Hora>
+    </Luna>
+    <Luna Estado="Luna llena">
+        <Fecha>15/11/2024</Fecha>
+        <Hora>22:29</Hora>
+    </Luna>
+    <Luna Estado="Cuarto menguante">
+        <Fecha>23/11/2024</Fecha>
+        <Hora>02:29</Hora>
+    </Luna>
+    <Luna Estado="Luna nueva">
+        <Fecha>01/12/2024</Fecha>
+        <Hora>07:22</Hora>
+    </Luna>
+    <Luna Estado="Cuarto creciente">
+        <Fecha>08/12/2024</Fecha>
+        <Hora>16:27</Hora>
+    </Luna>
+    <Luna Estado="Luna llena">
+        <Fecha>15/12/2024</Fecha>
+        <Hora>10:02</Hora>
+    </Luna>
+    <Luna Estado="Cuarto menguante">
+        <Fecha>22/12/2024</Fecha>
+        <Hora>23:19</Hora>
+    </Luna>
+</Lunas>

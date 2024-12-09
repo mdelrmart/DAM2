@@ -1,0 +1,35 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<Lunas Descripcion="Fases lunares" Servicio="MeteoGalicia">
+<Luna Estado="LUNA NUEVA">
+<Fecha>01-nov-24</Fecha>
+<Hora>13:48</Hora>
+</Luna>
+<Luna Estado="CUARTO CRECIENTE">
+<Fecha>09-nov-24</Fecha>
+<Hora>06:56</Hora>
+</Luna>
+<Luna Estado="LUNA LLENA">
+<Fecha>15-nov-24</Fecha>
+<Hora>22:29</Hora>
+</Luna>
+<Luna Estado="CUARTO MENGUANTE">
+<Fecha>23-nov-24</Fecha>
+<Hora>02:29</Hora>
+</Luna>
+<Luna Estado="LUNA NUEVA">
+<Fecha>01-dic-24</Fecha>
+<Hora>07:22</Hora>
+</Luna>
+<Luna Estado="CUARTO CRECIENTE">
+<Fecha>08-dic-24</Fecha>
+<Hora>16:27</Hora>
+</Luna>
+<Luna Estado="LUNA LLENA">
+<Fecha>15-dic-24</Fecha>
+<Hora>10:02</Hora>
+</Luna>
+<Luna Estado="CUARTO MENGUANTE">
+<Fecha>22-dic-24</Fecha>
+<Hora>23:19</Hora>
+</Luna>
+</Lunas>
