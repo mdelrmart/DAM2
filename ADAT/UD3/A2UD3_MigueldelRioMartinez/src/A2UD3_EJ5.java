@@ -120,14 +120,19 @@ public class A2UD3_EJ5 {
 
         try (Connection connection = DriverManager.getConnection(url, usuario, contrasenha)) {
             // Prepara la llamada al procedimiento almacenado
-            String funcion = "{?=CALL fn_nEmpDepart(?)}";
-            PreparedStatement preparedStatement = connection.prepareStatement(funcion);
+            String funcion = "{? = CALL fn_nEmpDepart(?)}";
+            CallableStatement callableStatement = connection.prepareCall(funcion);
 
-            preparedStatement.setString(1, nomeDepartamento);
+            // Registramos el parámetro de salida para el valor de retorno de la función
+            callableStatement.registerOutParameter(1, Types.INTEGER);
 
-            // Ejecuta el procedimiento almacenado
-            int numEmpleados = preparedStatement.executeQuery().getInt(1);
-            System.out.println(numEmpleados);
+            // Establece el parámetro de entrada
+            callableStatement.setString(2, nomeDepartamento);
+
+            // Ejecutamos la función y obtenemos el valor de retorno
+            callableStatement.execute();
+            int numEmpleados = callableStatement.getInt(1);
+            System.out.println("Número de empleados en el departamento " + nomeDepartamento + ": " + numEmpleados);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
