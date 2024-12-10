@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Elecciones</string>
+    <string name="usuario">NIF</string>
+    <string name="votar">Votar</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+</resources>
