@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,7 @@ import java.util.List;
 public class BusquedaFragmento extends Fragment {
 
     private RecyclerView recyclerView;
-    private EditText txtBusqueda;
+    private EditText edBusqueda;
     private BusquedaAdapter adaptadorBusqueda;
     private List<String> lista;
 
@@ -32,7 +31,6 @@ public class BusquedaFragmento extends Fragment {
     public BusquedaFragmento(List<String> lista) {
         this.lista = lista;
     }
-
 
     public interface OnItemSelectedListener {
         void onItemSelected(String item);
@@ -45,9 +43,9 @@ public class BusquedaFragmento extends Fragment {
 
         // Inicializamos las vistas
         recyclerView = view.findViewById(R.id.recyclerView);
-        txtBusqueda = view.findViewById(R.id.searchEditText);
+        edBusqueda = view.findViewById(R.id.searchEditText);
 
-        // Configurar lista y adaptador con listener
+        // Configuramos lista y adaptador con listener
         adaptadorBusqueda = new BusquedaAdapter(lista, item -> {
             if (getActivity() instanceof BusquedaFragmento.OnItemSelectedListener) {
                 // Llama a la interfaz personalizada
@@ -55,12 +53,11 @@ public class BusquedaFragmento extends Fragment {
             }
         });
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adaptadorBusqueda);
 
-        // Configurar el filtro de búsqueda
-        txtBusqueda.addTextChangedListener(new TextWatcher() {
+        // Configuramos el filtro de búsqueda
+        edBusqueda.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements BusquedaFragmento.OnItemSelectedListener {
 
-    private TextView textResultado;
+    private TextView txtResultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements BusquedaFragmento
 
         Database.init(this);
 
-        textResultado = findViewById(R.id.txtResultado);
+        txtResultado = findViewById(R.id.txtResultado);
 
         BusquedaFragmento fragment = new BusquedaFragmento(listaStringComunidades());
         getSupportFragmentManager().beginTransaction()
@@ -43,13 +43,11 @@ public class MainActivity extends AppCompatActivity implements BusquedaFragmento
 
     @Override
     public void onItemSelected(String elemento) {
-        // Aquí manejas el ítem seleccionado
-        // Puedes mostrar un Toast, actualizar una vista, etc.
-        //Toast.makeText(this, "Seleccionado: " + item, Toast.LENGTH_SHORT).show();
-        textResultado.setText(elemento);
-
+        // Aquí manejamos el elemento clicado
+        txtResultado.setText(elemento);
     }
 
+    // Este método lo pasamos al constructor del fragmento para que pueble la lista.
     public static List<String> listaStringComunidades() {
         List<ComunidadAutonoma> comunidadesAutonomas = ComunidadAutonomaDAO.obtenerComunidadesAutonomas();
 

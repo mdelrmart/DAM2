@@ -32,12 +32,12 @@ public class BusquedaAdapter extends RecyclerView.Adapter<BusquedaAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String item = listaDatos.get(position);
-        holder.textView.setText(item);
-        holder.itemView.setOnClickListener(v -> {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        String elemento = listaDatos.get(position);
+        viewHolder.textView.setText(elemento);
+        viewHolder.itemView.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onItemClick(item);
+                listener.onItemClick(elemento);
             }
         });
     }
@@ -47,8 +47,8 @@ public class BusquedaAdapter extends RecyclerView.Adapter<BusquedaAdapter.ViewHo
         return listaDatos.size();
     }
 
-    public void updateList(List<String> newList) {
-        this.listaDatos = newList;
+    public void updateList(List<String> listaActualizada) {
+        this.listaDatos = listaActualizada;
         notifyDataSetChanged();
     }
 
@@ -61,4 +61,3 @@ public class BusquedaAdapter extends RecyclerView.Adapter<BusquedaAdapter.ViewHo
         }
     }
 }
-
