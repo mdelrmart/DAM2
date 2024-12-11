@@ -1,63 +1,70 @@
 -- a)
-DELIMITER $$
-
-CREATE PROCEDURE pr_CambioDomicilio (IN NSSempregado VARCHAR(10), IN calle VARCHAR(100), IN numero INT, IN numPiso VARCHAR(5), IN codPostal INT, IN localidad VARCHAR(30))
-
+CREATE PROCEDURE pr_CambioDomicilio
+    @NSSempregado VARCHAR(10),
+    @calle NVARCHAR(100),
+    @numero INT,
+    @numPiso NVARCHAR(5),
+    @codPostal INT,
+    @localidad NVARCHAR(30)
+AS
 BEGIN
-    UPDATE empregado
-    SET Rua = calle, Numero_rua = numero, Piso = numPiso, CP = codPostal, Localidade = localidad
-    WHERE NSS = NSSempregado;
-END $$
-
-DELIMITER ;
+UPDATE empregado
+SET Rua = @calle,
+    Numero_rua = @numero,
+    Piso = @numPiso,
+    CP = @codPostal,
+    Localidade = @localidad
+WHERE NSS = @NSSempregado;
+END;
+GO
 
 -- b)
-DELIMITER $$
-
-CREATE PROCEDURE pr_DatosProxectos (IN numProyecto INT, OUT p_nomeProxecto VARCHAR(100), OUT p_Lugar VARCHAR(50), OUT p_Num_departamento_controla INT)
-
+CREATE PROCEDURE pr_DatosProxectos
+    @numProyecto INT,
+    @p_nomeProxecto NVARCHAR(100) OUTPUT,
+    @p_Lugar NVARCHAR(50) OUTPUT,
+    @p_Num_departamento_controla INT OUTPUT
+AS
 BEGIN
-    SELECT Nome_proxecto, Lugar, Num_departamento_controla
-    INTO p_nomeProxecto, p_Lugar, p_Num_departamento_controla
-    FROM proxecto
-    WHERE Num_proxecto = numProyecto;
-END $$
-
-DELIMITER ;
+SELECT @p_nomeProxecto = Nome_proxecto,
+       @p_Lugar = Lugar,
+       @p_Num_departamento_controla = Num_departamento_controla
+FROM proxecto
+WHERE Num_proxecto = @numProyecto;
+END;
+GO
 
 -- c)
-DELIMITER $$
-
-CREATE PROCEDURE pr_DepartControlaProxec (IN numProyectos INT)
+CREATE PROCEDURE pr_DepartControlaProxec
+    @numProyectos INT
+AS
 BEGIN
-    SELECT d.Num_departamento, d.Nome_departamento, d.NSS_dirige, d.Data_direccion
-    -- INTO p_numDepartamento, p_nomeDepartamento, p_NSSdirige, p_dataDireccion
-    FROM departamento d
-    INNER JOIN proxecto p
-    ON d.Num_departamento = p.Num_departamento_controla
-    GROUP BY d.Num_departamento
-    HAVING COUNT(d.Num_departamento) >= numProyectos;
-END $$
-
-DELIMITER ;
+SELECT d.Num_departamento,
+       d.Nome_departamento,
+       d.NSS_dirige,
+       d.Data_direccion
+FROM departamento d
+        INNER JOIN proxecto p
+ON d.Num_departamento = p.Num_departamento_controla
+GROUP BY d.Num_departamento, d.Nome_departamento, d.NSS_dirige, d.Data_direccion
+HAVING COUNT(d.Num_departamento) >= @numProyectos;
+END;
+GO
 
 -- d)
-DELIMITER $$
-
-CREATE FUNCTION fn_nEmpDepart(nomeDepartamento VARCHAR(25))
-RETURNS INT
-DETERMINISTIC
+CREATE FUNCTION fn_nEmpDepart(@nomeDepartamento NVARCHAR(25))
+    RETURNS INT
+AS
 BEGIN
-    DECLARE total_empleados INT;
+    DECLARE @total_empleados INT;
 
-    SELECT COUNT(e.Num_departamento_pertenece)
-    INTO total_empleados
-    FROM empregado e
-    INNER JOIN departamento d
-    ON e.Num_departamento_pertenece=d.Num_departamento
-    WHERE d.Nome_departamento = nomeDepartamento
-    GROUP BY e.Num_departamento_pertenece;
+SELECT @total_empleados = COUNT(e.Num_departamento_pertenece)
+FROM empregado e
+        INNER JOIN departamento d
+        ON e.Num_departamento_pertenece = d.Num_departamento
+WHERE d.Nome_departamento = @nomeDepartamento
+GROUP BY e.Num_departamento_pertenece;
 
-    RETURN total_empleados;
-END
-$$
+RETURN @total_empleados;
+END;
+GO
