@@ -12,6 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class BotonClicsLimitados extends Fragment {
+    // Interfaz para comunicarnos con la actividad
+    public interface OnClickListener {
+        boolean onClickAttempt();
+    }
 
     private String textoBoton;
     private int limiteClics;
@@ -79,8 +83,4 @@ public class BotonClicsLimitados extends Fragment {
         }
     }
 
-    // Interfaz para comunicarnos con la actividad
-    public interface OnClickListener {
-        boolean onClickAttempt();
-    }
 }
