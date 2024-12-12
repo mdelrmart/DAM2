@@ -44,7 +44,7 @@ SELECT d.Num_departamento,
        d.NSS_dirige,
        d.Data_direccion
 FROM departamento d
-        INNER JOIN proxecto p
+INNER JOIN proxecto p
 ON d.Num_departamento = p.Num_departamento_controla
 GROUP BY d.Num_departamento, d.Nome_departamento, d.NSS_dirige, d.Data_direccion
 HAVING COUNT(d.Num_departamento) >= @numProyectos;
@@ -60,8 +60,8 @@ BEGIN
 
 SELECT @total_empleados = COUNT(e.Num_departamento_pertenece)
 FROM empregado e
-        INNER JOIN departamento d
-        ON e.Num_departamento_pertenece = d.Num_departamento
+INNER JOIN departamento d
+ON e.Num_departamento_pertenece = d.Num_departamento
 WHERE d.Nome_departamento = @nomeDepartamento
 GROUP BY e.Num_departamento_pertenece;
 
