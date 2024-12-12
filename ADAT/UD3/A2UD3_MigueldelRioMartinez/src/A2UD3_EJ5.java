@@ -11,6 +11,7 @@ public class A2UD3_EJ5 {
 
         // c)
         departamentoControlaNumProyectosMayorIgualQue(2);
+        System.out.print("\n");
 
         // d)
         consultarNumEmpleadosDepartamento("INFORMÁTICA");
@@ -18,8 +19,8 @@ public class A2UD3_EJ5 {
 
     public static void cambiarDomicilio(String NSSempleado, String calle, int numero, String numPiso, int codPostal, String localidad) {
         // Datos de conexión con la BBDD
-        String url = "jdbc:mysql://localhost:3306/BDEmpresa";
-        String usuario = "root";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
         String contrasenha = "abc123.";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, contrasenha)) {
@@ -46,8 +47,8 @@ public class A2UD3_EJ5 {
 
     public static Proxecto informacionProxectos(int numProyecto) {
         // Datos de conexión con la BBDD
-        String url = "jdbc:mysql://localhost:3306/BDEmpresa";
-        String usuario = "root";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
         String contrasenha = "abc123.";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, contrasenha)) {
@@ -58,13 +59,13 @@ public class A2UD3_EJ5 {
             // Establece los parámetros de entrada
             callableStatement.setInt(1, numProyecto);
 
-            // Ejecutamos el procedimiento almacenado
-            callableStatement.execute();
-
             // Parametros de salida
             callableStatement.registerOutParameter(2, Types.VARCHAR);
             callableStatement.registerOutParameter(3, Types.VARCHAR);
             callableStatement.registerOutParameter(4, Types.INTEGER);
+
+            // Ejecutamos el procedimiento almacenado
+            callableStatement.execute();
 
             String p_nomeProxecto = callableStatement.getString(2);
             String p_Lugar = callableStatement.getString(3);
@@ -80,8 +81,8 @@ public class A2UD3_EJ5 {
 
     public static void departamentoControlaNumProyectosMayorIgualQue(int numProyectos) {
         // Datos de conexión con la BBDD
-        String url = "jdbc:mysql://localhost:3306/BDEmpresa";
-        String usuario = "root";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
         String contrasenha = "abc123.";
 
         ResultSet rs = null;
@@ -114,8 +115,8 @@ public class A2UD3_EJ5 {
 
     public static void consultarNumEmpleadosDepartamento(String nomeDepartamento) {
         // Datos de conexión con la BBDD
-        String url = "jdbc:mysql://localhost:3306/BDEmpresa";
-        String usuario = "root";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
         String contrasenha = "abc123.";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, contrasenha)) {
