@@ -4,6 +4,9 @@ public class A2UD3_EJ6 {
     public static void main(String[] args) {
         // a)
         visualizarTiposResultSet();
+
+        // b)
+
     }
 
     public static void visualizarTiposResultSet() {
@@ -45,6 +48,22 @@ public class A2UD3_EJ6 {
             if (metaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
                 System.out.println("- TYPE_SCROLL_SENSITIVE + CONCUR_UPDATABLE");
             }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener los tipos de ResultSet y concurrencia: " + e.getMessage());
+        }
+    }
+
+    public static void insertarDatosProyecto(Proxecto proxecto) {
+        // Datos de conexión con la BBDD
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
+        String contrasenha = "abc123.";
+
+        String sql = "SELECT * FROM PROXECTO";
+
+        try(Connection connection = DriverManager.getConnection(url, usuario, contrasenha);
+            PreparedStatement sentencia = connection.prepareStatement(sql))  {
+
         } catch (SQLException e) {
             System.out.println("Error al obtener los tipos de ResultSet y concurrencia: " + e.getMessage());
         }
