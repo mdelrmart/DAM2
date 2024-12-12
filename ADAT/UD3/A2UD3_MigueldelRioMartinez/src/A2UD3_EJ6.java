@@ -6,6 +6,14 @@ public class A2UD3_EJ6 {
         visualizarTiposResultSet();
 
         // b)
+        Proxecto proxecto = new Proxecto(11, "PRUEBA", "PONTEVEDRA", 3);
+        insertarDatosProyecto(proxecto);
+
+        // c)
+        incrementarSalarioDepartamento(100,200);
+
+        // d)
+        obtenerInfoEmpleadosProyectosAsignadosMayorQue(2);
 
     }
 
@@ -62,11 +70,79 @@ public class A2UD3_EJ6 {
         String sql = "SELECT * FROM PROXECTO";
 
         try(Connection connection = DriverManager.getConnection(url, usuario, contrasenha);
-            PreparedStatement sentencia = connection.prepareStatement(sql))  {
+            Statement sentencia = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE))  {
+
+            ResultSet rs = sentencia.executeQuery(sql);
+
+            rs.beforeFirst();
+
+            rs.moveToInsertRow();
+            rs.updateInt(1, proxecto.getNum_proxecto());
+            rs.updateString(2, proxecto.getNome_Proxecto());
+            rs.updateString(3, proxecto.getLugar());
+            rs.updateInt(4, proxecto.getNum_departamento_controla());
+
+            rs.insertRow();
+            rs.moveToCurrentRow();
+
+            System.out.println("Se insertó el proyecto " + proxecto.getNome_Proxecto());
+        } catch (SQLException e) {
+            System.out.println("Error al insertar el proyecto: " + e.getMessage());
+        }
+    }
+
+    public static void incrementarSalarioDepartamento(int numDepartamento, float cantidad) {
+        // Datos de conexión con la BBDD
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
+        String contrasenha = "abc123.";
+
+        String sql = "SELECT * FROM EMPREGADO WHERE Num_departamento_pertenece = ?";
+
+        try(Connection connection = DriverManager.getConnection(url, usuario, contrasenha);
+            PreparedStatement sentencia = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE))  {
+
+            sentencia.setInt(1, numDepartamento);
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) {
+                rs.updateFloat("Salario", rs.getFloat("Salario") + cantidad);
+                rs.updateRow();
+            }
+
+            System.out.println("Se actualizaron los salarios del departamento con número " + numDepartamento);
+        } catch (SQLException e) {
+            System.out.println("Error al insertar el proyecto: " + e.getMessage());
+        }
+    }
+
+    public static void obtenerInfoEmpleadosProyectosAsignadosMayorQue(int numProyectos) {
+        // Datos de conexión con la BBDD
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BDEmpresa;trustServerCertificate=true";
+        String usuario = "sa";
+        String contrasenha = "abc123.";
+
+        String sql = "SELECT Nome, Apelido_1, Apelido_2, Localidade, Salario FROM EMPREGADO WHERE NSS IN (SELECT NSS_empregado FROM EMPREGADO_PROXECTO GROUP BY NSS_empregado HAVING COUNT(*) > ? )";
+
+        try (Connection connection = DriverManager.getConnection(url, usuario, contrasenha);
+            PreparedStatement sentencia = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+
+            sentencia.setInt(1, numProyectos);
+
+            ResultSet rs = sentencia.executeQuery();
+            rs.first();
+
+            System.out.println(rs.getString(1) + rs.getString(2));
+
+            /*while (rs.next()) {
+                rs.updateFloat("Salario", rs.getFloat("Salario"));
+                rs.updateRow();
+            }*/
 
         } catch (SQLException e) {
-            System.out.println("Error al obtener los tipos de ResultSet y concurrencia: " + e.getMessage());
+            System.out.println("Error al insertar el proyecto: " + e.getMessage());
         }
+
     }
 
 }
