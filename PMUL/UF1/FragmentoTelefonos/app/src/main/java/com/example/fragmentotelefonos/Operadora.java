@@ -2,22 +2,26 @@ package com.example.fragmentotelefonos;
 
 import java.util.ArrayList;
 
+// Clase Operadora: Gestiona la conexión entre diferentes teléfonos
 public class Operadora {
-    ArrayList<Telefono> telefonos;
+    ArrayList<Telefono> telefonos; // Lista de teléfonos gestionados por la operadora
 
+    // Constructor: Recibe la lista de teléfonos
     public Operadora(ArrayList<Telefono> telefonos) {
         this.telefonos = telefonos;
     }
 
+    // Comprueba si un teléfono existe en la lista
     private boolean comprobarTelefono(Telefono telefono) {
-     for (Telefono tel : telefonos) {
-         if (tel.equals(telefono)) {
-             return true;
-         }
-     }
-     return false;
+        for (Telefono tel : telefonos) {
+            if (tel.equals(telefono)) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    // Método para realizar una llamada entre teléfonos
     public void llamar(Telefono telefonoOrigen, String numTelefonoDestino) {
         Telefono telefonoDestino = new Telefono(numTelefonoDestino);
 
@@ -27,10 +31,12 @@ public class Operadora {
 
             if (!telefonoDestino.isOcupado()) {
                 System.out.println(telefonoOrigen + " llamando a " + telefonoDestino);
+
                 telefonoOrigen.setOcupado();
                 telefonoDestino.setOcupado();
-                telefonoDestino.recibirLlamada(telefonoOrigen.getTelefono());
+
                 telefonoOrigen.recibirLlamada(null);
+                telefonoDestino.recibirLlamada(telefonoOrigen.getTelefono());
             } else {
                 System.out.println("El teléfono está ocupado");
             }
@@ -41,14 +47,15 @@ public class Operadora {
         }
     }
 
+    // Método para colgar una llamada
     public void colgar(String numTelefonoDestino) {
         Telefono telefonoDestino = new Telefono(numTelefonoDestino);
         int indice = telefonos.indexOf(telefonoDestino);
-        telefonoDestino = telefonos.get(indice);
-
-        telefonoDestino.setLibre();
-
-        telefonoDestino.recibirColgar();
-        System.out.println("Colgando a " + numTelefonoDestino);
+        if (indice != -1) {
+            telefonoDestino = telefonos.get(indice);
+            telefonoDestino.setLibre(); // Marca el teléfono como libre
+            telefonoDestino.recibirColgar(); // Notifica al listener
+            System.out.println("Colgando a " + numTelefonoDestino);
+        }
     }
 }

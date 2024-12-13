@@ -13,28 +13,26 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+// Fragmento que representa la interfaz de un teléfono
 public class FragmentTelefono extends Fragment implements onTelefonoListener {
 
-    private TextView textView;
-    private EditText editText;
-    private ImageButton imageButton;
+    private TextView textView; // Muestra el número del teléfono
+    private EditText editText; // Campo de texto para ingresar el número a llamar
+    private ImageButton imageButton; // Botón para realizar o colgar una llamada
 
-    private String numTelefono;
+    private String numTelefono; // Número del teléfono asociado
+    private onFragmentTelefonoListener listener; // Listener para obtener el teléfono
 
-    private onFragmentTelefonoListener listener;
+    Telefono telefono; // Instancia del teléfono gestionado
 
-
-    Telefono telefono;
-
-
+    // Asocia un listener y el número del teléfono
     public void setListener(onFragmentTelefonoListener listener, String numTelefono) {
         this.listener = listener;
         this.numTelefono = numTelefono;
-
     }
 
     public FragmentTelefono() {
-        // Required empty public constructor
+        // Constructor vacío requerido
     }
 
     @Override
@@ -43,10 +41,8 @@ public class FragmentTelefono extends Fragment implements onTelefonoListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_telefono, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_telefono, container, false); // Infla el diseño del fragmento
     }
 
     @Override
@@ -57,33 +53,29 @@ public class FragmentTelefono extends Fragment implements onTelefonoListener {
         editText = view.findViewById(R.id.editText);
         imageButton = view.findViewById(R.id.imageButton);
 
+        telefono = listener.obtenerTelefono(numTelefono); // Obtiene el teléfono asociado
+        textView.setText(telefono.getTelefono()); // Muestra el número del teléfono
 
-        telefono = listener.obtenerTelefono(numTelefono);
-        textView.setText(telefono.getTelefono());
-
+        // Configura el botón para llamar o colgar
         imageButton.setOnClickListener(v -> {
-
             if (!telefono.isOcupado()) {
                 telefono.llamar(editText.getText().toString());
-            }
-            else {
+            } else {
                 telefono.colgar();
             }
-
         });
-
     }
 
+    // Implementación de los métodos del listener
     @Override
     public void recibirLlamada(String telefonoOrigen) {
-        editText.setEnabled(false);
-        editText.setText(telefonoOrigen);
+        editText.setEnabled(false); // Deshabilita la edición durante la llamada
+        editText.setText(telefonoOrigen); // Muestra el número del origen
     }
 
     @Override
     public void recibirColgada() {
-        editText.setEnabled(true);
-        editText.setText("");
-
+        editText.setEnabled(true); // Habilita la edición tras colgar
+        editText.setText(""); // Limpia el campo de texto
     }
 }
