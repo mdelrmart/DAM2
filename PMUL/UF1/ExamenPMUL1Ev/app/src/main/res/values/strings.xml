@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExamenPMUL1Ev</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="se_ha_encontrado_el_texto">Se ha encontrado el texto:</string>
+    <string name="reset">Resetear</string>
+    <string name="contador_veces_detectadas_correo_ot_com_0">Contador veces detectadas correo @ot.com: 0</string>
+</resources>
