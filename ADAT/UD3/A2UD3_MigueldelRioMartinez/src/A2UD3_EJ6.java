@@ -6,14 +6,14 @@ public class A2UD3_EJ6 {
         visualizarTiposResultSet();
 
         // b)
-        Proxecto proxecto = new Proxecto(11, "PRUEBA", "PONTEVEDRA", 3);
+        Proxecto proxecto = new Proxecto(12, "PRUEB2A", "PONTEVEDRA", 3);
         insertarDatosProyecto(proxecto);
 
         // c)
         incrementarSalarioDepartamento(100,200);
 
         // d)
-        obtenerInfoEmpleadosProyectosAsignadosMayorQue(2);
+        obtenerInfoEmpleadosProyectosAsignadosMayorQue(1);
 
     }
 
@@ -122,7 +122,9 @@ public class A2UD3_EJ6 {
         String usuario = "sa";
         String contrasenha = "abc123.";
 
-        String sql = "SELECT Nome, Apelido_1, Apelido_2, Localidade, Salario FROM EMPREGADO WHERE NSS IN (SELECT NSS_empregado FROM EMPREGADO_PROXECTO GROUP BY NSS_empregado HAVING COUNT(*) > ? )";
+        String sql = "SELECT NSS, Nome + ' ' + Apelido_1 + ' ' + Apelido_2 AS NomeCompleto, Localidade, Salario " +
+                     "FROM EMPREGADO " +
+                     "WHERE NSS IN (SELECT NSS_empregado FROM EMPREGADO_PROXECTO GROUP BY NSS_empregado HAVING COUNT(*) > ? )";
 
         try (Connection connection = DriverManager.getConnection(url, usuario, contrasenha);
             PreparedStatement sentencia = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
@@ -131,14 +133,19 @@ public class A2UD3_EJ6 {
 
             ResultSet rs = sentencia.executeQuery();
             rs.first();
+                System.out.println("Primeiro: " + rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getFloat(4));
+            rs.last();
+                System.out.println("Último: " + rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getFloat(4));
+            rs.relative(-2);
+                System.out.println("Antepenúltimo: " + rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getFloat(4));
+            rs.afterLast();
 
-            System.out.println(rs.getString(1) + rs.getString(2));
+            System.out.println("Datos do ResultSet do último ao primeiro\n ");
+            while (rs.previous()) {
+                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getFloat(4));
+            }
 
-            /*while (rs.next()) {
-                rs.updateFloat("Salario", rs.getFloat("Salario"));
-                rs.updateRow();
-            }*/
-
+            rs.close();
         } catch (SQLException e) {
             System.out.println("Error al insertar el proyecto: " + e.getMessage());
         }
