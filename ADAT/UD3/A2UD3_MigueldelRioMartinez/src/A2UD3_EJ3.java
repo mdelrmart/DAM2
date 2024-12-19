@@ -9,7 +9,7 @@ public class A2UD3_EJ3 {
         Proxecto pr = new Proxecto(99,"Proyecto de prueba","Pontevedra",1);
         insertarNuevoProyecto(pr);
 
-        //c)
+        // c)
         borrarProyecto(8);
     }
 
