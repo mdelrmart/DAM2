@@ -27,7 +27,7 @@ public class A3UD3 {
 
             // 7)
             Metodos.metadatosDeResultSet(con, "SELECT * FROM PROXECTO");
-            
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

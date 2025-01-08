@@ -18,7 +18,7 @@ public class A5UD3_EJ1 {
         try (Connection connection = DriverManager.getConnection(connectionUrl, user, password)) {
             System.out.println("Conexión exitosa a la base de datos.");
 
-            // Dividir las sentencias SQL por punto y coma
+            // Dividimos las sentencias SQL por punto y coma
             String[] sentencias = sqlStatements.split(";");
 
             for (String sentencia : sentencias) {
@@ -35,13 +35,13 @@ public class A5UD3_EJ1 {
                             ResultSetMetaData metaData = resultSet.getMetaData();
                             int columnCount = metaData.getColumnCount();
 
-                            // Imprimir encabezados de columnas
+                            // Imprimimos los encabezados de las columnas
                             for (int i = 1; i <= columnCount; i++) {
                                 System.out.print(metaData.getColumnName(i) + "\t");
                             }
                             System.out.println();
 
-                            // Imprimir filas de resultados
+                            // Imprimimos las filas de los resultados
                             while (resultSet.next()) {
                                 for (int i = 1; i <= columnCount; i++) {
                                     System.out.print(resultSet.getObject(i) + "\t");
@@ -56,7 +56,7 @@ public class A5UD3_EJ1 {
 
                 } catch (SQLException e) {
                     System.err.println("Error al ejecutar la sentencia: " + sentencia);
-                    System.err.println("Mensaje: " + e.getMessage());
+                    System.err.println("Mensaje de error: " + e.getMessage());
                 }
             }
 
