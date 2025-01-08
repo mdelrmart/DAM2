@@ -6,7 +6,6 @@ import java.sql.Statement;
 import java.sql.SQLException;
 
 class Metodos {
-
     static void mostrarMetadatos(Connection con) throws SQLException {
         DatabaseMetaData dbmetadata = con.getMetaData();
 

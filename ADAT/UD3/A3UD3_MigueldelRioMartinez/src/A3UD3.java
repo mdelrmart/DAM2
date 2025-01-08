@@ -1,6 +1,7 @@
+// Nos dijo Pepa, que hicieramos el ejercicio 1, 2 y 7.
 import java.sql.Connection;
 
-public class A3UD3_EJ1 {
+public class A3UD3 {
 
     static Connection con;
 
@@ -24,13 +25,9 @@ public class A3UD3_EJ1 {
             // e)
             Metodos.obtenerClavesForaneas(con, "BDEmpresa", "EMPREGADO_PROXECTO");
 
-            // 3)
+            // 7)
             Metodos.metadatosDeResultSet(con, "SELECT * FROM PROXECTO");
-
-            //Metodos.obtenerFuncionesProcedimientosEtc(con);
-            //Metodos.metadatosDeLimites(con);
-            //Metodos.metadatosSobreTranasacciones(con);
-            //Metodos.metadatosSobreSoporteDeCaracteristicas(con);
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
