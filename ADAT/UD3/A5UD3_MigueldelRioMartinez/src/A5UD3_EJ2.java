@@ -3,7 +3,7 @@ import java.sql.*;
 public class A5UD3_EJ2 {
     public static void main(String[] args) {
         //crearTablas();
-        comprobarMatricula("AAAA");
+        comprobarMatricula("1234 AAA");
     }
 
     public static void crearTablas() {
