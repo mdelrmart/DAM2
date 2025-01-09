@@ -11,16 +11,24 @@ ELSE
 
 CREATE TABLE VEHICULOS
 (
-
-    codVehiculo VARCHAR(25) IDENTITY (1,1) NOT NULL,
-    Matricula   CHAR(8)                    NOT NULL,
-    Marca       VARCHAR(25)                NOT NULL,
-    Modelo      VARCHAR(15)                NOT NULL,
-    Combustible CHAR(1)                    NULL
+    codVehiculo INT IDENTITY (1,1) NOT NULL,
+    Matricula   CHAR(8)            NOT NULL,
+    Marca       VARCHAR(25)        NOT NULL,
+    Modelo      VARCHAR(15)        NOT NULL,
+    Combustible CHAR(1)            NOT NULL
 )
 
 ALTER TABLE VEHICULOS
     ADD CONSTRAINT PK_Vehiculos_codVehiculo PRIMARY KEY (codVehiculo)
+
+ALTER TABLE VEHICULOS
+    ADD CONSTRAINT UQ_Vehiculos_Combustible UNIQUE (Matricula)
+
+ALTER TABLE VEHICULOS
+    ADD CONSTRAINT CK_Vehiculos_Matricula CHECK (Matricula LIKE '[0-9][0-9][0-9][0-9] [A-Z][A-Z][A-Z]')
+
+ALTER TABLE VEHICULOS
+    ADD CONSTRAINT CK_Vehiculos_Combustible CHECK (Combustible IN ('G', 'D'))
 
 -- COMPROBAR SI EXISTE LA TABLA VEHICULOS_RENTING Y BORRARLA EN CASO DE QUE EXISTA
 IF DB_ID('VEHICULOS_RENTING') IS NOT NULL
@@ -33,17 +41,17 @@ ELSE
 
 CREATE TABLE VEHICULOS_RENTING
 (
-
-    Matricula      CHAR(8)     NOT NULL,
-    fechaInicio    DATETIME    NOT NULL,
-    mesesAlquilado VARCHAR(25) NOT NULL
+    codVehiculo    INT              NOT NULL,
+    fechaInicio    DATE             NOT NULL,
+    mesesAlquilado TINYINT          NOT NULL,
+    precio         DOUBLE PRECISION NOT NULL
 )
 
-ALTER TABLE VEHICULOS
-    ADD CONSTRAINT PK_VehiculosRenting_Matricula PRIMARY KEY (Matricula)
+ALTER TABLE VEHICULOS_RENTING
+    ADD CONSTRAINT PK_Vehiculos_codVehiculo PRIMARY KEY (codVehiculo)
 
-ALTER TABLE VEHICULOS
-    ADD CONSTRAINT FK_VehiculosRenting_Matricula FOREIGN KEY (Matricula) REFERENCES VEHICULOS (Matricula)
+ALTER TABLE VEHICULOS_RENTING
+    ADD CONSTRAINT FK_Vehiculos_codVehiculo FOREIGN KEY (codVehiculo) REFERENCES VEHICULOS (codVehiculo)
 
 -- COMPROBAR SI EXISTE LA TABLA VEHICULOS_PROPIOS Y BORRARLA EN CASO DE QUE EXISTA
 IF DB_ID('VEHICULOS_PROPIOS') IS NOT NULL
@@ -56,14 +64,13 @@ ELSE
 
 CREATE TABLE VEHICULOS_PROPIOS
 (
-
-    Matricula    CHAR(8)          NOT NULL,
-    fechaCompra  DATETIME         NOT NULL,
-    precioPagado DOUBLE PRECISION NOT NULL
+    codVehiculo INT              NOT NULL,
+    fechaCompra DATE             NOT NULL,
+    precio      DOUBLE PRECISION NOT NULL
 )
 
-ALTER TABLE VEHICULOS
-    ADD CONSTRAINT PK_VehiculosPropios_Matricula PRIMARY KEY (Matricula)
+ALTER TABLE VEHICULOS_PROPIOS
+    ADD CONSTRAINT PK_Vehiculos_codVehiculo PRIMARY KEY (codVehiculo)
 
-ALTER TABLE VEHICULOS
-    ADD CONSTRAINT FK_VehiculosPropios_Matricula FOREIGN KEY (Matricula) REFERENCES VEHICULOS (Matricula)
+ALTER TABLE VEHICULOS_PROPIOS
+    ADD CONSTRAINT FK_Vehiculos_codVehiculo FOREIGN KEY (codVehiculo) REFERENCES VEHICULOS (codVehiculo)
