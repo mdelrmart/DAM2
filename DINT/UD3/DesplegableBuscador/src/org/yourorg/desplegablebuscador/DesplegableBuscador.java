@@ -12,20 +12,18 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 
-public class DesplegableBuscador extends JComboBox<Object> implements Serializable {
-
-    private final JComboBox comboBox;
+public class DesplegableBuscador<T> extends JComboBox<T> implements Serializable {
+    private final JComboBox<T> comboBox;
     private boolean filtrado;
     private JTextField txtFiltro;
-    private List<String> listaOriginal;
+    private List<T> listaOriginal;
 
     public DesplegableBuscador() {
-        comboBox = new JComboBox();
+        comboBox = new JComboBox<>();
     }
-      
 
-    public DesplegableBuscador(DefaultComboBoxModel m) {
-        comboBox = new DesplegableBuscador(m);
+    public DesplegableBuscador(DefaultComboBoxModel<T> m) {
+        comboBox = new JComboBox<>(m);
         txtFiltro = new JTextField();
         txtFiltro.addKeyListener(new FilterKeyListener());
         txtFiltro.addActionListener(new FilterActionListener());
@@ -39,11 +37,8 @@ public class DesplegableBuscador extends JComboBox<Object> implements Serializab
         this.filtrado = filtrado;
         txtFiltro.setEnabled(filtrado);
     }
-    
-    public void setMasterItemList(List<String> itemList) {
-        for (int i = 0; i < comboBox.getModel().getSize(); i++) {
-            itemList.add((String)comboBox.getModel().getElementAt(i));
-        }
+
+    public void setMasterItemList(List<T> itemList) {
         listaOriginal = new ArrayList<>(itemList);
         filtrarContenido();
     }
@@ -52,13 +47,13 @@ public class DesplegableBuscador extends JComboBox<Object> implements Serializab
         comboBox.removeAllItems();
         String filterText = txtFiltro.getText().toLowerCase();
 
-        for (String item : listaOriginal) {
-            if (item.toLowerCase().contains(filterText)) {
+        for (T item : listaOriginal) {
+            if (item.toString().toLowerCase().contains(filterText)) {
                 comboBox.addItem(item);
             }
         }
     }
-    
+
     private class FilterKeyListener extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
@@ -72,7 +67,4 @@ public class DesplegableBuscador extends JComboBox<Object> implements Serializab
             filtrarContenido();
         }
     }
-    
-    
-    
 }

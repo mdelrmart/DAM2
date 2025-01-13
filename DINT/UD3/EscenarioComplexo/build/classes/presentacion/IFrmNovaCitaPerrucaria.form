@@ -247,6 +247,9 @@
           </Events>
         </Component>
         <Component class="org.yourorg.desplegablebuscador.DesplegableBuscador" name="desplegableBuscador1">
+          <Properties>
+            <Property name="editable" type="boolean" value="true"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="desplegableBuscador1ActionPerformed"/>
           </Events>

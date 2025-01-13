@@ -37,7 +37,7 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
         initComponents();
         modeloPropietarios = new DefaultComboBoxModel<Propietario>();
         cmbPropietario.setModel(modeloPropietarios);
-        desplegableBuscador1.setModel(modeloPropietarios2);
+        desplegableBuscador1.setModel(modeloPropietarios);
         modeloCans = new DefaultComboBoxModel<Can>();
         cmbCan.setModel(modeloCans);
         cargarPropietarios();
@@ -343,6 +343,7 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
         });
         pnlBotons.add(btnPechar);
 
+        desplegableBuscador1.setEditable(true);
         desplegableBuscador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 desplegableBuscador1ActionPerformed(evt);
@@ -376,10 +377,10 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
 
     private void cmbPropietarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPropietarioItemStateChanged
         // TODO add your handling code here:
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        /*if (evt.getStateChange() == ItemEvent.SELECTED) {
             String dniPropietario = modeloPropietarios.getElementAt(cmbPropietario.getSelectedIndex()).getDni();
             cargarCans(dniPropietario);
-        }
+        }*/
     }//GEN-LAST:event_cmbPropietarioItemStateChanged
 
     private void btnPecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPecharActionPerformed
@@ -538,6 +539,5 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtData;
     // End of variables declaration//GEN-END:variables
     private javax.swing.DefaultComboBoxModel<Propietario> modeloPropietarios;
-    private javax.swing.DefaultComboBoxModel<Object> modeloPropietarios2;
     private javax.swing.DefaultComboBoxModel<Can> modeloCans;
 }
