@@ -1,84 +1,78 @@
 package org.yourorg.desplegablebuscador;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
-public class DesplegableBuscador<E> extends JTextField {
-    private JPopupMenu popupMenu;
-    private List<E> originalItems;
-    private List<E> filteredItems;
-    public DesplegableBuscador(){}
+
+public class DesplegableBuscador extends JComboBox<Object> implements Serializable {
+
+    private final JComboBox comboBox;
+    private boolean filtrado;
+    private JTextField txtFiltro;
+    private List<String> listaOriginal;
+
+    public DesplegableBuscador() {
+        comboBox = new JComboBox();
+    }
+      
+
+    public DesplegableBuscador(DefaultComboBoxModel m) {
+        comboBox = new DesplegableBuscador(m);
+        txtFiltro = new JTextField();
+        txtFiltro.addKeyListener(new FilterKeyListener());
+        txtFiltro.addActionListener(new FilterActionListener());
+    }
+
+    public boolean isFiltrado() {
+        return filtrado;
+    }
+
+    public void setFiltrado(boolean filtrado) {
+        this.filtrado = filtrado;
+        txtFiltro.setEnabled(filtrado);
+    }
     
-    public DesplegableBuscador(List<E> items) {
-        super();
-        this.originalItems = new ArrayList<>(items);
-        this.filteredItems = new ArrayList<>();
-
-        // Crear el menú desplegable
-        popupMenu = new JPopupMenu();
-
-        // Añadir un listener al texto para filtrar las opciones
-        this.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                filtrar(getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                filtrar(getText());
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                filtrar(getText());
-            }
-        });
-
-        // Configurar el comportamiento al perder el foco
-        this.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusLost(java.awt.event.FocusEvent e) {
-                popupMenu.setVisible(false);
-            }
-        });
+    public void setMasterItemList(List<String> itemList) {
+        for (int i = 0; i < comboBox.getModel().getSize(); i++) {
+            itemList.add((String)comboBox.getModel().getElementAt(i));
+        }
+        listaOriginal = new ArrayList<>(itemList);
+        filtrarContenido();
     }
 
-    private void filtrar(String text) {
-        // Vaciar las opciones filtradas
-        filteredItems.clear();
-        popupMenu.removeAll();
+    private void filtrarContenido() {
+        comboBox.removeAllItems();
+        String filterText = txtFiltro.getText().toLowerCase();
 
-        // Filtrar los elementos que coincidan con el texto
-        for (E item : originalItems) {
-            if (item.toString().toLowerCase().contains(text.toLowerCase())) {
-                filteredItems.add(item);
+        for (String item : listaOriginal) {
+            if (item.toLowerCase().contains(filterText)) {
+                comboBox.addItem(item);
             }
-        }
-
-        // Si hay elementos que coinciden, mostrarlos en el menú desplegable
-        if (!filteredItems.isEmpty()) {
-            for (E item : filteredItems) {
-                JMenuItem menuItem = new JMenuItem(item.toString());
-                menuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        setText(item.toString());
-                        popupMenu.setVisible(false);
-                    }
-                });
-                popupMenu.add(menuItem);
-            }
-
-            // Mostrar el menú desplegable debajo del JTextField
-            popupMenu.show(this, 0, this.getHeight());
-        } else {
-            popupMenu.setVisible(false);
         }
     }
+    
+    private class FilterKeyListener extends KeyAdapter {
+        @Override
+        public void keyReleased(KeyEvent e) {
+            filtrarContenido();
+        }
+    }
+
+    private class FilterActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            filtrarContenido();
+        }
+    }
+    
+    
+    
 }

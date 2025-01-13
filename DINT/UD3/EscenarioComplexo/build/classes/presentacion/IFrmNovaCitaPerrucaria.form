@@ -246,6 +246,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPecharActionPerformed"/>
           </Events>
         </Component>
+        <Component class="org.yourorg.desplegablebuscador.DesplegableBuscador" name="desplegableBuscador1">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="desplegableBuscador1ActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

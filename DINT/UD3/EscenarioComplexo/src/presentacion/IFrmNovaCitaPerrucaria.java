@@ -37,7 +37,7 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
         initComponents();
         modeloPropietarios = new DefaultComboBoxModel<Propietario>();
         cmbPropietario.setModel(modeloPropietarios);
-        //desplegableBuscador2.setModel(modeloPropietarios);
+        desplegableBuscador1.setModel(modeloPropietarios2);
         modeloCans = new DefaultComboBoxModel<Can>();
         cmbCan.setModel(modeloCans);
         cargarPropietarios();
@@ -150,6 +150,7 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
         pnlBotons = new javax.swing.JPanel();
         btnReservar = new javax.swing.JButton();
         btnPechar = new javax.swing.JButton();
+        desplegableBuscador1 = new org.yourorg.desplegablebuscador.DesplegableBuscador();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -342,6 +343,13 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
         });
         pnlBotons.add(btnPechar);
 
+        desplegableBuscador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desplegableBuscador1ActionPerformed(evt);
+            }
+        });
+        pnlBotons.add(desplegableBuscador1);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -516,6 +524,7 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup btngrpHoras;
     private javax.swing.JComboBox cmbCan;
     private javax.swing.JComboBox cmbPropietario;
+    private org.yourorg.desplegablebuscador.DesplegableBuscador desplegableBuscador1;
     private javax.swing.JLabel lblCan;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblPropietario;
@@ -529,5 +538,6 @@ public class IFrmNovaCitaPerrucaria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtData;
     // End of variables declaration//GEN-END:variables
     private javax.swing.DefaultComboBoxModel<Propietario> modeloPropietarios;
+    private javax.swing.DefaultComboBoxModel<Object> modeloPropietarios2;
     private javax.swing.DefaultComboBoxModel<Can> modeloCans;
 }
