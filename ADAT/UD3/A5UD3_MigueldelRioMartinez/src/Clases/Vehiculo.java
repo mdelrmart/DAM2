@@ -1,9 +1,11 @@
+package Clases;
+
 public class Vehiculo {
-    int codVehiculo;
-    String matricula;
-    String marca;
-    String modelo;
-    char combustible;
+    public int codVehiculo;
+    public String matricula;
+    public String marca;
+    public String modelo;
+    public char combustible;
 
     public Vehiculo(int codVehiculo, String matricula, String marca, String modelo, char combustible) {
         this.codVehiculo = codVehiculo;

@@ -1,3 +1,5 @@
+import Clases.VehiculoPropio;
+import Clases.VehiculoRenting;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

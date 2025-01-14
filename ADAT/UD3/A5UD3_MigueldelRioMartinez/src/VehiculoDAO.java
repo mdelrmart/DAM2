@@ -1,3 +1,7 @@
+import Clases.Vehiculo;
+import Clases.VehiculoPropio;
+import Clases.VehiculoRenting;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

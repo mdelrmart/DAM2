@@ -1,3 +1,6 @@
+import Clases.VehiculoPropio;
+import Clases.VehiculoRenting;
+
 import java.sql.*;
 import java.time.LocalDate;
 

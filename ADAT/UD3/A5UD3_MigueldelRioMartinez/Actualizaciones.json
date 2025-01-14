@@ -1,38 +1,10 @@
 {
   "EmpleadosReasignados": [
     {
-      "NSS": "0010010",
-      "Nombre": "Rocio",
-      "Apellido1": "López",
-      "Apellido2": "Ferreiro",
-      "NuevoDepartamento": 2
-    },
-    {
-      "NSS": "0110010",
-      "Nombre": "Javier",
-      "Apellido1": "Quintero",
-      "Apellido2": "Alvarez",
-      "NuevoDepartamento": 2
-    },
-    {
-      "NSS": "1010001",
-      "Nombre": "Diego",
-      "Apellido1": "Lamela",
-      "Apellido2": "Bello",
-      "NuevoDepartamento": 2
-    },
-    {
       "NSS": "1100222",
       "Nombre": "Felix",
       "Apellido1": "Barreiro",
       "Apellido2": "Casa",
-      "NuevoDepartamento": 2
-    },
-    {
-      "NSS": "1111111",
-      "Nombre": "Pepe",
-      "Apellido1": "López",
-      "Apellido2": "López",
       "NuevoDepartamento": 2
     },
     {
@@ -78,13 +50,6 @@
       "NuevoDepartamento": 2
     },
     {
-      "NSS": "9990009",
-      "Nombre": "Celia",
-      "Apellido1": "Bueno",
-      "Apellido2": "Valiña",
-      "NuevoDepartamento": 2
-    },
-    {
       "NSS": "9998888",
       "Nombre": "Paulo",
       "Apellido1": "Máximo",
@@ -96,11 +61,6 @@
     {
       "Num_proxecto": 5,
       "Nombre": "PRODUCIÓN NOVO PRODUTO",
-      "NuevoDepartamentoControla": 2
-    },
-    {
-      "Num_proxecto": 7,
-      "Nombre": "MELLORAS SOCIAIS",
       "NuevoDepartamentoControla": 2
     }
   ],

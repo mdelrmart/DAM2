@@ -1,3 +1,7 @@
+import Clases.Actualizaciones;
+import Clases.Departamento;
+import Clases.Empleado;
+import Clases.Proyecto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -115,7 +119,7 @@ public class A5UD3_EJ3_JSON {
         }
 
         // Crear el objeto JSON y escribirlo en un archivo
-        DepartamentoEliminado departamentoEliminado = new DepartamentoEliminado(numDepEliminar, departamentoEliminar);
+        Departamento departamentoEliminado = new Departamento(numDepEliminar, departamentoEliminar);
         Actualizaciones actualizaciones = new Actualizaciones(empleadosReasignados, proyectosReasignados, departamentoEliminado);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -125,59 +129,6 @@ public class A5UD3_EJ3_JSON {
             e.printStackTrace();
         }
     }
-
-    //region Clases auxiliares para la estructura JSON
-    // Clases auxiliares para la estructura JSON
-    protected static class Empleado {
-        String NSS;
-        String Nombre;
-        String Apellido1;
-        String Apellido2;
-        int NuevoDepartamento;
-
-        Empleado(String NSS, String Nombre, String Apellido1, String Apellido2, int NuevoDepartamento) {
-            this.NSS = NSS;
-            this.Nombre = Nombre;
-            this.Apellido1 = Apellido1;
-            this.Apellido2 = Apellido2;
-            this.NuevoDepartamento = NuevoDepartamento;
-        }
-    }
-
-    protected static class Proyecto {
-        int Num_proxecto;
-        String Nombre;
-        int NuevoDepartamentoControla;
-
-        Proyecto(int Num_proxecto, String Nombre, int NuevoDepartamentoControla) {
-            this.Num_proxecto = Num_proxecto;
-            this.Nombre = Nombre;
-            this.NuevoDepartamentoControla = NuevoDepartamentoControla;
-        }
-    }
-
-    protected static class DepartamentoEliminado {
-        int Num_departamento;
-        String Nombre;
-
-        DepartamentoEliminado(int Num_departamento, String Nombre) {
-            this.Num_departamento = Num_departamento;
-            this.Nombre = Nombre;
-        }
-    }
-
-    protected static class Actualizaciones {
-        List<Empleado> EmpleadosReasignados;
-        List<Proyecto> ProyectosReasignados;
-        DepartamentoEliminado DepartamentoEliminado;
-
-        Actualizaciones(List<Empleado> EmpleadosReasignados, List<Proyecto> ProyectosReasignados, DepartamentoEliminado DepartamentoEliminado) {
-            this.EmpleadosReasignados = EmpleadosReasignados;
-            this.ProyectosReasignados = ProyectosReasignados;
-            this.DepartamentoEliminado = DepartamentoEliminado;
-        }
-    }
-    //endregion
 
     public static int existeDepartamento(String departamento) {
         String sql = """

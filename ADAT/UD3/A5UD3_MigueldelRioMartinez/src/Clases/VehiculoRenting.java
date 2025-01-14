@@ -1,9 +1,11 @@
+package Clases;
+
 import java.util.Date;
 
 public class VehiculoRenting extends Vehiculo {
-    Date fechaInicio;
-    int mesesAlquilado;
-    Double precio;
+    public Date fechaInicio;
+    public int mesesAlquilado;
+    public Double precio;
 
     public VehiculoRenting(int codVehiculo, String matricula, String marca, String modelo, char combustible, Date fechaInicio, Double precio, int mesesAlquilado) {
         super(codVehiculo, matricula, marca, modelo, combustible);
