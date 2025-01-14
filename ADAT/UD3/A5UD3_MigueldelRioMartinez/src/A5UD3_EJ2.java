@@ -26,7 +26,7 @@ public class A5UD3_EJ2 {
     }
 
     public static void crearTablas() {
-        String sqlVehiculos = """                
+        String sqlVehiculos = """
                 CREATE TABLE VEHICULOS
                 (
                     codVehiculo INT IDENTITY (1,1) NOT NULL,
