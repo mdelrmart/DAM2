@@ -98,7 +98,7 @@ public class A5UD3_EJ2 {
 
     public static int comprobarMatricula(String matricula) {
         String sql = """
-                    SELECT Matricula FROM VEHICULOS WHERE Matricula=?
+                    SELECT Matricula FROM VEHICULOS WHERE Matricula = ?
                 """;
 
         try (Connection conexion = Conexion.obtenerConexion();
