@@ -1,0 +1,111 @@
+{
+  "EmpleadosReasignados": [
+    {
+      "NSS": "0010010",
+      "Nombre": "Rocio",
+      "Apellido1": "López",
+      "Apellido2": "Ferreiro",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "0110010",
+      "Nombre": "Javier",
+      "Apellido1": "Quintero",
+      "Apellido2": "Alvarez",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "1010001",
+      "Nombre": "Diego",
+      "Apellido1": "Lamela",
+      "Apellido2": "Bello",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "1100222",
+      "Nombre": "Felix",
+      "Apellido1": "Barreiro",
+      "Apellido2": "Casa",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "1111111",
+      "Nombre": "Pepe",
+      "Apellido1": "López",
+      "Apellido2": "López",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "1122331",
+      "Nombre": "Xiao",
+      "Apellido1": "Vecino",
+      "Apellido2": "Vecino",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "1341431",
+      "Nombre": "Marta",
+      "Apellido1": "Bello",
+      "Apellido2": "Arias",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "2525252",
+      "Nombre": "José Manuel",
+      "Apellido1": "García",
+      "Apellido2": "Graña",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "6565656",
+      "Nombre": "Valeriano",
+      "Apellido1": "Boo",
+      "Apellido2": "Boo",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "7777777",
+      "Nombre": "Ana María",
+      "Apellido1": "Ramilo",
+      "Apellido2": "Barreiro",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "8888877",
+      "Nombre": "Rubén",
+      "Apellido1": "Guerra",
+      "Apellido2": "Vázquez",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "9990009",
+      "Nombre": "Celia",
+      "Apellido1": "Bueno",
+      "Apellido2": "Valiña",
+      "NuevoDepartamento": 2
+    },
+    {
+      "NSS": "9998888",
+      "Nombre": "Paulo",
+      "Apellido1": "Máximo",
+      "Apellido2": "Guerra",
+      "NuevoDepartamento": 2
+    }
+  ],
+  "ProyectosReasignados": [
+    {
+      "Num_proxecto": 5,
+      "Nombre": "PRODUCIÓN NOVO PRODUTO",
+      "NuevoDepartamentoControla": 2
+    },
+    {
+      "Num_proxecto": 7,
+      "Nombre": "MELLORAS SOCIAIS",
+      "NuevoDepartamentoControla": 2
+    }
+  ],
+  "DepartamentoEliminado": {
+    "Num_departamento": 6,
+    "Nombre": "INNOVACIÓN"
+  }
+}

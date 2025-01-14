@@ -20,6 +20,9 @@ public class A5UD3_EJ3 {
             return;
         }
 
+        int numDepEliminar = obtenerNumDepartamento(departamentoEliminar);
+        int numDepReasignar = obtenerNumDepartamento(departamentoReasignar);
+
         // Cambiamos el departamento que controla los proyectos
         String sqlUpdateProxecto = """
                     UPDATE PROXECTO
@@ -30,8 +33,8 @@ public class A5UD3_EJ3 {
         try (Connection conexion = Conexion.obtenerConexion();
              PreparedStatement sentencia = conexion.prepareStatement(sqlUpdateProxecto)) {
 
-            sentencia.setInt(1, obtenerNumDepartamento(departamentoReasignar));
-            sentencia.setInt(2, obtenerNumDepartamento(departamentoEliminar));
+            sentencia.setInt(1, numDepReasignar);
+            sentencia.setInt(2, numDepEliminar);
 
             sentencia.executeUpdate();
         } catch (SQLException e) {
@@ -48,8 +51,8 @@ public class A5UD3_EJ3 {
         try (Connection conexion = Conexion.obtenerConexion();
              PreparedStatement sentencia = conexion.prepareStatement(sqlUpdateEmpregado)) {
 
-            sentencia.setInt(1, obtenerNumDepartamento(departamentoReasignar));
-            sentencia.setInt(2, obtenerNumDepartamento(departamentoEliminar));
+            sentencia.setInt(1, numDepReasignar);
+            sentencia.setInt(2, numDepEliminar);
 
             sentencia.executeUpdate();
         } catch (SQLException e) {
@@ -65,7 +68,7 @@ public class A5UD3_EJ3 {
         try (Connection conexion = Conexion.obtenerConexion();
              PreparedStatement sentencia = conexion.prepareStatement(sqlEliminarDepartamento)) {
 
-            sentencia.setInt(1, obtenerNumDepartamento(departamentoEliminar));
+            sentencia.setInt(1, numDepEliminar);
 
             sentencia.executeUpdate();
         } catch (SQLException e) {
