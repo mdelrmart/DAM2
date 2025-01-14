@@ -116,18 +116,19 @@ public class A5UD3_EJ3_JSON {
 
         // Crear el objeto JSON y escribirlo en un archivo
         DepartamentoEliminado departamentoEliminado = new DepartamentoEliminado(numDepEliminar, departamentoEliminar);
-        Actualizacion actualizacion = new Actualizacion(empleadosReasignados, proyectosReasignados, departamentoEliminado);
+        Actualizaciones actualizaciones = new Actualizaciones(empleadosReasignados, proyectosReasignados, departamentoEliminado);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter("Actualizaciones.json")) {
-            gson.toJson(actualizacion, writer);
+            gson.toJson(actualizaciones, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //region Clases auxiliares para la estructura JSON
     // Clases auxiliares para la estructura JSON
-    static class Empleado {
+    protected static class Empleado {
         String NSS;
         String Nombre;
         String Apellido1;
@@ -143,7 +144,7 @@ public class A5UD3_EJ3_JSON {
         }
     }
 
-    static class Proyecto {
+    protected static class Proyecto {
         int Num_proxecto;
         String Nombre;
         int NuevoDepartamentoControla;
@@ -155,7 +156,7 @@ public class A5UD3_EJ3_JSON {
         }
     }
 
-    static class DepartamentoEliminado {
+    protected static class DepartamentoEliminado {
         int Num_departamento;
         String Nombre;
 
@@ -165,17 +166,18 @@ public class A5UD3_EJ3_JSON {
         }
     }
 
-    static class Actualizacion {
+    protected static class Actualizaciones {
         List<Empleado> EmpleadosReasignados;
         List<Proyecto> ProyectosReasignados;
         DepartamentoEliminado DepartamentoEliminado;
 
-        Actualizacion(List<Empleado> EmpleadosReasignados, List<Proyecto> ProyectosReasignados, DepartamentoEliminado DepartamentoEliminado) {
+        Actualizaciones(List<Empleado> EmpleadosReasignados, List<Proyecto> ProyectosReasignados, DepartamentoEliminado DepartamentoEliminado) {
             this.EmpleadosReasignados = EmpleadosReasignados;
             this.ProyectosReasignados = ProyectosReasignados;
             this.DepartamentoEliminado = DepartamentoEliminado;
         }
     }
+    //endregion
 
     public static int existeDepartamento(String departamento) {
         String sql = """
