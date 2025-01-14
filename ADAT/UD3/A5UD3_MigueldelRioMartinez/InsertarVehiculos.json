@@ -1,0 +1,35 @@
+{
+  "vehiculos": [
+    {
+      "matricula": "1239ABC",
+      "marca": "Toyota",
+      "modelo": "Corolla",
+      "tipo": "G",
+      "vehiculoPropio": {
+        "fechaCompra": "2023-05-15",
+        "precio": 15000.00
+      }
+    },
+    {
+      "matricula": "1678XYZ",
+      "marca": "Ford",
+      "modelo": "Fiesta",
+      "tipo": "D",
+      "vehiculoRenting": {
+        "fechaInicio": "2023-07-01",
+        "precioMensual": 200.00,
+        "meses": 24
+      }
+    },
+    {
+      "matricula": "3662ABF",
+      "marca": "Nissan",
+      "modelo": "Maxima",
+      "tipo": "D",
+      "vehiculoPropio": {
+        "fechaCompra": "2024-11-25",
+        "precio": 21000.00
+      }
+    }
+  ]
+}

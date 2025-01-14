@@ -5,15 +5,15 @@ public class VehiculoRenting extends Vehiculo {
     int mesesAlquilado;
     Double precio;
 
-    public VehiculoRenting(int codVehiculo, String matricula, String marca, String modelo, char combustible, Date fechaInicio, Double precio, int mesesAlquilado) {
-        super(codVehiculo, matricula, marca, modelo, combustible);
+    public VehiculoRenting(int codVehiculo, String matricula, String marca, String modelo, char combustible, Date fechaInicio, int mesesAlquilado, Double precio) {
+        super(codVehiculo, matricula, marca,modelo, combustible);
         this.fechaInicio = fechaInicio;
-        this.precio = precio;
         this.mesesAlquilado = mesesAlquilado;
+        this.precio = precio;
     }
 
-    public VehiculoRenting(String matricula, String marca, String modelo, char combustible, Date fechaInicio, Double precio, int mesesAlquilado) {
-        this(-1, matricula, marca, modelo, combustible, fechaInicio, precio, mesesAlquilado);
+    public VehiculoRenting(String matricula, String marca, String modelo, char combustible, Date fechaInicio, int mesesAlquilado, Double precio) {
+        this(-1, matricula, marca, modelo, combustible, fechaInicio, mesesAlquilado, precio);
     }
 
     public Date getFechaInicio() {

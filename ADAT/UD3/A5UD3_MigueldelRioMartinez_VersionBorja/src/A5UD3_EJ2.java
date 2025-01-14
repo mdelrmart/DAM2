@@ -3,26 +3,16 @@ import java.time.LocalDate;
 
 public class A5UD3_EJ2 {
     public static void main(String[] args) {
-        // 1)
-        crearTablas();
+        //crearTablas();
 
-        // 2)
-        if (comprobarMatricula("1234ABC") == 0) {
-            VehiculoPropio v = new VehiculoPropio("1234ABC", "Seat", "Ibiza", 'G', Date.valueOf(LocalDate.of(2023,5,15)), 15000.0);
+        String matricula = "1239 ABC";
+
+        if (comprobarMatricula(matricula) == 0) {
+            VehiculoPropio v = new VehiculoPropio(matricula, "Seat", "Ibiza", 'G', Date.valueOf(LocalDate.of(2023,5,15)), 10000.0);
             VehiculoDAO.insertarVehiculo(v);
         } else {
             System.out.println("La matrícula ya existe");
         }
-
-        if (comprobarMatricula("5678XYZ") == 0) {
-            VehiculoRenting v = new VehiculoRenting("5678XYZ", "Ford", "Fiesta", 'D', Date.valueOf(LocalDate.of(2023,7,1)), 200.0, 4);
-            VehiculoDAO.insertarVehiculo(v);
-        } else {
-            System.out.println("La matrícula ya existe");
-        }
-
-        // 3)
-        InsertarVehiculosJSON.insertarVehiculosDesdeJson("InsertarVehiculos.json");
     }
 
     public static void crearTablas() {
@@ -43,7 +33,7 @@ public class A5UD3_EJ2 {
                     ADD CONSTRAINT UQ_Vehiculos_Combustible UNIQUE (Matricula)
                 
                 ALTER TABLE VEHICULOS
-                    ADD CONSTRAINT CK_Vehiculos_Matricula CHECK (Matricula LIKE '[0-9][0-9][0-9][0-9][A-Z][A-Z][A-Z]')
+                    ADD CONSTRAINT CK_Vehiculos_Matricula CHECK (Matricula LIKE '[0-9][0-9][0-9][0-9] [A-Z][A-Z][A-Z]')
                 
                 ALTER TABLE VEHICULOS
                     ADD CONSTRAINT CK_Vehiculos_Combustible CHECK (Combustible IN ('G', 'D'))
