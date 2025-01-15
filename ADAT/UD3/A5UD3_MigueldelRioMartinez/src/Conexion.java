@@ -9,7 +9,7 @@ public class Conexion {
     private static final String USUARIO = "sa";
     private static final String CONTRASENHA = "abc123.";
 
-    // Método para obtener la conexión a la base de datos
+    // Metodo para obtener la conexión a la base de datos
     public static Connection obtenerConexion() throws SQLException {
         return DriverManager.getConnection(URL, USUARIO, CONTRASENHA);
     }

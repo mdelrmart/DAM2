@@ -1,71 +1,81 @@
 {
   "EmpleadosReasignados": [
     {
-      "NSS": "1100222",
-      "Nombre": "Felix",
-      "Apellido1": "Barreiro",
-      "Apellido2": "Casa",
-      "NuevoDepartamento": 2
+      "NSS": "0010010",
+      "nombre": "Rocio",
+      "apellido1": "López",
+      "apellido2": "Ferreiro",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "1122331",
-      "Nombre": "Xiao",
-      "Apellido1": "Vecino",
-      "Apellido2": "Vecino",
-      "NuevoDepartamento": 2
+      "NSS": "0110010",
+      "nombre": "Javier",
+      "apellido1": "Quintero",
+      "apellido2": "Alvarez",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "1341431",
-      "Nombre": "Marta",
-      "Apellido1": "Bello",
-      "Apellido2": "Arias",
-      "NuevoDepartamento": 2
+      "NSS": "1010001",
+      "nombre": "Diego",
+      "apellido1": "Lamela",
+      "apellido2": "Bello",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "2525252",
-      "Nombre": "José Manuel",
-      "Apellido1": "García",
-      "Apellido2": "Graña",
-      "NuevoDepartamento": 2
+      "NSS": "1111111",
+      "nombre": "Pepe",
+      "apellido1": "López",
+      "apellido2": "López",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "6565656",
-      "Nombre": "Valeriano",
-      "Apellido1": "Boo",
-      "Apellido2": "Boo",
-      "NuevoDepartamento": 2
+      "NSS": "1231231",
+      "nombre": "Eligio",
+      "apellido1": "Rodrigo",
+      "apellido2": "Olmo",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "7777777",
-      "Nombre": "Ana María",
-      "Apellido1": "Ramilo",
-      "Apellido2": "Barreiro",
-      "NuevoDepartamento": 2
+      "NSS": "4444444",
+      "nombre": "Sara",
+      "apellido1": "Plaza",
+      "apellido2": "Marín",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "8888877",
-      "Nombre": "Rubén",
-      "Apellido1": "Guerra",
-      "Apellido2": "Vázquez",
-      "NuevoDepartamento": 2
+      "NSS": "9876567",
+      "nombre": "Angeles",
+      "apellido1": "López",
+      "apellido2": "Arias",
+      "numDepartamentoPertenece": 3
     },
     {
-      "NSS": "9998888",
-      "Nombre": "Paulo",
-      "Apellido1": "Máximo",
-      "Apellido2": "Guerra",
-      "NuevoDepartamento": 2
+      "NSS": "9990009",
+      "nombre": "Celia",
+      "apellido1": "Bueno",
+      "apellido2": "Valiña",
+      "numDepartamentoPertenece": 3
     }
   ],
   "ProyectosReasignados": [
     {
-      "Num_proxecto": 5,
-      "Nombre": "PRODUCIÓN NOVO PRODUTO",
-      "NuevoDepartamentoControla": 2
+      "Num_proxecto": 4,
+      "Nome_proxecto": "INFORME ESTADISTICO ANUAL",
+      "Num_departamento_controla": 3
+    },
+    {
+      "Num_proxecto": 7,
+      "Nome_proxecto": "MELLORAS SOCIAIS",
+      "Num_departamento_controla": 3
+    },
+    {
+      "Num_proxecto": 9,
+      "Nome_proxecto": "PROXECTO X",
+      "Num_departamento_controla": 3
     }
   ],
   "DepartamentoEliminado": {
-    "Num_departamento": 6,
-    "Nombre": "INNOVACIÓN"
+    "numDepartamento": 1,
+    "nomeDepartamento": "PERSOAL"
   }
 }

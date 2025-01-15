@@ -16,8 +16,8 @@ public class InsertarVehiculosJSON {
         Gson gson = new Gson();
 
         try (FileReader reader = new FileReader(filePath)) {
-            JsonObject rootObject = JsonParser.parseReader(reader).getAsJsonObject();
-            JsonArray arrayVehiculos = rootObject.getAsJsonArray("vehiculos");
+            JsonObject objectoRaiz = JsonParser.parseReader(reader).getAsJsonObject();
+            JsonArray arrayVehiculos = objectoRaiz.getAsJsonArray("vehiculos");
 
             // Vamos recorriendo el array de vehículos hasta que no haya más elementos y los vamos insertando en la base de datos
             for (int i = 0; i < arrayVehiculos.size(); i++) {
@@ -51,7 +51,7 @@ public class InsertarVehiculosJSON {
                         VehiculoDAO.insertarVehiculo(v);
                     }
                 } else {
-                    // Si la matricula está en la base de datos, mostramos el siguiente mensaje
+                    // Si la matrícula está en la base de datos, mostramos el siguiente mensaje
                     System.out.println("El vehículo con matrícula " + matricula + " ya existe en la base de datos.");
                 }
             }

@@ -13,8 +13,7 @@ import java.util.List;
 
 public class A5UD3_EJ3_JSON {
     public static void main(String[] args) {
-        //eliminarDepartamento("INNOVACIÓN", "CONTABILIDADE");
-         System.out.println(existeMatricula("1234Abc"));
+        eliminarDepartamento("INNOVACIÓN", "CONTABILIDADE");
     }
 
     public static void eliminarDepartamento(String departamentoEliminar, String departamentoReasignar) {
@@ -28,8 +27,8 @@ public class A5UD3_EJ3_JSON {
             return;
         }
 
-        int numDepEliminar = obtenerNumDepartamentoProcedimiento(departamentoEliminar);
-        int numDepReasignar = obtenerNumDepartamentoProcedimiento(departamentoReasignar);
+        int numDepEliminar = obtenerNumDepartamento(departamentoEliminar);
+        int numDepReasignar = obtenerNumDepartamento(departamentoReasignar);
 
         List<Empleado> empleadosReasignados = new ArrayList<>();
         List<Proyecto> proyectosReasignados = new ArrayList<>();
@@ -155,49 +154,17 @@ public class A5UD3_EJ3_JSON {
     }
 
     public static int obtenerNumDepartamento(String departamento) {
-        String sql = """
-                    SELECT Num_departamento FROM DEPARTAMENTO WHERE Nome_departamento = ?
-                """;
-
-        try (Connection conexion = Conexion.obtenerConexion();
-             PreparedStatement sentencia = conexion.prepareStatement(sql)) {
-
-            sentencia.setString(1, departamento);
-
-            ResultSet rs = sentencia.executeQuery();
-
-            // Mover el cursor a la primera fila y comprobar si hay resultados
-            if (rs.next()) {
-                return rs.getInt("Num_departamento");
-            } else {
-                // Devolvemos -1 si no se encuentra el departamento
-                System.out.println("No se ha encontrado el departamento " + departamento);
-                return -1;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static int obtenerNumDepartamentoProcedimiento(String departamento) {
         try (Connection conexion = Conexion.obtenerConexion()) {
-            // Prepara la llamada al procedimiento almacenado
             String procedimiento = "{CALL pr_ObtenerNumDepartamento(?, ?)}";
             CallableStatement callableStatement = conexion.prepareCall(procedimiento);
 
-            // Establece el parámetro de entrada
             callableStatement.setString(1, departamento);
-
-            // Registra el parámetro de salida
             callableStatement.registerOutParameter(2, java.sql.Types.INTEGER);
-
-            // Ejecuta el procedimiento almacenado
             callableStatement.execute();
 
             // Recupera el valor del parámetro de salida
             int numDepartamento = callableStatement.getInt(2);
 
-            // Procesa el resultado
             if (numDepartamento == -1) {
                 return -1;
             } else {
@@ -208,23 +175,4 @@ public class A5UD3_EJ3_JSON {
             throw new RuntimeException(e);
         }
     }
-
-
-    public static int existeMatricula(String matricula) {
-        try (Connection conexion = Conexion.obtenerConexion()) {
-            String funcion = "{? = CALL fn_ComprobarMatricula(?)}";
-            CallableStatement callableStatement = conexion.prepareCall(funcion);
-
-            callableStatement.registerOutParameter(1, Types.INTEGER);
-
-            callableStatement.setString(2,matricula);
-
-            callableStatement.execute();
-
-            return callableStatement.getInt(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

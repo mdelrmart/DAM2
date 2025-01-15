@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class A5UD3_EJ2 {
     public static void main(String[] args) {
         // 1)
-        crearTablas();
+        //crearTablas();
 
         // 2)
         if (comprobarMatricula("1234ABC") == 0) {
@@ -100,23 +100,15 @@ public class A5UD3_EJ2 {
     }
 
     public static int comprobarMatricula(String matricula) {
-        String sql = """
-                    SELECT Matricula FROM VEHICULOS WHERE Matricula = ?
-                """;
+        try (Connection conexion = Conexion.obtenerConexion()) {
+            String funcion = "{? = CALL fn_ComprobarMatricula(?)}";
+            CallableStatement callableStatement = conexion.prepareCall(funcion);
 
-        try (Connection conexion = Conexion.obtenerConexion();
-             PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            callableStatement.registerOutParameter(1, Types.INTEGER);
+            callableStatement.setString(2,matricula);
+            callableStatement.execute();
 
-            sentencia.setString(1, matricula);
-
-            ResultSet rs = sentencia.executeQuery();
-
-            if (rs.next()) {
-                return 1;
-            } else {
-                return 0;
-            }
-
+            return callableStatement.getInt(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

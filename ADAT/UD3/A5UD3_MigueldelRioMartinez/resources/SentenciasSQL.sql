@@ -75,23 +75,6 @@ ALTER TABLE VEHICULOS_PROPIOS
 ALTER TABLE VEHICULOS_PROPIOS
     ADD CONSTRAINT FK_Vehiculos_codVehiculo FOREIGN KEY (codVehiculo) REFERENCES VEHICULOS (codVehiculo)
 
-CREATE PROCEDURE pr_ObtenerNumDepartamento(@NombreDepartamento VARCHAR(25),
-                                           @NumDepartamento INT OUTPUT)
-AS
-BEGIN
-    -- Intentamos obtener el número del departamento
-    SELECT @NumDepartamento = Num_departamento
-    FROM DEPARTAMENTO
-    WHERE Nome_departamento = @NombreDepartamento;
-
-    -- Si no se encuentra el departamento, devolvemos -1
-    IF @NumDepartamento IS NULL
-        BEGIN
-            SET @NumDepartamento = -1;
-        END
-END;
-GO
-
 --DECLARE @NumDepartamento INT; -- Declarar la variable de salida
 
 --EXEC pr_ObtenerNumDepartamento
@@ -100,6 +83,8 @@ GO
 
 -- Verificar el valor devuelto
 --PRINT 'El número del departamento es: ' + CAST(@NumDepartamento AS VARCHAR);
+
+-----------------------------------------------------------------------------------
 CREATE FUNCTION fn_nEmpDepart(@nomeDepartamento NVARCHAR(25))
     RETURNS INT
 AS
@@ -116,7 +101,25 @@ BEGIN
     RETURN @total_empleados;
 END;
 GO
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE pr_ObtenerNumDepartamento(@NombreDepartamento VARCHAR(25),
+                                           @NumDepartamento INT OUTPUT)
+AS
+BEGIN
+    -- Intentamos obtener el número del departamento
+    SELECT @NumDepartamento = Num_departamento
+    FROM DEPARTAMENTO
+    WHERE Nome_departamento = @NombreDepartamento;
 
+    -- Si no se encuentra el departamento, devolvemos -1
+    IF @NumDepartamento IS NULL
+        BEGIN
+            SET @NumDepartamento = -1;
+        END
+END;
+GO
+-----------------------------------------------------------------------------------
+-- Version Borja
 CREATE FUNCTION fn_ComprobarMatricula(@matricula VARCHAR(10))
     RETURNS INT
 AS
@@ -126,6 +129,7 @@ BEGIN
     RETURN @resultado;
 END;
 
+-- Version Normal
 CREATE FUNCTION fn_ComprobarMatricula(@matricula VARCHAR(10))
     RETURNS INT
 AS
@@ -144,3 +148,40 @@ BEGIN
 
     RETURN @resultado; -- Devuelve el resultado
 END;
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE pr_EliminarProyecto (@numProyecto INT)
+AS
+BEGIN
+    BEGIN TRY
+        -- Iniciar la transacción
+        BEGIN TRANSACTION;
+
+        -- Verificar si el proyecto existe
+        IF EXISTS (SELECT 1 FROM PROXECTO WHERE Num_proxecto = @numProyecto)
+            BEGIN
+                -- Eliminar referencias en la tabla Empleado_Proyecto
+                DELETE FROM EMPREGADO_PROXECTO
+                WHERE Num_proxecto = @numProyecto;
+
+                -- Eliminar el proyecto de la tabla Proyecto
+                DELETE FROM PROXECTO
+                WHERE Num_proxecto = @numProyecto;
+            END
+        ELSE
+            BEGIN
+                -- Lanzar un error si el proyecto no existe
+                THROW 50001, 'El proyecto no existe.', 1;
+            END
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        -- Revertir la transacción en caso de error
+        ROLLBACK TRANSACTION;
+
+        -- Rethrow para capturar el error en el cliente
+        THROW;
+    END CATCH
+END
+GO
