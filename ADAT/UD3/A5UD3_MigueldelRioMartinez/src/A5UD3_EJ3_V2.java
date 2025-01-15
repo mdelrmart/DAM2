@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class A5UD3_EJ3_JSON {
+public class A5UD3_EJ3_V2 {
     public static void main(String[] args) {
         eliminarDepartamento("INNOVACIÓN", "CONTABILIDADE");
     }

@@ -3,7 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class A5UD3_EJ3 {
+public class A5UD3_EJ3_V1 {
     public static void main(String[] args) {
         eliminarDepartamento("PERSOAL","INNOVACIÓN");
     }

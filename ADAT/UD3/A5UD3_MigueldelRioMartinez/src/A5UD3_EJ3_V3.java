@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class A5UD3_EJ3_GPT {
+public class A5UD3_EJ3_V3 {
     public static void main(String[] args) {
         eliminarDepartamento("PERSOAL", "TÉCNICO");
     }
