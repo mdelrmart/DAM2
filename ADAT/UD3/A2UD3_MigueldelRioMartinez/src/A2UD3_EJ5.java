@@ -3,18 +3,18 @@ import java.sql.*;
 public class A2UD3_EJ5 {
     public static void main(String[] args) {
         // a)
-        //cambiarDomicilio("0010010","Calle de prueba", 45, "1-A", 36930, "Bueu");
+        cambiarDomicilio("0010010","Calle de prueba", 45, "1-A", 36930, "Bueu");
 
         // b)
         System.out.println(informacionProxectos(2));
         System.out.print("\n");
 
         // c)
-        //departamentoControlaNumProyectosMayorIgualQue(2);
+        departamentoControlaNumProyectosMayorIgualQue(2);
         System.out.print("\n");
 
         // d)
-        //consultarNumEmpleadosDepartamento("INFORMÁTICA");
+        consultarNumEmpleadosDepartamento("INFORMÁTICA");
     }
 
     public static void cambiarDomicilio(String NSSempleado, String calle, int numero, String numPiso, int codPostal, String localidad) {

@@ -74,3 +74,73 @@ ALTER TABLE VEHICULOS_PROPIOS
 
 ALTER TABLE VEHICULOS_PROPIOS
     ADD CONSTRAINT FK_Vehiculos_codVehiculo FOREIGN KEY (codVehiculo) REFERENCES VEHICULOS (codVehiculo)
+
+CREATE PROCEDURE pr_ObtenerNumDepartamento(@NombreDepartamento VARCHAR(25),
+                                           @NumDepartamento INT OUTPUT)
+AS
+BEGIN
+    -- Intentamos obtener el número del departamento
+    SELECT @NumDepartamento = Num_departamento
+    FROM DEPARTAMENTO
+    WHERE Nome_departamento = @NombreDepartamento;
+
+    -- Si no se encuentra el departamento, devolvemos -1
+    IF @NumDepartamento IS NULL
+        BEGIN
+            SET @NumDepartamento = -1;
+        END
+END;
+GO
+
+--DECLARE @NumDepartamento INT; -- Declarar la variable de salida
+
+--EXEC pr_ObtenerNumDepartamento
+--    @NombreDepartamento = 'CONTABILIDADE', -- Reemplaza con el nombre deseado
+--  @NumDepartamento = @NumDepartamento OUTPUT;
+
+-- Verificar el valor devuelto
+--PRINT 'El número del departamento es: ' + CAST(@NumDepartamento AS VARCHAR);
+CREATE FUNCTION fn_nEmpDepart(@nomeDepartamento NVARCHAR(25))
+    RETURNS INT
+AS
+BEGIN
+    DECLARE @total_empleados INT;
+
+    SELECT @total_empleados = COUNT(e.Num_departamento_pertenece)
+    FROM empregado e
+             INNER JOIN departamento d
+                        ON e.Num_departamento_pertenece = d.Num_departamento
+    WHERE d.Nome_departamento = @nomeDepartamento
+    GROUP BY e.Num_departamento_pertenece;
+
+    RETURN @total_empleados;
+END;
+GO
+
+CREATE FUNCTION fn_ComprobarMatricula(@matricula VARCHAR(10))
+    RETURNS INT
+AS
+BEGIN
+    DECLARE @resultado INT = (SELECT count(*) from VEHICULOS where Matricula = @matricula);
+
+    RETURN @resultado;
+END;
+
+CREATE FUNCTION fn_ComprobarMatricula(@matricula VARCHAR(10))
+    RETURNS INT
+AS
+BEGIN
+    DECLARE @resultado INT;
+
+    -- Verifica si la matrícula existe en la tabla VEHICULOS
+    IF EXISTS (SELECT 1 FROM VEHICULOS WHERE Matricula = @matricula)
+        BEGIN
+            SET @resultado = 1; -- Si existe, devuelve 1
+        END
+    ELSE
+        BEGIN
+            SET @resultado = 0; -- Si no existe, devuelve 0
+        END
+
+    RETURN @resultado; -- Devuelve el resultado
+END;

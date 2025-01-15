@@ -13,7 +13,8 @@ import java.util.List;
 
 public class A5UD3_EJ3_JSON {
     public static void main(String[] args) {
-        eliminarDepartamento("INNOVACIÓN", "CONTABILIDADE");
+        //eliminarDepartamento("INNOVACIÓN", "CONTABILIDADE");
+         System.out.println(existeMatricula("1234Abc"));
     }
 
     public static void eliminarDepartamento(String departamentoEliminar, String departamentoReasignar) {
@@ -27,8 +28,8 @@ public class A5UD3_EJ3_JSON {
             return;
         }
 
-        int numDepEliminar = obtenerNumDepartamento(departamentoEliminar);
-        int numDepReasignar = obtenerNumDepartamento(departamentoReasignar);
+        int numDepEliminar = obtenerNumDepartamentoProcedimiento(departamentoEliminar);
+        int numDepReasignar = obtenerNumDepartamentoProcedimiento(departamentoReasignar);
 
         List<Empleado> empleadosReasignados = new ArrayList<>();
         List<Proyecto> proyectosReasignados = new ArrayList<>();
@@ -177,4 +178,53 @@ public class A5UD3_EJ3_JSON {
             throw new RuntimeException(e);
         }
     }
+
+    public static int obtenerNumDepartamentoProcedimiento(String departamento) {
+        try (Connection conexion = Conexion.obtenerConexion()) {
+            // Prepara la llamada al procedimiento almacenado
+            String procedimiento = "{CALL pr_ObtenerNumDepartamento(?, ?)}";
+            CallableStatement callableStatement = conexion.prepareCall(procedimiento);
+
+            // Establece el parámetro de entrada
+            callableStatement.setString(1, departamento);
+
+            // Registra el parámetro de salida
+            callableStatement.registerOutParameter(2, java.sql.Types.INTEGER);
+
+            // Ejecuta el procedimiento almacenado
+            callableStatement.execute();
+
+            // Recupera el valor del parámetro de salida
+            int numDepartamento = callableStatement.getInt(2);
+
+            // Procesa el resultado
+            if (numDepartamento == -1) {
+                return -1;
+            } else {
+                return numDepartamento;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static int existeMatricula(String matricula) {
+        try (Connection conexion = Conexion.obtenerConexion()) {
+            String funcion = "{? = CALL fn_ComprobarMatricula(?)}";
+            CallableStatement callableStatement = conexion.prepareCall(funcion);
+
+            callableStatement.registerOutParameter(1, Types.INTEGER);
+
+            callableStatement.setString(2,matricula);
+
+            callableStatement.execute();
+
+            return callableStatement.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

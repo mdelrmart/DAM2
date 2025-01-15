@@ -17,7 +17,7 @@ public class A2UD3_EJ4 {
 
     }
 
-    public static List<Proxecto> proyectosControladosPorDepartamento (String nomeDepartamento) {
+    public static List<Proxecto> proyectosControladosPorDepartamento(String nomeDepartamento) {
         // Datos de conexión con la BBDD
         String url = "jdbc:mysql://localhost:3306/BDEmpresa";
         String usuario = "root";
