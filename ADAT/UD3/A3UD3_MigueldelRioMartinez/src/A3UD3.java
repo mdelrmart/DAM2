@@ -11,22 +11,22 @@ public class A3UD3 {
             con = conexionMYSQL.inicializarConexionMySQL("BDEmpresa");
 
             // 1)
-            Metodos.mostrarMetadatos(con);
+            //Metodos.mostrarMetadatos(con);
 
             // 2)
             // a)
-            Metodos.mostrarTodasLasTablas(con);
+            //Metodos.mostrarTodasLasTablas(con);
             // b)
             Metodos.mostrarInfoTabla(con, "PROXECTO");
             // c)
-            Metodos.mostrarProcedimientos(con);
+            //Metodos.mostrarProcedimientos(con);
             // d)
-            Metodos.obtenerClavePrimaria(con, "BDEmpresa", "EMPREGADO");
+            //Metodos.obtenerClavePrimaria(con, "BDEmpresa", "EMPREGADO");
             // e)
-            Metodos.obtenerClavesForaneas(con, "BDEmpresa", "EMPREGADO_PROXECTO");
+            //Metodos.obtenerClavesForaneas(con, "BDEmpresa", "EMPREGADO_PROXECTO");
 
             // 7)
-            Metodos.metadatosDeResultSet(con, "SELECT * FROM PROXECTO");
+            //Metodos.metadatosDeResultSet(con, "SELECT * FROM PROXECTO");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
