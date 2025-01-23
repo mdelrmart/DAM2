@@ -33,19 +33,29 @@ public class Cliente {
         while (!mensaje.equalsIgnoreCase(FIN)) {
             mensaje = sc.nextLine();
             String strRecibido;
+
             try {
                 //Enviamos
                 out.writeUTF(mensaje);
                 System.out.println("Cliente envía: " + mensaje);
+
                 //Recibimos
                 strRecibido = in.readUTF();
-                System.out.println("Cliente recibe: " + strRecibido);
+
+                if (strRecibido.equals("close")) {
+                    System.out.println("El servidor ha cerrado la conexión, ya que hay un usuario con el mismo nombre logueado");
+                    System.out.println("***************************");
+                    break;
+                }
+                else {
+                    System.out.println("Cliente recibe: " + strRecibido);
+                }
             } catch (IOException ex) {
                 System.out.println("Problemas en la transmisión");
                 break;
             }
-            //if (!mensaje.equals(strRecibido))
-              //  System.out.println("Ha ocurrido un problema. Las cadenas son distintas");
+            /* if (!mensaje.equals(strRecibido))
+                System.out.println("Ha ocurrido un problema. Las cadenas son distintas"); */
             System.out.println("**********************************************");
         }
 

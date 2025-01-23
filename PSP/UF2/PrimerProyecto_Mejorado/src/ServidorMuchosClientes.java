@@ -11,7 +11,7 @@ public class ServidorMuchosClientes extends Thread {
     ServerSocket serverSocket;
     boolean salir = false;
 
-    HashMap<String,String> usuarios = new HashMap<>();
+    HashMap<String, String> usuarios = new HashMap<>();
 
     public ServidorMuchosClientes() throws IOException {
         serverSocket = new ServerSocket(puerto);
@@ -55,8 +55,6 @@ class HiloEcho extends Thread {
     ServidorMuchosClientes servidor;
     Socket socket;
 
-
-
     public HiloEcho(ServidorMuchosClientes servidor, Socket socket) {
         this.servidor = servidor;
         this.socket = socket;
@@ -66,6 +64,7 @@ class HiloEcho extends Thread {
     public void run() {
         SocketAddress clientAddress = socket.getRemoteSocketAddress();
         System.out.println("Ha conectado " + clientAddress);
+        System.out.println(socket.getPort());
         DataInputStream in;
         DataOutputStream out;
 
@@ -80,17 +79,20 @@ class HiloEcho extends Thread {
         String str;
         boolean salir = false;
 
+        String usuarioConectado;
+
         try {
             String username = in.readUTF();
 
             if (servidor.usuarios.containsValue(username)) {
-                out.writeUTF("Ya estás logueado");
+                out.writeUTF("close");
                 socket.close();
                 return;
             }
 
             out.writeUTF("Bienvenido, " + username);
-            servidor.usuarios.put(username,username);
+            usuarioConectado = username;
+            servidor.usuarios.put(username, username);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -105,8 +107,10 @@ class HiloEcho extends Thread {
                 System.out.println("Error en la transmisión");
                 break;
             }
-            if (str.equalsIgnoreCase(finHilo)) salir = true;
-            else {
+            if (str.equalsIgnoreCase(finHilo)) {
+                salir = true;
+                servidor.usuarios.remove(usuarioConectado);
+            } else {
                 System.out.println("Servidor retransmite: " + str);
                 System.out.println("***************************");
             }

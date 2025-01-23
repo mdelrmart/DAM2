@@ -15,8 +15,7 @@ public class Servidor {
         ServerSocket serverSocket = new ServerSocket(puerto);
         System.out.println("Servidor arriba");
 
-        while (SERVER_UP)
-        {
+        while (SERVER_UP) {
             Socket socket = serverSocket.accept(); // Esperamos por un cliente
             new Thread(() -> respuestaComplejaACliente(socket)).start();
         }
