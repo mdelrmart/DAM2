@@ -42,6 +42,7 @@ public class Cliente {
                 //Recibimos
                 strRecibido = in.readUTF();
 
+                // Si el servidor envía "close", significa que la conexión está cerrada
                 if (strRecibido.equals("close")) {
                     System.out.println("El servidor ha cerrado la conexión, ya que hay un usuario con el mismo nombre logueado");
                     System.out.println("***************************");
@@ -50,6 +51,7 @@ public class Cliente {
                 else {
                     System.out.println("Cliente recibe: " + strRecibido);
                 }
+
             } catch (IOException ex) {
                 System.out.println("Problemas en la transmisión");
                 break;
