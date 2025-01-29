@@ -60,9 +60,9 @@ public class EmpresaHBU4A1 {
 
         /*
         // Hecho en clase aparte.
-        Operaciones.agregarTelefonoEmpleado("52485147F", "986320719", sesion);
+        Operaciones.insertarTelefonoEmpleado("52485147F", "986320719", sesion);
 
-        Operaciones.eliminarTelefonoEmpleado("52485147F", "698542598", sesion);
+        Operaciones.borrarTelefonoEmpleado("52485147F", "698542598", sesion);
 
         Operaciones.borrarEmpleado("52485145F", sesion);
         */

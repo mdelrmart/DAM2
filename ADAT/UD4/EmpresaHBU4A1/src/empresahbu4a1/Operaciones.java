@@ -123,7 +123,7 @@ public class Operaciones {
         }
     }
 
-    public static void agregarTelefonoEmpleado(String nss, String telefono, Session sesion) {
+    public static void insertarTelefonoEmpleado(String nss, String telefono, Session sesion) {
         Transaction tx = null;
 
         try {
@@ -155,7 +155,7 @@ public class Operaciones {
         }
     }
 
-    public static void eliminarTelefonoEmpleado(String nss, String telefono, Session sesion) {
+    public static void borrarTelefonoEmpleado(String nss, String telefono, Session sesion) {
         Transaction tx = null;
 
         try {
