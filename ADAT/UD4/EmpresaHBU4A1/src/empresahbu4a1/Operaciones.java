@@ -5,6 +5,8 @@
  */
 package empresahbu4a1;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,7 +18,7 @@ import pojos.Empregado;
  * @author usuario
  */
 public class Operaciones {
-    
+
     public static Session iniciarSesion() {
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         return sesion;
@@ -43,8 +45,8 @@ public class Operaciones {
             }
         }
     }
-    
-    public static void getDepartamento(int numDepartamento){
+
+    public static void getDepartamento(int numDepartamento) {
         try {
             Session session = iniciarSesion();
             Departamento departamento = (Departamento) session.load(Departamento.class, numDepartamento);
@@ -53,10 +55,10 @@ public class Operaciones {
         } catch (Exception e) {
             System.out.println("No se ha encontrado el departamento " + numDepartamento);
         }
-    
+
     }
-    
-    public static void getEmpleado(String nss){
+
+    public static void getEmpleado(String nss) {
         try {
             Session session = iniciarSesion();
             Empregado empregado = (Empregado) session.load(Empregado.class, nss);
@@ -65,14 +67,14 @@ public class Operaciones {
         } catch (Exception e) {
             System.out.println("No se ha encontrado el empleado " + nss);
         }
-    
+
     }
-    
-    public static void borrarDepartamento(int numDepartamento, Session sesion){
+
+    public static void borrarDepartamento(int numDepartamento, Session sesion) {
         Transaction tx = null;
 
         Departamento dep = new Departamento(numDepartamento, "");
-        
+
         try {
             tx = sesion.beginTransaction();
             sesion.delete(dep);
@@ -84,7 +86,7 @@ public class Operaciones {
             }
         }
     }
-    
+
     public static void cambiarNombreDepartamento(int numDepartamento, String nuevoNombre, Session sesion) {
         Transaction tx = null;
 
@@ -101,9 +103,40 @@ public class Operaciones {
             }
         }
     }
-        
+
+    public static void agregarTelefonoEmpleado(String nss, String telefono, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Empregado emp = (Empregado) sesion.get(Empregado.class, nss);
+            
+            if (emp != null) {
+                Set<String> telefonos = emp.getTelefonos();
+                telefonos.add(telefono);
+                
+                // No es necesario porque cojo una referencia al set 
+                //emp.setTelefonos(telefonos);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
     //--------------------------------------------------------------------------
-    
     public static void insertarEmpleado(Empregado emp, Session sesion) {
         Transaction tx = null;
 
@@ -118,7 +151,7 @@ public class Operaciones {
             }
         }
     }
-    
+
     public static void insertarDepartamento(Departamento dep, Session sesion) {
         Transaction tx = null;
 
@@ -133,12 +166,12 @@ public class Operaciones {
             }
         }
     }
-    
-        public static void insertarDepartamentoNombre(String nombre, Session sesion) {
+
+    public static void insertarDepartamentoNombre(String nombre, Session sesion) {
         Transaction tx = null;
 
         Departamento dep = new Departamento(0, nombre);
-        
+
         try {
             tx = sesion.beginTransaction();
             sesion.save(dep);
@@ -150,7 +183,6 @@ public class Operaciones {
             }
         }
     }
-    
+
     //--------------------------------------------------------------------------
-    
 }
