@@ -33,7 +33,10 @@ public class EmpresaHBU4A1 {
         //Operaciones.insertarObjeto(departamento);
         //Operaciones.insertarDepartamento(departamento, sesion);
 
-       /* Operaciones.insertarDepartamentoNombre("COMERCIAL", sesion);
+        /*
+        // Corresponden al ejercicio 1.
+
+        Operaciones.insertarDepartamentoNombre("COMERCIAL", sesion);
         
         Empregado empregado = new Empregado("52485145F", "Miguel", "Gutierrez");
         Operaciones.insertarEmpleado(empregado, sesion);
@@ -51,13 +54,21 @@ public class EmpresaHBU4A1 {
         telefonos.add("635658452");
         
         Empregado empregado2 = new Empregado("52785452F", "Manuel", "Fernandez", telefonos);
-        Operaciones.insertarEmpleado(empregado2, sesion); */
-        
-        
+        Operaciones.insertarEmpleado(empregado2, sesion);
+
+        */
+
+        /*
+        // Hecho en clase aparte.
         Operaciones.agregarTelefonoEmpleado("52485147F", "986320719", sesion);
-        
+
+        Operaciones.eliminarTelefonoEmpleado("52485147F", "698542598", sesion);
+
+        Operaciones.borrarEmpleado("52485145F", sesion);
+        */
+
         HibernateUtil.getSessionFactory().close();
-        
+
         // Sin esta línea el programa no finaliza la ejecución
         System.exit(0);
     }

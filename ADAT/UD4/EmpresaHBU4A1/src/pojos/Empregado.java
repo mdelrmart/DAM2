@@ -24,7 +24,7 @@ public class Empregado  implements java.io.Serializable {
     public Empregado() {
     }
 
-	
+
     public Empregado(String nss, String nome, String apelido1) {
         this.nss = nss;
         this.nome = nome;

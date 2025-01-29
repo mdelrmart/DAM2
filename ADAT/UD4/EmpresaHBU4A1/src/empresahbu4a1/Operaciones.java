@@ -87,6 +87,25 @@ public class Operaciones {
         }
     }
 
+    public static void borrarEmpleado(String nss, Session sesion) {
+        Transaction tx = null;
+
+        //Departamento dep = new Departamento(numDepartamento, "");
+
+        Empregado emp = new Empregado(nss, "", "");
+
+        try {
+            tx = sesion.beginTransaction();
+            sesion.delete(emp);
+            tx.commit();
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
     public static void cambiarNombreDepartamento(int numDepartamento, String nuevoNombre, Session sesion) {
         Transaction tx = null;
 
@@ -136,7 +155,40 @@ public class Operaciones {
         }
     }
 
+    public static void eliminarTelefonoEmpleado(String nss, String telefono, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Empregado emp = (Empregado) sesion.get(Empregado.class, nss);
+
+            if (emp != null) {
+                Set<String> telefonos = emp.getTelefonos();
+                telefonos.remove(telefono);
+
+                // No es necesario porque cojo una referencia al set
+                //emp.setTelefonos(telefonos);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
     //--------------------------------------------------------------------------
+
     public static void insertarEmpleado(Empregado emp, Session sesion) {
         Transaction tx = null;
 
