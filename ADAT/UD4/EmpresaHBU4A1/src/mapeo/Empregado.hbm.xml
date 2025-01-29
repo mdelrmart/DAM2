@@ -26,5 +26,11 @@
         <property name="sexo" type="java.lang.Character">
             <column name="Sexo" length="1" />
         </property>
+        <set name="telefonos" table="telefono" cascade="all">
+            <key>
+                <column name="NSS" not-null="true"/>
+            </key>
+            <element column="Numero" type="string" not-null="true"/>
+        </set>
     </class>
 </hibernate-mapping>

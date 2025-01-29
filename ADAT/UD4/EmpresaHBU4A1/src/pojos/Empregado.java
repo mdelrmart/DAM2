@@ -30,6 +30,14 @@ public class Empregado  implements java.io.Serializable {
         this.nome = nome;
         this.apelido1 = apelido1;
     }
+    
+    public Empregado(String nss, String nome, String apelido1, Set<String> telefonos) {
+        this.nss = nss;
+        this.nome = nome;
+        this.apelido1 = apelido1;
+        this.telefonos = telefonos;
+    }
+    
     public Empregado(String nss, String nome, String apelido1, String apelido2, Double salario, Date dataNacemento, Character sexo) {
        this.nss = nss;
        this.nome = nome;
