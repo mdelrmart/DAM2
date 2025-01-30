@@ -10,10 +10,11 @@ import java.util.Set;
 import org.hibernate.Session;
 import pojos.Departamento;
 import pojos.Empregado;
+import pojos.Telefono;
 
 /**
  *
- * @author usuario
+ * @author Miguel del Río
  */
 public class EmpresaHBU4A1 {
 
@@ -67,6 +68,13 @@ public class EmpresaHBU4A1 {
         Operaciones.borrarEmpleado("52485145F", sesion);
         */
 
+        Telefono tel = new Telefono(null, "623123457");
+        OperacionesTelefono.insertarTelefonoEmpleado("52485145F", tel, sesion);
+
+        //OperacionesTelefono.borrarTelefonoEmpleado("52485145F", tel, sesion);
+
+        // Cerramos la sesión
+        Operaciones.cerrarSesion(sesion);
         HibernateUtil.getSessionFactory().close();
 
         // Sin esta línea el programa no finaliza la ejecución

@@ -26,11 +26,34 @@
         <property name="sexo" type="java.lang.Character">
             <column name="Sexo" length="1" />
         </property>
+        <!--
+        // Ej. A Cuando en la BD solo teníamos el teléfono
+        // Mapeo de teléfono como set cuando no teniamos la tabla
         <set name="telefonos" table="telefono" cascade="all">
             <key>
                 <column name="NSS" not-null="true"/>
             </key>
             <element column="Numero" type="string" not-null="true"/>
         </set>
+        -->
+        <!--
+        //Ej. B Mapeo de los teléfonos con número e información como set de componentes
+        <set name="telefonos" table="telefono">
+            <key>
+                <column name="NSS" not-null="true"/>
+            </key>
+            <composite-element class="pojos.Telefono">
+                <property name="numero" column="numero" type="java.lang.String" not-null="true"/>
+                <property name="informacion" column="informacion" type="java.lang.String"/>
+            </composite-element>
+        </set>
+        -->
+        <map name="telefonos" table="telefono">
+            <key>
+                <column name="NSS" not-null="true"/>
+            </key>
+            <map-key type="string" column="numero"/>
+            <element column="informacion" type="string"/>
+        </map>
     </class>
 </hibernate-mapping>

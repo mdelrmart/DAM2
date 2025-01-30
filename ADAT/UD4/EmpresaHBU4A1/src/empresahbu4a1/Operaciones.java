@@ -12,10 +12,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojos.Departamento;
 import pojos.Empregado;
+import pojos.Telefono;
 
 /**
  *
- * @author usuario
+ * @author Miguel del Río
  */
 public class Operaciones {
 
@@ -123,7 +124,9 @@ public class Operaciones {
         }
     }
 
+    /*
     public static void insertarTelefonoEmpleado(String nss, String telefono, Session sesion) {
+
         Transaction tx = null;
 
         try {
@@ -186,6 +189,7 @@ public class Operaciones {
             }
         }
     }
+     */
 
     //--------------------------------------------------------------------------
 

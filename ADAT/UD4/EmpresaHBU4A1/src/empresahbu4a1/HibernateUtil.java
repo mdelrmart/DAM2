@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import pojos.*;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -27,6 +28,13 @@ public class HibernateUtil {
             serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties())
                     .build();
+
+            // Para anotaciones
+            configuration.addAnnotatedClass(Empregado.class);
+            configuration.addAnnotatedClass(Departamento.class);
+            configuration.addAnnotatedClass(Proxecto.class);
+            configuration.addAnnotatedClass(Telefono.class);
+
             sessionFactory = configuration.buildSessionFactory(serviceRegistry); // Usar la misma configuración para construir la SessionFactory
         } catch (Throwable ex) {
             // Log the exception.
