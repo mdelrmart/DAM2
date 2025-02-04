@@ -3,8 +3,8 @@ package pojos;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 public class FamiliarId implements Serializable {
+
     private String NSSempregado;
     private Integer numero;
 
@@ -25,7 +25,9 @@ public class FamiliarId implements Serializable {
     }
 
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         FamiliarId that = (FamiliarId) o;
         return Objects.equals(this.NSSempregado, that.NSSempregado) && Objects.equals(this.numero, that.numero);
