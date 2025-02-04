@@ -5,11 +5,15 @@
  */
 package empresahbu4a1;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import org.hibernate.Session;
 import pojos.Departamento;
 import pojos.Empregado;
+import pojos.Familiar;
 import pojos.Telefono;
 
 /**
@@ -68,10 +72,16 @@ public class EmpresaHBU4A1 {
         Operaciones.borrarEmpleado("52485145F", sesion);
         */
 
+        /*
         Telefono tel = new Telefono(null, "623123457");
         OperacionesTelefono.insertarTelefonoEmpleado("52485145F", tel, sesion);
+         */
 
         //OperacionesTelefono.borrarTelefonoEmpleado("52485145F", tel, sesion);
+
+        Familiar fam = new Familiar("12345678A", "Fernando", "Terranjausen", "Estevez", Date.valueOf(LocalDate.of(2000,5,12)), "Amego", Character.valueOf('M'));
+        Operaciones.insertarFamiliar("52485145F", fam, sesion);
+
 
         // Cerramos la sesión
         Operaciones.cerrarSesion(sesion);

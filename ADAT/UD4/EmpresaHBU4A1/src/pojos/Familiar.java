@@ -11,8 +11,20 @@ public class Familiar {
     private Date datanacemento;
     private String parentesco;
     private Character sexo;
-    private FamiliarId id;
-    private Empregado empregado;
+
+    public Familiar() {
+
+    }
+
+    public Familiar(String nss, String nome, String apelido1, String apelido2, Date datanacemento, String parentesco, Character sexo) {
+        this.nss = nss;
+        this.nome = nome;
+        this.apelido1 = apelido1;
+        this.apelido2 = apelido2;
+        this.datanacemento = datanacemento;
+        this.parentesco = parentesco;
+        this.sexo = sexo;
+    }
 
     public String getNss() {
         return this.nss;
@@ -68,22 +80,6 @@ public class Familiar {
 
     public void setSexo(Character sexo) {
         this.sexo = sexo;
-    }
-
-    public FamiliarId getId() {
-        return this.id;
-    }
-
-    public void setId(FamiliarId id) {
-        this.id = id;
-    }
-
-    public Empregado getEmpregado() {
-        return this.empregado;
-    }
-
-    public void setEmpregado(Empregado empregado) {
-        this.empregado = empregado;
     }
 
 }

@@ -8,11 +8,19 @@ public class FamiliarId implements Serializable {
     private String NSSempregado;
     private Integer numero;
 
-    public String getNSSEmpregado() {
+    public FamiliarId() {
+    }
+
+    public FamiliarId(String NSSempregado, Integer numero) {
+        this.NSSempregado = NSSempregado;
+        this.numero = numero;
+    }
+
+    public String getNSSempregado() {
         return this.NSSempregado;
     }
 
-    public void setNSSEmpregado(String nSSEmpregado) {
+    public void setNSSempregado(String nSSEmpregado) {
         this.NSSempregado = nSSEmpregado;
     }
 

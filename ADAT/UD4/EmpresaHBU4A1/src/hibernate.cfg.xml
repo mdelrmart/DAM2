@@ -55,6 +55,5 @@ Contributor(s):
     <mapping resource="mapeo/Departamento.hbm.xml"/>
     <mapping resource="mapeo/Empregado.hbm.xml"/>
     <mapping resource="mapeo/Proxecto.hbm.xml"/>
-    <mapping resource="mapeo/Familiar.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

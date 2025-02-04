@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojos.Departamento;
 import pojos.Empregado;
+import pojos.Familiar;
 import pojos.Telefono;
 
 /**
@@ -241,4 +242,26 @@ public class Operaciones {
     }
 
     //--------------------------------------------------------------------------
+
+    public static void insertarFamiliar(String nss, Familiar familiar, Session session) {
+        Transaction tx = null;
+
+        Empregado emp = (Empregado) session.get(Empregado.class, nss);
+
+        if (emp != null) {
+            emp.getFamiliares().add(familiar);
+
+            try {
+                tx = session.beginTransaction();
+                tx.commit();
+                System.out.println("Familiar insertado correctamente.");
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                System.out.println("Error al insertar. " + e.getMessage());
+            }
+        }
+
+    }
 }
