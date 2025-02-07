@@ -25,11 +25,13 @@ public class Main extends ApplicationAdapter {
         sr=new ShapeRenderer();
         Gdx.input.setInputProcessor(new ProcesadorDeEntrada());
     }
+
     @Override public void resize(int width, int height) {
         camara.setToOrtho(false,Mundo.ANCHO,Mundo.ALTO);
         sb.setProjectionMatrix(camara.combined);
         sr.setProjectionMatrix(camara.combined);
     }
+
     @Override public void render() {
         ScreenUtils.clear(1,1,1,1);
         float delta=Gdx.graphics.getDeltaTime();
