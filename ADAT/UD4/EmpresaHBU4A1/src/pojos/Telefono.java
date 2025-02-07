@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Telefono {
     @Column(name = "informacion", length = 9)
     private String informacion;
+
     @Column(name = "numero", length = 25, nullable = false)
     private String numero;
 

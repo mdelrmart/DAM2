@@ -1,15 +1,34 @@
 package pojos;
 
+import javax.persistence.*;
 import java.util.Date;
 
-public class Familiar {
+@Embeddable
+public class Familiar implements java.io.Serializable {
 
+    //@Column(name = "Numero", length = 15, nullable = false)
+    //private Integer numero;
+
+    @Column(name = "NSS", length = 15, nullable = false)
     private String nss;
+
+    @Column(name = "Nome", length = 25, nullable = false)
     private String nome;
+
+    @Column(name = "Apelido1", length = 25, nullable = false)
     private String apelido1;
+
+    @Column(name = "Apelido2", length = 25)
     private String apelido2;
+
+    @Column(name = "Datanacemento")
+    //@Temporal(TemporalType.DATE);
     private Date datanacemento;
+
+    @Column(name = "Parentesco", length = 20, nullable = false)
     private String parentesco;
+
+    @Column(name = "Sexo", length = 1, nullable = false)
     private Character sexo;
 
     public Familiar() {
@@ -82,4 +101,13 @@ public class Familiar {
         this.sexo = sexo;
     }
 
+   /* public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    */
 }

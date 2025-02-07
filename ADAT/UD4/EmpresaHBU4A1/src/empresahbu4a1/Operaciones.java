@@ -5,18 +5,19 @@
  */
 package empresahbu4a1;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Sort;
 import pojos.Departamento;
 import pojos.Empregado;
 import pojos.Familiar;
 import pojos.Telefono;
 
 /**
- *
  * @author Miguel del Río
  */
 public class Operaciones {
@@ -264,4 +265,169 @@ public class Operaciones {
         }
 
     }
+
+    public static void insertarFamiliarFix(String nss, Familiar familiar, Session session) {
+        Transaction tx = null;
+
+        Empregado emp = (Empregado) session.get(Empregado.class, nss);
+
+        if (emp != null) {
+            //familiar.setNumero(emp.getFamiliares().size() + 1);
+            emp.getFamiliares().add(familiar);
+
+            try {
+                tx = session.beginTransaction();
+                tx.commit();
+                System.out.println("Familiar insertado correctamente.");
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                System.out.println("Error al insertar. " + e.getMessage());
+            }
+        }
+
+    }
+
+    public static void insertarAficion(String nss, String aficion, Session sesion) {
+
+        Transaction tx = null;
+
+        try {
+            Empregado emp = (Empregado) sesion.get(Empregado.class, nss);
+
+            if (emp != null) {
+
+                //Collection<String> aficiones = emp.getAficiones();
+                //aficiones.add(aficion);
+                // MEJOR ASI HOME
+                emp.getAficiones().add(aficion);
+
+                // No es necesario porque cojo una referencia al set
+                //emp.setTelefonos(telefonos);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+    public static void insertarLugar(int numDpto, String lugar, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Departamento dep = (Departamento) sesion.get(Departamento.class, numDpto);
+
+            if (dep != null) {
+                //Collection<String> aficiones = emp.getAficiones();
+                //aficiones.add(aficion);
+                // MEJOR ASI HOME
+                dep.getLugares().add(lugar);
+
+                // No es necesario porque cojo una referencia al set
+                //emp.setTelefonos(telefonos);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+    public static void insertarHorasExtras(String nss, Date data, Double horas, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Empregado emp = (Empregado) sesion.get(Empregado.class, nss);
+
+            if (emp != null) {
+                SortedMap<Date, Double> listaHoras = emp.getHorasextras();
+                listaHoras.put(data, horas);
+                emp.setHorasextras(listaHoras);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+    public static void visualizasHorasExtrasEmpleado(String nss, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Empregado emp = (Empregado) sesion.get(Empregado.class, nss);
+
+            if (emp != null) {
+                SortedMap<Date, Double> listaHoras = emp.getHorasextras();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                StringBuilder sb = new StringBuilder();
+
+                for (Date fecha : listaHoras.keySet()) {
+                    double horas = listaHoras.get(fecha);
+                    sb.append(sdf.format(fecha))
+                            .append(" ")
+                            .append((Double) horas)
+                            .append(" horas\n");
+                }
+
+                System.out.println(sb);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
 }

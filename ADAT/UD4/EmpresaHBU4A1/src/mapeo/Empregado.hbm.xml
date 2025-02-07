@@ -86,5 +86,34 @@
             </composite-element>
         </list>
 
+        <bag name="aficiones" table="aficion">
+            <key>
+                <column name="NSS_Empregado" not-null="true"/>
+            </key>
+            <element column="Aficion" type="string" not-null="true"></element>
+        </bag>
+
+        <map name="horasextras" sort="pojos.OrderData" table="horasextra">
+            <key>
+                <column name="NSS_Empregado" not-null="true"/>
+            </key>
+            <map-key column="Data" type="date" />
+            <element column="Horas" type="java.lang.Double"/>
+        </map>
+
+        <component name="enderezo" class="pojos.Enderezo">
+            <property name="rua" type="java.lang.String">
+                <column name="rua" length="30"></column>
+            </property>
+            <property name="cp" type="java.lang.String">
+                <column name="cp" length="5"></column>
+            </property>
+            <property name="localidade" type="java.lang.String">
+                <column name="localidade" length="30"></column>
+            </property>
+            <property name="provincia" type="java.lang.String">
+                <column name="provincia" length="30"></column>
+            </property>
+        </component>
     </class>
 </hibernate-mapping>

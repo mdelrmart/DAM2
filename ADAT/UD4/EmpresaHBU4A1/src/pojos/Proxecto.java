@@ -18,8 +18,10 @@ public class Proxecto implements java.io.Serializable {
     @Id
     @Column(name = "Num_proxecto")
     private int numProxecto;
+
     @Column(name = "Nome_proxecto")
     private String nomeProxecto;
+
     @Column(name = "Lugar")
     private String lugar;
 
