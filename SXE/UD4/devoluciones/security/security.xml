@@ -1,0 +1,11 @@
+<odoo>
+    <record id="group_return_manager" model="res.groups">
+        <field name="name">Gestor de Devoluciones</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+
+    <record id="group_return_user" model="res.groups">
+        <field name="name">Usuario de Devoluciones</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+</odoo>

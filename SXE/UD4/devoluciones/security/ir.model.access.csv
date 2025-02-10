@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_return_order_manager,Gestor de Devoluciones,model_return_order,security.group_return_manager,1,1,1,1
+access_return_order_user,Usuario de Devoluciones,model_return_order,security.group_return_user,1,0,1,0
+access_return_reason,Acceso a Motivos de Devolución,model_return_reason,,1,1,1,1

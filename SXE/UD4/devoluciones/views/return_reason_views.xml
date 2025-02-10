@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_return_reason_tree" model="ir.ui.view">
+        <field name="name">return.reason.tree</field>
+        <field name="model">return.reason</field>
+        <field name="arch" type="xml">
+            <tree string="Motivos de Devolución">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_return_reason_form" model="ir.ui.view">
+        <field name="name">return.reason.form</field>
+        <field name="model">return.reason</field>
+        <field name="arch" type="xml">
+            <form string="Motivo de Devolución">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_return_reason" name="Motivos de Devolución" parent="menu_return_order"
+              action="action_return_reason_list"/>
+    
+    <record id="action_return_reason_list" model="ir.actions.act_window">
+        <field name="name">Motivos de Devolución</field>
+        <field name="res_model">return.reason</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
