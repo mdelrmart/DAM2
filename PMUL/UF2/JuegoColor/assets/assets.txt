@@ -1,0 +1,2 @@
+dedo.png
+libgdx.png
