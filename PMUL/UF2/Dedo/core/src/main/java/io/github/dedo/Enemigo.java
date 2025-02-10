@@ -1,4 +1,4 @@
-package io.github.juegocolor;
+package io.github.dedo;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;

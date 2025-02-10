@@ -1,4 +1,4 @@
-package io.github.juegocolor;
+package io.github.dedo;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

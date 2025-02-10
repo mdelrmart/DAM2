@@ -1,4 +1,4 @@
-package io.github.juegocolor;
+package io.github.dedo;
 
 public class ConfMundo {
     public static final float WORLD_WIDTH = 500;
