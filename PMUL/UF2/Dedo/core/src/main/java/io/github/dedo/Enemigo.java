@@ -41,7 +41,7 @@ public class Enemigo extends Personaje {
         );
 
         if (Intersector.overlaps(hitboxCirculo, dedo.getHitbox())) {
-            System.out.println("Colisión detectada");
+            System.out.println("Colision detectada");
             dedo.restarVida();
             eliminado = true;
         }
@@ -49,7 +49,6 @@ public class Enemigo extends Personaje {
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-
         shapeRenderer.circle(
             getX(),
             getY(),

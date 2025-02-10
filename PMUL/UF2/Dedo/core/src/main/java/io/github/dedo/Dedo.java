@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Dedo extends Personaje {
     private int direccion = 0;
-    private final int velocidad = 50;
+    private final int velocidad = 100;
     private int vidas = 3 ;
 
     private final Texture textura = new Texture("dedo.png");
@@ -60,7 +60,9 @@ public class Dedo extends Personaje {
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-        batch.draw(textura, getX() - textura.getWidth() / 2f, getY() - textura.getHeight() / 2f);
+        batch.draw(textura,
+            getX() - textura.getWidth() / 2f,
+            getY() - textura.getHeight() / 2f);
 
         if (ConfMundo.DEBUG) {
             shapeRenderer.rect(
