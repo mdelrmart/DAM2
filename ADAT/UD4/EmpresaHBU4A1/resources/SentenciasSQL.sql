@@ -76,3 +76,15 @@ ALTER TABLE EMPREGADO
         CP CHAR(5) NULL,
         Localidade VARCHAR(30) NULL,
         Provincia VARCHAR(30) NULL;
+
+CREATE TABLE VEHICULOS
+(
+    NSS_Empregado VARCHAR(15) NOT NULL,
+    Matricula     VARCHAR(10) NOT NULL,
+    Marca         VARCHAR(30) NOT NULL,
+    Modelo        VARCHAR(30) NOT NULL,
+    DataCompra    DATE        NOT NULL,
+    CONSTRAINT PK_NSS_Vehiculos PRIMARY KEY (NSS_Empregado),
+    CONSTRAINT FK_Vehiculo_Empregado FOREIGN KEY (NSS_Empregado) REFERENCES empregado (NSS),
+    CONSTRAINT UQ_Matricula UNIQUE (Matricula)
+)

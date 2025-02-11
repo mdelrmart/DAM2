@@ -91,7 +91,7 @@ public class EmpresaHBU4A1 {
         HibernateUtil.getSessionFactory().close();
 
         // Sin esta línea el programa no finaliza la ejecución, en la versión de Hibernate 4.3.1
-        //System.exit(0);
+        System.exit(0);
     }
     
 }

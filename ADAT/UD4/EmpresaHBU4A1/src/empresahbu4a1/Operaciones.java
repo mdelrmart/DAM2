@@ -12,10 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.annotations.Sort;
-import pojos.Departamento;
-import pojos.Empregado;
-import pojos.Familiar;
-import pojos.Telefono;
+import pojos.*;
 
 /**
  * @author Miguel del Río
