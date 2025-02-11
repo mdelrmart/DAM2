@@ -115,5 +115,7 @@
                 <column name="provincia" length="30"></column>
             </property>
         </component>
+
+        <one-to-one name="vehiculo" class="pojos.Vehiculo" cascade="all" lazy="proxy"/>
     </class>
 </hibernate-mapping>

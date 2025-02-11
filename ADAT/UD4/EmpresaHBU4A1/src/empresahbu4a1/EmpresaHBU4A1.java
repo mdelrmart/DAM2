@@ -86,6 +86,11 @@ public class EmpresaHBU4A1 {
         Empregado emp = new Empregado("54562124N", "Francisco", "Martinez", "Terranjausen", 300.0, Date.valueOf(LocalDate.of(2025,2,5)),'H', enderezo);
         Operaciones.insertarEmpleado(emp, sesion);
 
+
+        //Vehiculo vehiculo = new Vehiculo("54562124N","4565LGC","Volkswagen","Polo", Date.valueOf(LocalDate.of(2020,8,23)), emp);
+        Vehiculo vehiculo = new Vehiculo("4565LGC","Volkswagen","Polo", Date.valueOf(LocalDate.of(2020,8,23)));
+        Operaciones.insertarVehiculo("54562124N", vehiculo, sesion);
+
         // Cerramos la sesión
         Operaciones.cerrarSesion(sesion);
         HibernateUtil.getSessionFactory().close();

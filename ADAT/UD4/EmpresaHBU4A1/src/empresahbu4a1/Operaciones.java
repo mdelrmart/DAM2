@@ -427,4 +427,26 @@ public class Operaciones {
         }
     }
 
+    public static void insertarVehiculo(String nss, Vehiculo vehiculo, Session session) {
+        Transaction tx = null;
+
+        Empregado emp = (Empregado) session.get(Empregado.class, nss);
+
+        if (emp != null) {
+            emp.setVehiculo(vehiculo);
+
+            try {
+                tx = session.beginTransaction();
+                tx.commit();
+                System.out.println("Vehiculo insertado correctamente.");
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                System.out.println("Error al insertar. " + e.getMessage());
+            }
+        }
+
+    }
+
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="pojos.Vehiculo" table="vehiculo" schema="dbo" catalog="EmpresaHB">
+        <!-- Id -->
+        <id name="nss" type="string">
+            <column name="NSS_Empregado" not-null="true" length="15"/>
+            <!--<generator class="assigned"/> -->
+            <generator class="foreign"/>
+        </id>
+
+        <!-- Properties -->
+        <property name="matricula" type="string">
+            <column name="Matricula" not-null="true" unique="true"/>
+        </property>
+        <property name="marca" type="string">
+            <column name="Marca" not-null="true"/>
+        </property>
+        <property name="modelo" type="string">
+            <column name="Modelo" not-null="true"/>
+        </property>
+        <property name="dataCompra" type="date">
+            <column name="DataCompra" not-null="true"/>
+        </property>
+
+        <!-- References -->
+        <one-to-one name="empregado" class="pojos.Empregado" constrained="true" lazy="proxy"/>
+        <!-- Referenced by -->
+    </class>
+</hibernate-mapping>
+        
