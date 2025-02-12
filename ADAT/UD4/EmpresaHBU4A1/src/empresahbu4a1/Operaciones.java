@@ -434,6 +434,7 @@ public class Operaciones {
 
         if (emp != null) {
             emp.setVehiculo(vehiculo);
+            vehiculo.setEmpregado(emp);
 
             try {
                 tx = session.beginTransaction();
