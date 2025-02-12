@@ -262,6 +262,5 @@ public class Empregado implements java.io.Serializable {
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
+
 }
-
-

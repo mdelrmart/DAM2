@@ -450,4 +450,79 @@ public class Operaciones {
 
     }
 
+    public static void visualizarProyectosDptoProPlus(String nomeDepartamento, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Departamento dep = (Departamento) sesion.createQuery("from Departamento d where d.nomeDepartamento = :name")
+                    .setString("name", nomeDepartamento)
+                    .list().get(0);
+
+            if (dep != null) {
+                Collection<Proxecto> listaProxectos = dep.getProxectos();
+
+                StringBuilder sb = new StringBuilder();
+
+                for (var e : listaProxectos) {
+                    sb.append(e.getNomeProxecto());
+                }
+
+                System.out.println(sb);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+
+    public static void visualizarProyectosDpto(int numDepartamento, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Departamento dep = (Departamento) sesion.get(Departamento.class, numDepartamento);
+
+            if (dep != null) {
+                Collection<Proxecto> listaProxectos = dep.getProxectos();
+
+                StringBuilder sb = new StringBuilder();
+
+                for (var e : listaProxectos) {
+                    sb.append(e.getNomeProxecto());
+                }
+
+                System.out.println(sb);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
 }

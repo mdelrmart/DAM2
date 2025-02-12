@@ -20,5 +20,18 @@
             </key>
             <element column="Lugar" not-null="true" type="string" />
         </idbag>
+
+        <!-- Mapeo del director de un departamento -->
+        <many-to-one name="director" class="pojos.Empregado" cascade="all" lazy="proxy">
+            <column name="Director" length="15"/>
+        </many-to-one>
+
+        <!-- Mapeo de los proyectos que controla un deparamento -->
+        <bag name="proxectos" table="PROXECTO" inverse="true" lazy="true">
+            <key>
+                <column name="numdepartcontrola" sql-type="int" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.Proxecto" />
+        </bag>
     </class>
 </hibernate-mapping>
