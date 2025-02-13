@@ -57,7 +57,7 @@ public class Main extends Game {
         Mundo.enemigos.clear();
         Mundo.balas.clear();
     }
-    
+
     public void ponerPantallaJuego() {
         reset();
         setScreen(new PantallaJuego());
