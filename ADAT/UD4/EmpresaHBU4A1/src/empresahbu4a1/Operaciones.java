@@ -12,10 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.annotations.Sort;
-import pojos.Departamento;
-import pojos.Empregado;
-import pojos.Familiar;
-import pojos.Telefono;
+import pojos.*;
 
 /**
  * @author Miguel del Río
@@ -407,6 +404,104 @@ public class Operaciones {
                             .append(" ")
                             .append((Double) horas)
                             .append(" horas\n");
+                }
+
+                System.out.println(sb);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+    public static void insertarVehiculo(String nss, Vehiculo vehiculo, Session session) {
+        Transaction tx = null;
+
+        Empregado emp = (Empregado) session.get(Empregado.class, nss);
+
+        if (emp != null) {
+            emp.setVehiculo(vehiculo);
+            vehiculo.setEmpregado(emp);
+
+            try {
+                tx = session.beginTransaction();
+                tx.commit();
+                System.out.println("Vehiculo insertado correctamente.");
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                System.out.println("Error al insertar. " + e.getMessage());
+            }
+        }
+
+    }
+
+    public static void visualizarProyectosDptoProPlus(String nomeDepartamento, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Departamento dep = (Departamento) sesion.createQuery("from Departamento d where d.nomeDepartamento = :name")
+                    .setString("name", nomeDepartamento)
+                    .list().get(0);
+
+            if (dep != null) {
+                Collection<Proxecto> listaProxectos = dep.getProxectos();
+
+                StringBuilder sb = new StringBuilder();
+
+                for (var e : listaProxectos) {
+                    sb.append(e.getNomeProxecto());
+                }
+
+                System.out.println(sb);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+
+    public static void visualizarProyectosDpto(int numDepartamento, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Departamento dep = (Departamento) sesion.get(Departamento.class, numDepartamento);
+
+            if (dep != null) {
+                Collection<Proxecto> listaProxectos = dep.getProxectos();
+
+                StringBuilder sb = new StringBuilder();
+
+                for (var e : listaProxectos) {
+                    sb.append(e.getNomeProxecto());
                 }
 
                 System.out.println(sb);

@@ -39,6 +39,9 @@ public class Empregado implements java.io.Serializable {
     @Embedded
     private Enderezo enderezo;
 
+
+    private Vehiculo vehiculo;
+
     //Ej. A Cuando en la BD solo teníamos el teléfono
     // Mapeo de la clase teléfono como set
     //private Set<String> telefonos = new HashSet<>();
@@ -251,6 +254,13 @@ public class Empregado implements java.io.Serializable {
     public void setEnderezo(Enderezo enderezo) {
         this.enderezo = enderezo;
     }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
 }
-
-

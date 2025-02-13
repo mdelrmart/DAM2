@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.Random;
+
 public class GameScreen implements Screen {
     private final Camera camera = new OrthographicCamera();
 
@@ -21,7 +23,6 @@ public class GameScreen implements Screen {
 
     private BitmapFont font;
 
-    // GameScreen.java
     private void eliminarEnemigos() {
         for (int i = personajes.size - 1; i >= 0; i--) {
             if (personajes.get(i) instanceof Enemigo && ((Enemigo) personajes.get(i)).isEliminado()) {
@@ -30,13 +31,21 @@ public class GameScreen implements Screen {
         }
     }
 
+    Random random = new Random();
+
+    int altura = 30;
 
     @Override
     public void show() {
-        dedo = new Dedo(-ConfMundo.WORLD_WIDTH / 2f + 50, 0);
+        dedo = new Dedo(-ConfMundo.MUNDO_ANCHO / 2f + 0, 0);
 
         personajes.add(dedo);
-        personajes.add(new Enemigo(ConfMundo.WORLD_WIDTH / 2f - 50, 0, dedo));
+
+        //personajes.add(new Enemigo(ConfMundo.MUNDO_ANCHO / 2f - 20, 0, dedo));
+
+        for (int i = 0; i < Aleatorio.aleatorio(); i++) {
+            personajes.add(new Enemigo(Aleatorio.aleatorio(), Aleatorio.aleatorio(), dedo));
+        }
 
         shapeRenderer.setAutoShapeType(true);
 
@@ -66,15 +75,15 @@ public class GameScreen implements Screen {
 
         batch.begin();
         font = new BitmapFont();
-        font.draw(batch, "Vidas: " + dedo.getVidas(), -ConfMundo.WORLD_WIDTH / 2f, ConfMundo.WORLD_HEIGHT / 2f - 10);
+        font.draw(batch, "Vidas: " + dedo.getVidas(), -ConfMundo.MUNDO_ANCHO / 2f, ConfMundo.MUNDO_ALTO / 2f - 10);
         batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
         float aspectRatio = (float) height / width;
-        camera.viewportHeight = ConfMundo.WORLD_HEIGHT;
-        camera.viewportWidth = ConfMundo.WORLD_WIDTH / aspectRatio;
+        camera.viewportHeight = ConfMundo.MUNDO_ALTO;
+        camera.viewportWidth = ConfMundo.MUNDO_ANCHO / aspectRatio;
         camera.update();
 
         batch.setProjectionMatrix(camera.combined);

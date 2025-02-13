@@ -76,3 +76,41 @@ ALTER TABLE EMPREGADO
         CP CHAR(5) NULL,
         Localidade VARCHAR(30) NULL,
         Provincia VARCHAR(30) NULL;
+
+CREATE TABLE VEHICULO
+(
+    NSS_Empregado VARCHAR(15) NOT NULL,
+    Matricula     VARCHAR(10) NOT NULL,
+    Marca         VARCHAR(30) NOT NULL,
+    Modelo        VARCHAR(30) NOT NULL,
+    DataCompra    DATE        NOT NULL,
+    CONSTRAINT PK_NSS_Vehiculos PRIMARY KEY (NSS_Empregado),
+    CONSTRAINT FK_Vehiculo_Empregado FOREIGN KEY (NSS_Empregado) REFERENCES empregado (NSS),
+    CONSTRAINT UQ_Matricula UNIQUE (Matricula)
+)
+
+ALTER TABLE DEPARTAMENTO
+    ADD Director VARCHAR(15) NOT NULL
+        CONSTRAINT FK_Director_Departamento FOREIGN KEY (Director) REFERENCES empregado (NSS)
+
+ALTER TABLE PROXECTO
+    ADD NumDepartControla INT
+        CONSTRAINT FK_Proxecto_Departamento FOREIGN KEY (NumDepartControla) REFERENCES departamento (Num_departamento)
+
+INSERT INTO proxecto
+VALUES (1, 'Pontevedra', 'Proxecto 1', 1);
+INSERT INTO proxecto
+VALUES (2, 'Pontevedra', 'Proxecto 2', 1);
+INSERT INTO proxecto
+VALUES (3, 'Pontevedra', 'Proxecto 3', 1);
+INSERT INTO proxecto
+VALUES (4, 'Pontevedra', 'Proxecto 4', 1);
+
+CREATE TABLE EMPREGADO_PROXECTO
+(
+    NSS_Empregado VARCHAR(15) NOT NULL,
+    NumProxecto   INT         NOT NULL,
+    CONSTRAINT PK_Empregado_Proxecto PRIMARY KEY (NSS_Empregado, NumProxecto),
+    CONSTRAINT FK_Empregado_Proxectos FOREIGN KEY (NSS_Empregado) REFERENCES EMPREGADO,
+    CONSTRAINT FK_Proxecto_Empregados FOREIGN KEY (NumProxecto) REFERENCES PROXECTO
+)
