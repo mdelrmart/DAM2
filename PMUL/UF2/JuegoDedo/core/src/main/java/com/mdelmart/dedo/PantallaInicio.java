@@ -1,0 +1,33 @@
+package com.mdelmart.dedo;
+
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.ScreenUtils;
+
+public class PantallaInicio extends Pantalla{
+
+    @Override
+    public void render(float delta) {
+        ScreenUtils.clear(Color.WHITE);
+
+        main.sb.begin();
+        Assets.fuente.draw(main.sb, "Juego del dedo", Mundo.ANCHO / 2, Mundo.ALTO / 2);
+        Assets.fuente.draw(main.sb, "Pulsa ENTER para empezar", Mundo.ANCHO / 2, Mundo.ALTO / 2 - 20);
+        main.sb.end();
+    }
+
+    @Override
+    public boolean teclaAbajo(int keycode) {
+        if (keycode == Input.Keys.ENTER) {
+            // main.setScreen(new PantallaJuego());
+            main.ponerPantallaJuego();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean teclaArriba(int keycode) {
+        return false;
+    }
+}
