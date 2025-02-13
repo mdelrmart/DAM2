@@ -4,9 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.Array;
-import com.mdelmart.dedo.entidades.Bala;
-import com.mdelmart.dedo.entidades.Dedo;
-import com.mdelmart.dedo.entidades.Enemigo;
+import com.mdelmart.dedo.entidades.*;
 
 import java.util.Random;
 
@@ -19,6 +17,9 @@ public class Mundo {
     public static final int MAX_VIDAS_ENEMIGO = 5;
     public static final int VIDAS_DEDO = 3;
     public static final float ALTURA_SEPARADOR = Mundo.ALTO / 7;
+    public static final boolean DEBUG = false;
+    public static final int HIPERESPACIOS = 3;
+    public static final float TIEMPO_HIPERESPACIO = 5f;
 
     public static Random random = new Random();
 
@@ -26,9 +27,15 @@ public class Mundo {
     public static Array<Enemigo> enemigos = new Array<>();
     public static Array<Bala> balas = new Array<>();
 
+    public static float puntos = 0;
+
 
     public static void crearEnemigo() {
-        enemigos.add(new Enemigo());
+        if (random.nextBoolean()) {
+            enemigos.add(new EnemigoCuadrado());
+        } else {
+            enemigos.add(new EnemigoCircular());
+        }
     }
 
     public static void crearBala() {
@@ -64,6 +71,43 @@ public class Mundo {
     public static void comprobarColisiones() {
         for (Enemigo enemigo : enemigos) {
             for (Bala bala : balas) {
+                // Check collision between bullet and enemy
+                if (enemigo instanceof EnemigoCuadrado) {
+                    // Enemy is a square, use Rectangle for hitbox
+                    if (Intersector.overlaps(bala.getHitbox(), ((EnemigoCuadrado) enemigo).getHitbox())) {
+                        enemigo.quitarVida();
+                        balas.removeValue(bala, true);
+                    }
+                } else if (enemigo instanceof EnemigoCircular) {
+                    // Enemy is a circle, use Circle for hitbox
+                    if (Intersector.overlaps(bala.getHitbox(), ((EnemigoCircular) enemigo).getHitbox())) {
+                        enemigo.quitarVida();
+                        balas.removeValue(bala, true);
+                    }
+                }
+            }
+
+            // Check collision between finger and enemy
+            if (enemigo instanceof EnemigoCuadrado) {
+                // Enemy is a square, use Rectangle for hitbox
+                if (Intersector.overlaps(((EnemigoCuadrado) enemigo).getHitbox(), dedo.getHitbox()) && !enemigo.haColisionado  && !dedo.hiperespacioActivo) {
+                    dedo.quitarVida();
+                    enemigo.colision();
+                }
+            } else if (enemigo instanceof EnemigoCircular) {
+                // Enemy is a circle, use Circle for hitbox
+                if (Intersector.overlaps(((EnemigoCircular) enemigo).getHitbox(), dedo.getHitbox()) && !enemigo.haColisionado && !dedo.hiperespacioActivo) {
+                    dedo.quitarVida();
+                    enemigo.colision();
+                }
+            }
+        }
+    }
+
+    /*
+    public static void comprobarColisiones() {
+        for (Enemigo enemigo : enemigos) {
+            for (Bala bala : balas) {
                 if (Intersector.overlaps(enemigo.getHitbox(), bala.getHitbox())) {
                     //enemigos.removeValue(enemigo, true);
                     enemigo.quitarVida();
@@ -82,5 +126,6 @@ public class Mundo {
 
         }
     }
+     */
 
 }

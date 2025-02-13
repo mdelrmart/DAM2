@@ -52,10 +52,11 @@ public class Main extends Game {
         // Reset de variables y estados
         stateTime = 0;
         tiempoProximoEnemigo = Mundo.TIEMPO_ENTRE_ENEMIGOS;
-        Mundo.dedo.vidas = Mundo.VIDAS_DEDO;
+        //Mundo.dedo.vidas = Mundo.VIDAS_DEDO;
         Mundo.dedo = new Dedo();
         Mundo.enemigos.clear();
         Mundo.balas.clear();
+        Mundo.puntos = 0;
     }
 
     public void ponerPantallaJuego() {

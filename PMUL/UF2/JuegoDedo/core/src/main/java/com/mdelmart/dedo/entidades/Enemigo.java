@@ -1,14 +1,17 @@
 package com.mdelmart.dedo.entidades;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
 import com.mdelmart.dedo.Assets;
 import com.mdelmart.dedo.Mundo;
 
 public class Enemigo extends Personaje {
-    Circle hitbox;
-    Boolean haColisionado = false;
+    public Boolean haColisionado = false;
+
+    Color color;
 
     public Enemigo() {
         ancho = 10f;
@@ -20,10 +23,19 @@ public class Enemigo extends Personaje {
 
         estado = Estado.ATRAS;
 
-        // +2 para que se vea un poco más grande que el círculo de colisión
-        hitbox = new Circle(x, y, ancho + 2);
-
         vidas = Mundo.random.nextInt(Mundo.MAX_VIDAS_ENEMIGO - Mundo.MIN_VIDAS_ENEMIGO) + Mundo.MIN_VIDAS_ENEMIGO;
+
+        switch (Mundo.random.nextInt(3)) {
+            case 0:
+                color = Color.RED;
+                break;
+            case 1:
+                color = Color.YELLOW;
+                break;
+            case 2:
+                color = Color.BLUE;
+                break;
+        }
     }
 
     public void actualiza(float delta) {
@@ -34,14 +46,10 @@ public class Enemigo extends Personaje {
             Mundo.enemigos.removeValue(this, true);
             Mundo.dedo.quitarVida();
         }
-
-        hitbox.x = x;
     }
 
     public void dibuja(SpriteBatch sb, ShapeRenderer sr) {
-        sr.circle(x, y, ancho);
-        sr.circle(hitbox.x, hitbox.y, hitbox.radius);
-        Assets.fuente.draw(sb, "" + vidas, x - 5, y + 5);
+        sr.setColor(color);
     }
 
     public void quitarVida() {
@@ -53,14 +61,11 @@ public class Enemigo extends Personaje {
 
     public void eliminar() {
         Mundo.enemigos.removeValue(this, true);
+        Mundo.puntos++;
     }
 
     public void colision() {
         haColisionado = true;
-    }
-
-    public Circle getHitbox() {
-        return hitbox;
     }
 
     public Boolean getHaColisionado() {

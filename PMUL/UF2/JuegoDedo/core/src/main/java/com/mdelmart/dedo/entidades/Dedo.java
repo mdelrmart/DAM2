@@ -8,8 +8,10 @@ import com.mdelmart.dedo.Assets;
 import com.mdelmart.dedo.Mundo;
 
 public class Dedo extends Personaje {
-
     Rectangle hitbox;
+    int hiperespacios;
+    public boolean hiperespacioActivo;
+    float tiempoEnHiperespacio;
 
     public Dedo() {
         x = 0;
@@ -19,8 +21,9 @@ public class Dedo extends Personaje {
         alto = 65;
         ancho = 85;
         hitbox = new Rectangle(x, y, ancho, alto);
-
         vidas = Mundo.VIDAS_DEDO;
+        hiperespacios = Mundo.HIPERESPACIOS;
+        hiperespacioActivo = false;
     }
 
     public void actualiza(float delta) {
@@ -39,8 +42,13 @@ public class Dedo extends Personaje {
     }
 
     public void dibuja(SpriteBatch sb, ShapeRenderer sr) {
-        sb.draw(Assets.dedo, x, y, ancho, alto);
-        sr.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        if (Mundo.DEBUG) {
+            sr.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        }
+
+        if (!hiperespacioActivo) {
+            sb.draw(Assets.dedo, x, y, ancho, alto);
+        }
     }
 
     public void subir() {
@@ -64,6 +72,23 @@ public class Dedo extends Personaje {
 
     public Rectangle getHitbox() {
         return hitbox;
+    }
+
+    public void activarHiperespacio() {
+        if (hiperespacios > 0) {
+            hiperespacios--;
+            hiperespacioActivo = true;
+        }
+    }
+
+    public void comprobarHiperespacio(float delta) {
+        if (hiperespacioActivo) {
+            tiempoEnHiperespacio += delta;
+            if (tiempoEnHiperespacio >= Mundo.TIEMPO_HIPERESPACIO) {
+                hiperespacioActivo = false;
+                tiempoEnHiperespacio = 0;
+            }
+        }
     }
 
 }

@@ -2,12 +2,19 @@ package com.mdelmart.dedo.pantallas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mdelmart.dedo.Assets;
 import com.mdelmart.dedo.Mundo;
 
 public class PantallaFin extends Pantalla{
+    Preferences record = Gdx.app.getPreferences("record");
+
+    public PantallaFin() {
+        record.putFloat("record", Math.max(record.getFloat("record", 0), Mundo.puntos));
+        record.flush();
+    }
 
     @Override
     public void render(float delta) {
@@ -16,6 +23,7 @@ public class PantallaFin extends Pantalla{
         main.sb.begin();
         Assets.fuente.draw(main.sb, "PERDISTE", Mundo.ANCHO / 2, Mundo.ALTO / 2);
         Assets.fuente.draw(main.sb, "Pulsa ENTER para volver a empezar", Mundo.ANCHO / 2, Mundo.ALTO / 2 - 20);
+        Assets.fuente.draw(main.sb, "Record " + (int) record.getFloat("record", 0) + " puntos", Mundo.ANCHO / 2, Mundo.ALTO / 2 - 40);
         main.sb.end();
     }
 
