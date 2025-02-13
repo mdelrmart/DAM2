@@ -17,7 +17,7 @@
             <column name="Lugar" length="25" not-null="true" />
         </property>
 
-        <many-to-one name="numDepartControla" class="pojos.Departamento">
+        <many-to-one name="getDepartamento" class="pojos.Departamento">
             <column name="NumDepartControla" not-null="true" />
         </many-to-one>
 

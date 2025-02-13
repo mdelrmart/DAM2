@@ -1,11 +1,11 @@
-package com.mdelmart.dedo;
+package com.mdelmart.dedo.entidades;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-
-import javax.net.ssl.ExtendedSSLSession;
+import com.mdelmart.dedo.Assets;
+import com.mdelmart.dedo.Mundo;
 
 public class Dedo extends Personaje {
 
@@ -14,7 +14,7 @@ public class Dedo extends Personaje {
     public Dedo() {
         x = 0;
         y = Mundo.ALTO / 2;
-        velocidad = 160;
+        velocidad = 200;
         estado = Estado.PARADO;
         alto = 65;
         ancho = 85;
@@ -57,8 +57,13 @@ public class Dedo extends Personaje {
 
     public void quitarVida() {
         vidas--;
-        if (vidas <= 0) {
-            Gdx.app.exit();
-        }
+        //if (vidas <= 0) {
+        //    Gdx.app.exit();
+        //}
     }
+
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
 }

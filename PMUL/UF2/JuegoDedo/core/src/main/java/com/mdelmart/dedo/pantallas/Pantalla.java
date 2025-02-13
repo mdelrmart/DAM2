@@ -1,6 +1,7 @@
-package com.mdelmart.dedo;
+package com.mdelmart.dedo.pantallas;
 
 import com.badlogic.gdx.Screen;
+import com.mdelmart.dedo.Main;
 
 public abstract class Pantalla implements Screen {
     public static Main main;

@@ -79,6 +79,16 @@ public class Empregado implements java.io.Serializable {
     @org.hibernate.annotations.OrderBy(clause = "Data")
     private SortedMap<Date, Double> horasextras = new TreeMap<>();
 
+
+    /*@ManyToMany
+    @JoinTable(name = "empregado_proxecto",
+                joinColumns = @JoinColumn(name = "NSS_Empregado", referencedColumnName = "NSS"),
+                inverseJoinColumns = @JoinColumn(name = "NumProxecto", referencedColumnName = "Num_Proxecto")
+    )*/
+    @ManyToMany
+    @JoinTable(name = "empregado_proxecto",
+            joinColumns = @JoinColumn(name = "NSS_Empregado"),
+            inverseJoinColumns = @JoinColumn(name = "NumProxecto"))
     private Collection<Proxecto> proxectos = new ArrayList<>();
 
     public Empregado() {
@@ -271,4 +281,6 @@ public class Empregado implements java.io.Serializable {
     public void setProxectos(Collection<Proxecto> proxectos) {
         this.proxectos = proxectos;
     }
+
+
 }

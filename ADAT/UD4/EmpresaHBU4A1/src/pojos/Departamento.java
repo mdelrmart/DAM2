@@ -26,8 +26,8 @@ public class Departamento implements java.io.Serializable {
     @Column(name = "Nome_departamento")
     private String nomeDepartamento;
 
-    @ManyToOne
-    @JoinColumn(name = "Director")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Director", nullable = false)
     private Empregado director;
 
     /* Mapeo de los lugares como ibag de componente*/
@@ -41,6 +41,7 @@ public class Departamento implements java.io.Serializable {
     private Collection<String> lugares = new ArrayList<>();
 
     //Mapeo de los proyectos que controla
+    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
     private Collection<Proxecto> proxectos = new ArrayList<>();
 
     public Departamento() {
@@ -96,6 +97,7 @@ public class Departamento implements java.io.Serializable {
     public void setProxectos(Collection<Proxecto> proxectos) {
         this.proxectos = proxectos;
     }
+
 }
 
 

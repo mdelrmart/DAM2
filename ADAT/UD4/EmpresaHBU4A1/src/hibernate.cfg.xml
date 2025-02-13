@@ -46,12 +46,12 @@ Contributor(s):
     <property name="hibernate.connection.username">sa</property>
     <property name="hibernate.connection.password">abc123.</property>
     <!--<property name="hibernate.hbm2ddl.auto">validate</property>-->
-    <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
+    <!--<property name="hibernate.hbm2ddl.auto">update</property>
 
     <mapping resource="mapeo/Departamento.hbm.xml"/>
     <mapping resource="mapeo/Empregado.hbm.xml"/>
     <mapping resource="mapeo/Proxecto.hbm.xml"/>
-    <mapping resource="mapeo/Vehiculo.hbm.xml"/>
+    <mapping resource="mapeo/Vehiculo.hbm.xml"/>-->
 
   </session-factory>
 </hibernate-configuration>

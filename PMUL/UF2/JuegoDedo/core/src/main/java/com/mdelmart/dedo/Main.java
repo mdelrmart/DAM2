@@ -1,22 +1,24 @@
 package com.mdelmart.dedo;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.mdelmart.dedo.entidades.Dedo;
+import com.mdelmart.dedo.pantallas.Pantalla;
+import com.mdelmart.dedo.pantallas.PantallaFin;
+import com.mdelmart.dedo.pantallas.PantallaInicio;
+import com.mdelmart.dedo.pantallas.PantallaJuego;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
-    protected SpriteBatch sb;
-    protected ShapeRenderer sr;
+    public SpriteBatch sb;
+    public ShapeRenderer sr;
 
-    protected float stateTime;
-    protected float tiempoProximoEnemigo;
+    public float stateTime;
+    public float tiempoProximoEnemigo;
 
     OrthographicCamera camara = new OrthographicCamera();
 
@@ -46,7 +48,22 @@ public class Main extends Game {
         Assets.liberar();
     }
 
+    public void reset() {
+        // Reset de variables y estados
+        stateTime = 0;
+        tiempoProximoEnemigo = Mundo.TIEMPO_ENTRE_ENEMIGOS;
+        Mundo.dedo.vidas = Mundo.VIDAS_DEDO;
+        Mundo.dedo = new Dedo();
+        Mundo.enemigos.clear();
+        Mundo.balas.clear();
+    }
+    
     public void ponerPantallaJuego() {
+        reset();
         setScreen(new PantallaJuego());
+    }
+
+    public void ponerPantallaFin() {
+        setScreen(new PantallaFin());
     }
 }

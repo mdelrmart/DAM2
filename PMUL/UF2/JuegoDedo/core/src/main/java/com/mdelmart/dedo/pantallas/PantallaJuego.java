@@ -1,10 +1,12 @@
-package com.mdelmart.dedo;
+package com.mdelmart.dedo.pantallas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mdelmart.dedo.Assets;
+import com.mdelmart.dedo.Mundo;
 
 public class PantallaJuego extends Pantalla {
 
@@ -59,6 +61,10 @@ public class PantallaJuego extends Pantalla {
             main.tiempoProximoEnemigo = main.stateTime + Mundo.TIEMPO_ENTRE_ENEMIGOS;
         }
 
+        if (Mundo.dedo.vidas <= 0) {
+            main.ponerPantallaFin();
+        }
+
         Mundo.dedo.actualiza(delta);
         Mundo.actualizarEnemigos(delta);
         Mundo.actualizarBalas(delta);
@@ -77,5 +83,4 @@ public class PantallaJuego extends Pantalla {
         main.sb.end();
         main.sr.end();
     }
-
 }

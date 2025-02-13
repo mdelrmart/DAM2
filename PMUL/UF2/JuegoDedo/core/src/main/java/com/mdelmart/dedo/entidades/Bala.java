@@ -1,7 +1,8 @@
-package com.mdelmart.dedo;
+package com.mdelmart.dedo.entidades;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
+import com.mdelmart.dedo.Mundo;
 
 public class Bala extends Personaje{
 
@@ -31,4 +32,7 @@ public class Bala extends Personaje{
         sr.circle(hitbox.x, hitbox.y, hitbox.radius);
     }
 
+    public Circle getHitbox() {
+        return hitbox;
+    }
 }

@@ -1,10 +1,7 @@
 package com.mdelmart.dedo;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-
-import static com.mdelmart.dedo.Mundo.dedo;
+import com.mdelmart.dedo.pantallas.Pantalla;
 
 public class ProcesadorDeEntrada extends InputAdapter {
 

@@ -73,7 +73,7 @@ public class Operaciones {
     public static void borrarDepartamento(int numDepartamento, Session sesion) {
         Transaction tx = null;
 
-        Departamento dep = new Departamento(numDepartamento, "");
+        Departamento dep = (Departamento) sesion.get(Departamento.class, numDepartamento);
 
         try {
             tx = sesion.beginTransaction();

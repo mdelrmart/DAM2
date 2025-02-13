@@ -4,16 +4,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.Array;
+import com.mdelmart.dedo.entidades.Bala;
+import com.mdelmart.dedo.entidades.Dedo;
+import com.mdelmart.dedo.entidades.Enemigo;
 
 import java.util.Random;
 
 public class Mundo {
-    public static float ANCHO = 640;
-    public static float ALTO = 480;
-    public static final float TIEMPO_ENTRE_ENEMIGOS = 1.5f;
+    public static float ANCHO = 1024;
+    public static float ALTO = 768;
+    public static final float TIEMPO_ENTRE_ENEMIGOS = 2f;
     public static final float LIMITE_BALAS = 5;
     public static final int MIN_VIDAS_ENEMIGO = 1;
-    public static final int MAX_VIDAS_ENEMIGO = 10;
+    public static final int MAX_VIDAS_ENEMIGO = 5;
     public static final int VIDAS_DEDO = 3;
     public static final float ALTURA_SEPARADOR = Mundo.ALTO / 7;
 
@@ -61,17 +64,22 @@ public class Mundo {
     public static void comprobarColisiones() {
         for (Enemigo enemigo : enemigos) {
             for (Bala bala : balas) {
-                if (Intersector.overlaps(enemigo.hitbox, bala.hitbox)) {
+                if (Intersector.overlaps(enemigo.getHitbox(), bala.getHitbox())) {
                     //enemigos.removeValue(enemigo, true);
                     enemigo.quitarVida();
                     balas.removeValue(bala, true);
                 }
             }
 
-            if (Intersector.overlaps(enemigo.hitbox, dedo.hitbox) && !enemigo.haColisionado) {
+            // Si el enemigo colisiona con el dedo y no ha colisionado antes, le quitamos una vida al dedo,
+            // marcamos al enemigo como colisionado ya que si no restaría vidas al dedo en cada Delta
+            // y finalmente lo eliminamos
+            if (Intersector.overlaps(enemigo.getHitbox(), dedo.getHitbox()) && !enemigo.getHaColisionado()) {
                 dedo.quitarVida();
                 enemigo.colision();
+                enemigo.eliminar();
             }
+
         }
     }
 

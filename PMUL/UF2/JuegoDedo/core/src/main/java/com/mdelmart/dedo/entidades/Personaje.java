@@ -1,4 +1,4 @@
-package com.mdelmart.dedo;
+package com.mdelmart.dedo.entidades;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -6,7 +6,7 @@ public class Personaje {
     protected float x, y;
     protected float velocidad;
     protected float ancho, alto;
-    protected int vidas;
+    public int vidas;
 
     protected Rectangle rectangulo;
 

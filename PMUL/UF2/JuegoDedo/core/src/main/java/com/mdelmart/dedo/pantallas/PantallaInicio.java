@@ -1,11 +1,12 @@
-package com.mdelmart.dedo;
+package com.mdelmart.dedo.pantallas;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mdelmart.dedo.Assets;
+import com.mdelmart.dedo.Mundo;
 
-public class PantallaInicio extends Pantalla{
+public class PantallaInicio extends Pantalla {
 
     @Override
     public void render(float delta) {
