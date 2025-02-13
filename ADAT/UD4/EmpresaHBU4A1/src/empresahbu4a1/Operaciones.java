@@ -525,4 +525,41 @@ public class Operaciones {
         }
     }
 
+
+    public static void asignarEmpregadoProxecto(String nss, int numProxecto, Session sesion) {
+        Transaction tx = null;
+
+        try {
+            Empregado emp = (Empregado) sesion.get(Empregado.class, nss);
+            Proxecto pr = (Proxecto) sesion.get(Proxecto.class, numProxecto);
+
+            if (emp != null) {
+                if (emp.getProxectos().contains(pr)) {
+                    System.out.println("Ya está en el proyecto");
+                    return;
+                }
+
+                emp.getProxectos().add(pr);
+                pr.getEmpregados().add(emp);
+
+                try {
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                } catch (HibernateException e) {
+                    System.out.println("No ha funcionado " + e.getMessage());
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("No ha funcionado " + e.getMessage());
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+
 }

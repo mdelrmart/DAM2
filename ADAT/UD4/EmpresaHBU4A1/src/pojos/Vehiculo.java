@@ -1,14 +1,30 @@
 package pojos;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "vehiculo", schema = "dbo", catalog = "EmpresaHB")
 public class Vehiculo {
+
+    @Id
+    @Column(name = "NSS_Empregado", length = 15)
     private String nss;
-    private String matricula;
-    private String marca;
-    private String modelo;
-    private Date dataCompra;
+
+    // Mapeo
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "NSS_Empregado")
     private Empregado empregado;
+
+    @Column(name = "Matricula", length = 10, nullable = false, unique = true)
+    private String matricula;
+    @Column(name = "Marca", length = 30, nullable = false, unique = true)
+    private String marca;
+    @Column(name = "Modelo", length = 30, nullable = false, unique = true)
+    private String modelo;
+    @Column(name = "DataCompra", nullable = false)
+    private Date dataCompra;
 
     public Vehiculo() {
     }

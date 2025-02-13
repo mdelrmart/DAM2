@@ -117,5 +117,13 @@
         </component>
 
         <one-to-one name="vehiculo" class="pojos.Vehiculo" cascade="all" lazy="proxy"/>
+
+        <bag name="proxectos" table="empregado_proxecto">
+            <key>
+                <column name="nss_empregado" not-null="true"/>
+            </key>
+            <many-to-many column="NumProxecto" class="pojos.Proxecto"></many-to-many>
+        </bag>
+
     </class>
 </hibernate-mapping>

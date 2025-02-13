@@ -39,7 +39,7 @@ public class Empregado implements java.io.Serializable {
     @Embedded
     private Enderezo enderezo;
 
-
+    @OneToOne(mappedBy = "empregado", cascade = CascadeType.ALL)
     private Vehiculo vehiculo;
 
     //Ej. A Cuando en la BD solo teníamos el teléfono
@@ -79,6 +79,7 @@ public class Empregado implements java.io.Serializable {
     @org.hibernate.annotations.OrderBy(clause = "Data")
     private SortedMap<Date, Double> horasextras = new TreeMap<>();
 
+    private Collection<Proxecto> proxectos = new ArrayList<>();
 
     public Empregado() {
     }
@@ -263,4 +264,11 @@ public class Empregado implements java.io.Serializable {
         this.vehiculo = vehiculo;
     }
 
+    public Collection<Proxecto> getProxectos() {
+        return proxectos;
+    }
+
+    public void setProxectos(Collection<Proxecto> proxectos) {
+        this.proxectos = proxectos;
+    }
 }

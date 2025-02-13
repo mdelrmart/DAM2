@@ -34,6 +34,7 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(Departamento.class);
             configuration.addAnnotatedClass(Proxecto.class);
             configuration.addAnnotatedClass(Telefono.class);
+            configuration.addAnnotatedClass(Vehiculo.class);
 
             sessionFactory = configuration.buildSessionFactory(serviceRegistry); // Usar la misma configuración para construir la SessionFactory
         } catch (Throwable ex) {

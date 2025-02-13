@@ -7,6 +7,8 @@
         <id name="numProxecto" type="int">
             <column name="Num_proxecto" />
             <generator class="increment" />
+            <!--Magia de Borja para insertar proyectos sin método-->
+            <!--<generator class="assigned" />-->
         </id>
         <property name="nomeProxecto" type="string">
             <column name="Nome_proxecto" length="25" not-null="true" unique="true" />
@@ -15,9 +17,15 @@
             <column name="Lugar" length="25" not-null="true" />
         </property>
 
-
         <many-to-one name="numDepartControla" class="pojos.Departamento">
             <column name="NumDepartControla" not-null="true" />
         </many-to-one>
+
+        <set name="empregados" table="empregado_proxecto" inverse="true">
+            <key>
+                <column name="NumProxecto" not-null="true"></column>
+            </key>
+            <many-to-many class="pojos.Empregado" column="NSS_Empregado"></many-to-many>
+        </set>
     </class>
 </hibernate-mapping>
