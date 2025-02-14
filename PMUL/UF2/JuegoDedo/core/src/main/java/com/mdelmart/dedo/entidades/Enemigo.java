@@ -18,7 +18,7 @@ public class Enemigo extends Personaje {
         alto = 5f;
 
         x = Mundo.ANCHO + ancho;
-        y = Mundo.random.nextInt((int) (Mundo.ALTO - alto * 2) - (int) Mundo.ALTURA_SEPARADOR) + (Mundo.ALTURA_SEPARADOR + 2);
+        y = Mundo.random.nextInt((int) (Mundo.ALTO - alto / 2) - (int) Mundo.ALTURA_SEPARADOR) + (Mundo.ALTURA_SEPARADOR + 2);
         velocidad = 130;
 
         estado = Estado.ATRAS;

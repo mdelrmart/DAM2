@@ -29,7 +29,10 @@ public class Bala extends Personaje{
 
     public void dibuja(ShapeRenderer sr) {
         sr.circle(x, y, ancho);
-        sr.circle(hitbox.x, hitbox.y, hitbox.radius);
+        
+        if (Mundo.DEBUG) {
+            sr.circle(hitbox.x, hitbox.y, hitbox.radius);
+        }
     }
 
     public Circle getHitbox() {

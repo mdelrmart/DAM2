@@ -79,16 +79,17 @@ public class PantallaJuego extends Pantalla {
 
         main.sr.begin(ShapeRenderer.ShapeType.Line);
         main.sb.begin();
+
         Mundo.dibujarEnemigos(main.sb, main.sr);
         main.sr.setColor(Color.BLACK);
         Mundo.dedo.dibuja(main.sb, main.sr);
         Mundo.dibujarBalas(main.sr);
         main.sr.line(0, Mundo.ALTURA_SEPARADOR, Mundo.ANCHO, Mundo.ALTURA_SEPARADOR);
 
-        Assets.fuente.draw(main.sb, "Vidas: " + Mundo.dedo.vidas, 10, Mundo.ALTURA_SEPARADOR - 10);
-        Assets.fuente.draw(main.sb, "Tiempo de juego (segs.): " + (int) main.stateTime, 10, Mundo.ALTURA_SEPARADOR - 30);
+        Assets.fuente.draw(main.sb, "Tiempo de juego: " + (int) main.stateTime, 10, Mundo.ALTURA_SEPARADOR - 30);
         Assets.fuente.draw(main.sb, "Puntos: " + (int) Mundo.puntos, 10, Mundo.ALTURA_SEPARADOR - 50);
-        Assets.fuente.draw(main.sb, "Hiperespacios: " + Mundo.HIPERESPACIOS, 10, Mundo.ALTURA_SEPARADOR - 70);
+        Assets.fuente.draw(main.sb, "Vidas: " + Mundo.dedo.vidas, 10, Mundo.ALTURA_SEPARADOR - 10);
+        Assets.fuente.draw(main.sb, "Hiperespacios: " + Mundo.dedo.hiperespacios, 10, Mundo.ALTURA_SEPARADOR - 70);
 
         main.sb.end();
         main.sr.end();

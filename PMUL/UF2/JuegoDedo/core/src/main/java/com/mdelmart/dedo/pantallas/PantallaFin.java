@@ -18,14 +18,14 @@ public class PantallaFin extends Pantalla{
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.WHITE);
+        ScreenUtils.clear(Color.BLACK);
 
         main.sb.begin();
 
         Assets.fuente.setColor(Color.RED);
         Assets.fuente.draw(main.sb, "HAS PERDIDO", Mundo.ANCHO / 2 - 50, Mundo.ALTO / 2);
 
-        Assets.fuente.setColor(Color.BLACK);
+        Assets.fuente.setColor(Color.WHITE);
         Assets.fuente.draw(main.sb, "Pulsa ENTER para volver a empezar.", Mundo.ANCHO / 2 - 140, Mundo.ALTO / 2 - 20);
 
         Assets.fuente.setColor(Color.GREEN);
@@ -45,7 +45,6 @@ public class PantallaFin extends Pantalla{
         }
 
         return true;
-
     }
 
     @Override

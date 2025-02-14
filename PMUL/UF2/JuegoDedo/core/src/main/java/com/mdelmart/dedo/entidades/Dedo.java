@@ -9,7 +9,7 @@ import com.mdelmart.dedo.Mundo;
 
 public class Dedo extends Personaje {
     Rectangle hitbox;
-    int hiperespacios;
+    public int hiperespacios;
     public boolean hiperespacioActivo;
     float tiempoEnHiperespacio;
 
@@ -65,9 +65,6 @@ public class Dedo extends Personaje {
 
     public void quitarVida() {
         vidas--;
-        //if (vidas <= 0) {
-        //    Gdx.app.exit();
-        //}
     }
 
     public Rectangle getHitbox() {
@@ -75,6 +72,10 @@ public class Dedo extends Personaje {
     }
 
     public void activarHiperespacio() {
+        if (hiperespacioActivo) {
+            return;
+        }
+
         if (hiperespacios > 0) {
             hiperespacios--;
             hiperespacioActivo = true;

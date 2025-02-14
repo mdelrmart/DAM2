@@ -27,7 +27,7 @@ public class Mundo {
     public static final int HIPERESPACIOS = 3;
     public static final float TIEMPO_HIPERESPACIO = 5f;
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     //endregion
 
     public static Random random = new Random();

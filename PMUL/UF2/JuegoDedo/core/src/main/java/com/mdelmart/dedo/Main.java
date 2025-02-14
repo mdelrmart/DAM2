@@ -57,6 +57,7 @@ public class Main extends Game {
         Mundo.enemigos.clear();
         Mundo.balas.clear();
         Mundo.puntos = 0;
+        Assets.fuente.setColor(Color.BLACK);
     }
 
     public void ponerPantallaJuego() {
