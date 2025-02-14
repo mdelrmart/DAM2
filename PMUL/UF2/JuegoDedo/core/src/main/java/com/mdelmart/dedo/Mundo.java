@@ -9,17 +9,26 @@ import com.mdelmart.dedo.entidades.*;
 import java.util.Random;
 
 public class Mundo {
+    //region --- Constantes del juego ---
+    // Resolución
     public static float ANCHO = 1024;
     public static float ALTO = 768;
-    public static final float TIEMPO_ENTRE_ENEMIGOS = 2f;
-    public static final float LIMITE_BALAS = 5;
+
+    public static final float ALTURA_SEPARADOR = Mundo.ALTO / 7;
+
+    public static final int VIDAS_DEDO = 3;
+
     public static final int MIN_VIDAS_ENEMIGO = 1;
     public static final int MAX_VIDAS_ENEMIGO = 5;
-    public static final int VIDAS_DEDO = 3;
-    public static final float ALTURA_SEPARADOR = Mundo.ALTO / 7;
-    public static final boolean DEBUG = false;
+
+    public static final float TIEMPO_ENTRE_ENEMIGOS = 2f;
+    public static final float LIMITE_BALAS_PANTALLA = 5;
+
     public static final int HIPERESPACIOS = 3;
     public static final float TIEMPO_HIPERESPACIO = 5f;
+
+    public static final boolean DEBUG = true;
+    //endregion
 
     public static Random random = new Random();
 
@@ -28,7 +37,6 @@ public class Mundo {
     public static Array<Bala> balas = new Array<>();
 
     public static float puntos = 0;
-
 
     public static void crearEnemigo() {
         if (random.nextBoolean()) {
@@ -39,7 +47,7 @@ public class Mundo {
     }
 
     public static void crearBala() {
-        if(balas.size < LIMITE_BALAS) {
+        if(balas.size < LIMITE_BALAS_PANTALLA) {
             balas.add(new Bala());
         }
     }
@@ -87,18 +95,20 @@ public class Mundo {
                 }
             }
 
-            // Check collision between finger and enemy
+            // Comprobar colisión entre dedo y enemigo
             if (enemigo instanceof EnemigoCuadrado) {
-                // Enemy is a square, use Rectangle for hitbox
+                // Si el enemigo es un rectangulo, usamos Rectangle para la hitbox
                 if (Intersector.overlaps(((EnemigoCuadrado) enemigo).getHitbox(), dedo.getHitbox()) && !enemigo.haColisionado  && !dedo.hiperespacioActivo) {
                     dedo.quitarVida();
                     enemigo.colision();
+                    enemigo.eliminar();
                 }
             } else if (enemigo instanceof EnemigoCircular) {
-                // Enemy is a circle, use Circle for hitbox
+                // Si el enemigo es un circulo, usamos Circle para la hitbox
                 if (Intersector.overlaps(((EnemigoCircular) enemigo).getHitbox(), dedo.getHitbox()) && !enemigo.haColisionado && !dedo.hiperespacioActivo) {
                     dedo.quitarVida();
                     enemigo.colision();
+                    enemigo.eliminar();
                 }
             }
         }

@@ -44,7 +44,11 @@ public class Enemigo extends Personaje {
         }
         if (x < 0 - ancho) {
             Mundo.enemigos.removeValue(this, true);
-            Mundo.dedo.quitarVida();
+
+            if (!Mundo.dedo.hiperespacioActivo) {
+                Mundo.dedo.quitarVida();
+            }
+
         }
     }
 

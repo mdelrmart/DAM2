@@ -21,9 +21,16 @@ public class PantallaFin extends Pantalla{
         ScreenUtils.clear(Color.WHITE);
 
         main.sb.begin();
-        Assets.fuente.draw(main.sb, "PERDISTE", Mundo.ANCHO / 2, Mundo.ALTO / 2);
-        Assets.fuente.draw(main.sb, "Pulsa ENTER para volver a empezar", Mundo.ANCHO / 2, Mundo.ALTO / 2 - 20);
-        Assets.fuente.draw(main.sb, "Record " + (int) record.getFloat("record", 0) + " puntos", Mundo.ANCHO / 2, Mundo.ALTO / 2 - 40);
+
+        Assets.fuente.setColor(Color.RED);
+        Assets.fuente.draw(main.sb, "HAS PERDIDO", Mundo.ANCHO / 2 - 50, Mundo.ALTO / 2);
+
+        Assets.fuente.setColor(Color.BLACK);
+        Assets.fuente.draw(main.sb, "Pulsa ENTER para volver a empezar.", Mundo.ANCHO / 2 - 140, Mundo.ALTO / 2 - 20);
+
+        Assets.fuente.setColor(Color.GREEN);
+        Assets.fuente.draw(main.sb, "Record " + (int) record.getFloat("record", 0) + " puntos", Mundo.ANCHO / 2 - 65, Mundo.ALTO / 2 - 40);
+
         main.sb.end();
     }
 

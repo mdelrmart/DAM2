@@ -13,8 +13,8 @@ public class PantallaInicio extends Pantalla {
         ScreenUtils.clear(Color.WHITE);
 
         main.sb.begin();
-        Assets.fuente.draw(main.sb, "Juego del dedo", Mundo.ANCHO / 2, Mundo.ALTO / 2);
-        Assets.fuente.draw(main.sb, "Pulsa ENTER para empezar", Mundo.ANCHO / 2, Mundo.ALTO / 2 - 20);
+        Assets.fuente.draw(main.sb, "JUEGO DEL DEDO", Mundo.ANCHO / 2 - 75, Mundo.ALTO / 2);
+        Assets.fuente.draw(main.sb, "Pulsa ENTER para empezar", Mundo.ANCHO / 2 - 110, Mundo.ALTO / 2 - 20);
         main.sb.end();
     }
 
