@@ -22,7 +22,7 @@ public class Mundo {
     public static final int MAX_VIDAS_ENEMIGO = 5;
 
     public static final float TIEMPO_ENTRE_ENEMIGOS = 2f;
-    public static final float LIMITE_BALAS_PANTALLA = 5;
+    public static final float LIMITE_BALAS_PANTALLA = 500;
 
     public static final int HIPERESPACIOS = 3;
     public static final float TIEMPO_HIPERESPACIO = 5f;

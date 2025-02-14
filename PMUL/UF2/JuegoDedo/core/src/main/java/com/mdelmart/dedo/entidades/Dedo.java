@@ -16,7 +16,7 @@ public class Dedo extends Personaje {
     public Dedo() {
         x = 0;
         y = Mundo.ALTO / 2;
-        velocidad = 200;
+        velocidad = 300;
         estado = Estado.PARADO;
         alto = 45;
         ancho = 65;
