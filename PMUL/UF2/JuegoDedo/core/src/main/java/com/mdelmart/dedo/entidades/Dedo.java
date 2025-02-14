@@ -18,8 +18,8 @@ public class Dedo extends Personaje {
         y = Mundo.ALTO / 2;
         velocidad = 200;
         estado = Estado.PARADO;
-        alto = 65;
-        ancho = 85;
+        alto = 45;
+        ancho = 65;
         hitbox = new Rectangle(x, y, ancho, alto);
         vidas = Mundo.VIDAS_DEDO;
         hiperespacios = Mundo.HIPERESPACIOS;
