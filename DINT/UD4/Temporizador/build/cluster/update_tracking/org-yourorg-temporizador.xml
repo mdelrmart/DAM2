@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.yourorg.temporizador">
+    <module_version install_time="1736495702445" last="true" origin="installer" specification_version="1.0">
+        <file crc="850939964" name="config/Modules/org-yourorg-temporizador.xml"/>
+        <file crc="894538210" name="modules/org-yourorg-temporizador.jar"/>
+    </module_version>
+</module>

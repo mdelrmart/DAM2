@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: org.yourorg.temporizador
+OpenIDE-Module-Localizing-Bundle: org/yourorg/temporizador/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

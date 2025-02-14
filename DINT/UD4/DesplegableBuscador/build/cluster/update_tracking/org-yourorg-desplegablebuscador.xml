@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.yourorg.desplegablebuscador">
+    <module_version install_time="1736767910296" last="true" origin="installer" specification_version="1.0">
+        <file crc="1593327184" name="config/Modules/org-yourorg-desplegablebuscador.xml"/>
+        <file crc="3771988524" name="modules/org-yourorg-desplegablebuscador.jar"/>
+    </module_version>
+</module>

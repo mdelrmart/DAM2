@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.yourorg.urllabel">
+    <module_version install_time="1736324849021" last="true" origin="installer" specification_version="1.0">
+        <file crc="2290026106" name="config/Modules/org-yourorg-urllabel.xml"/>
+        <file crc="1678784470" name="modules/org-yourorg-urllabel.jar"/>
+    </module_version>
+</module>

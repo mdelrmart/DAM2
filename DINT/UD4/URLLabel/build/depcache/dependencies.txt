@@ -1,0 +1,15 @@
+||:org.yourorg.urllabel.URLLabel
+org.yourorg.urllabel.URLLabel
+java.awt.Color
+org.yourorg.urllabel.URLLabel$1
+javax.swing.JLabel
+java.lang.Runtime
+java.awt.Cursor
+java.lang.StringBuilder
+java.io.IOException
+javax.swing.JOptionPane
+java.io.Serializable
+||:org.yourorg.urllabel.URLLabel$1
+org.yourorg.urllabel.URLLabel
+org.yourorg.urllabel.URLLabel$1
+java.awt.event.MouseAdapter
