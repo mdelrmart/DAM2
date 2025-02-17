@@ -23,7 +23,6 @@ public class Mundo {
     public static Array<Enemigo> enemigos = new Array<>();
     public static Array<Bala> balas = new Array<>();
 
-
     public static void crearEnemigo() {
         enemigos.add(new Enemigo());
     }
