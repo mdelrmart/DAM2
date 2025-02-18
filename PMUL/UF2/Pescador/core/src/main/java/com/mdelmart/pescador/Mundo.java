@@ -10,10 +10,10 @@ import java.util.Random;
 public class Mundo {
     public static float ANCHO = 1024;
     public static float ALTO = 768;
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
     public static final float LIMITE_MAR = Mundo.ALTO / 1.54f;
     public static final float TIEMPO_ENTRE_PECES = 1.5f;
-    public static final int TIEMPO_INICIAL_JUEGO = 60;
+    //public static final int TIEMPO_INICIAL_JUEGO = 60;
 
     public static Pescador pescador = new Pescador();
     public static Anzuelo anzuelo = new Anzuelo();
@@ -42,8 +42,8 @@ public class Mundo {
         if (anzuelo.sube()) {
             for (Pez pez : peces) {
                 if (Intersector.overlaps(pez.hitbox, anzuelo.hitbox)) {
-                    pez.pescar();
-                    peces.removeValue(pez, true);
+                    pez.pescado();
+                    //peces.removeValue(pez, true);
                 }
             }
         }

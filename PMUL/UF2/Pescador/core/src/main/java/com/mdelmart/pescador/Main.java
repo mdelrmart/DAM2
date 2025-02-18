@@ -68,7 +68,10 @@ public class Main extends ApplicationAdapter {
 
         Assets.fuente.draw(sb, "Tiempo de juego (segs.): " + (int) stateTime, 10, Mundo.ALTO - 10);
         Assets.fuente.draw(sb, "Peces pescados: " + Mundo.pescador.pecesPescados, 400, Mundo.ALTO - 10);
-        Assets.fuente.draw(sb, "Peces mem.: " + Mundo.peces.size, 800, Mundo.ALTO - 10);
+
+        if (Mundo.DEBUG) {
+            Assets.fuente.draw(sb, "Peces mem.: " + Mundo.peces.size, 800, Mundo.ALTO - 10);
+        }
 
         sb.end();
         sr.end();
