@@ -15,6 +15,7 @@ public class Main extends ApplicationAdapter {
 
     private float delta;
     private float stateTime;
+    private float tiempoProximoPez = Mundo.TIEMPO_ENTRE_PECES;
 
     OrthographicCamera camara = new OrthographicCamera();
 
@@ -43,16 +44,31 @@ public class Main extends ApplicationAdapter {
         delta = Gdx.graphics.getDeltaTime();
         stateTime += delta;
 
+        if (stateTime >= tiempoProximoPez) {
+            Mundo.crearPez();
+            tiempoProximoPez = stateTime + Mundo.TIEMPO_ENTRE_PECES;
+        }
+
         Mundo.pescador.actualiza(delta);
         Mundo.anzuelo.actualiza(delta);
+        Mundo.actualizarPeces(delta);
+        Mundo.comprobarColisiones();
 
         sr.begin(ShapeRenderer.ShapeType.Line);
         sb.begin();
 
         sb.draw(Assets.fondo, 0, 0, Mundo.ANCHO, Mundo.ALTO);
+
         Mundo.pescador.dibuja(sb,sr);
         Mundo.anzuelo.dibuja(sb,sr);
+        Mundo.dibujarPeces(sb, sr);
+
+        // Línea de límite del mar
         //sr.line(0, Mundo.LIMITE_MAR, Mundo.ANCHO, Mundo.LIMITE_MAR);
+
+        Assets.fuente.draw(sb, "Tiempo de juego (segs.): " + (int) stateTime, 10, Mundo.ALTO - 10);
+        Assets.fuente.draw(sb, "Peces pescados: " + Mundo.pescador.pecesPescados, 400, Mundo.ALTO - 10);
+        Assets.fuente.draw(sb, "Peces mem.: " + Mundo.peces.size, 800, Mundo.ALTO - 10);
 
         sb.end();
         sr.end();
@@ -62,7 +78,5 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         Assets.liberar();
     }
-
-
 
 }

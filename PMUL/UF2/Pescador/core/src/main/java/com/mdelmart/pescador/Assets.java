@@ -30,8 +30,8 @@ public class Assets {
 
         //fuente = new BitmapFont(Gdx.files.internal("fuentes/fuente.fnt"));
         fuente = new BitmapFont();
-        fuente.getData().setScale(.5f);
-        fuente.setColor(Color.RED);
+        fuente.getData().setScale(2.0f);
+        fuente.setColor(Color.BLACK);
 
         atlas = new TextureAtlas(Gdx.files.internal("atlas.atlas"));
         pescador = atlas.findRegion("pescador");

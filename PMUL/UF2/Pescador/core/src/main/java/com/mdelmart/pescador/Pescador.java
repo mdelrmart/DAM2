@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Pescador extends Personaje {
     Rectangle hitbox;
+    int pecesPescados = 0;
 
     public Pescador() {
         x = Mundo.ANCHO / 2 - 50;

@@ -29,7 +29,7 @@ public class Enemigo extends Personaje {
         if (estado == Estado.ATRAS) {
             x -= velocidad * delta;
         }
-        if (x < 0 - ancho) {
+        if (x < 0 - Mundo.ANCHO) {
             Mundo.enemigos.removeValue(this, true);
         }
 
