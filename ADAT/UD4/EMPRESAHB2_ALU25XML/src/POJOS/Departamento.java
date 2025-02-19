@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class Departamento  implements java.io.Serializable {
+public class Departamento implements java.io.Serializable {
 
 
-     private int numDepartamento;
-     private String nomeDepartamento;
-    
+    private int numDepartamento;
+    private String nomeDepartamento;
+
 
     public Departamento() {
     }
@@ -33,12 +33,6 @@ public class Departamento  implements java.io.Serializable {
     public void setNomeDepartamento(String nomeDepartamento) {
         this.nomeDepartamento = nomeDepartamento;
     }
-
-   
-  
-
-
-
 
 }
 

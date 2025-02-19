@@ -13,11 +13,13 @@ public class Empregadofixo extends Empregado implements java.io.Serializable {
     private Double salario;
     private Date dataAlta;
     private String categoria;
-   
+
+    private Set<Edicion> edicionProfesor = new HashSet<>();
 
     public Empregadofixo() {
     }
-  public Empregadofixo(String nss) {
+
+    public Empregadofixo(String nss) {
         super(nss);
     }
 
@@ -54,5 +56,13 @@ public class Empregadofixo extends Empregado implements java.io.Serializable {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Set<Edicion> getEdicionProfesor() {
+        return edicionProfesor;
+    }
+
+    public void setEdicionProfesor(Set<Edicion> edicionProfesor) {
+        this.edicionProfesor = edicionProfesor;
     }
 }

@@ -7,18 +7,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * */
+ *
+ */
 public class Edicion implements java.io.Serializable {
 
     private EdicionId id;
     private Date data;
     private String lugar;
-  
+    private Curso curso;
+    private Empregadofixo profesor;
 
     public Edicion() {
     }
 
-   
 
     public EdicionId getId() {
         return this.id;
@@ -28,7 +29,7 @@ public class Edicion implements java.io.Serializable {
         this.id = id;
     }
 
-  
+
     public Date getData() {
         return this.data;
     }
@@ -45,8 +46,19 @@ public class Edicion implements java.io.Serializable {
         this.lugar = lugar;
     }
 
-   
+    public Curso getCurso() {
+        return curso;
+    }
 
-   
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
+    public Empregadofixo getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Empregadofixo profesor) {
+        this.profesor = profesor;
+    }
 }

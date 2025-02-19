@@ -55,6 +55,14 @@
             <property name="categoria" type="java.lang.String">
                 <column name="Categoria"/>
             </property>
+
+            <set name="edicionProfesor" table="edicion" lazy="true">
+                <key>
+                    <column name="Profesor" not-null="true"/>
+                </key>
+                <one-to-many class="POJOS.Edicion"/>
+            </set>
+
         </joined-subclass>
 
         <!-- Mapeo de la herencia EMPREGADOTEMPORAL -->
