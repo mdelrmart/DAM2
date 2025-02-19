@@ -17,7 +17,6 @@
         <property name="apelido2" type="string">
             <column length="25" name="Apelido2"/>
         </property>
-       
         <property name="rua" type="string">
             <column length="30" name="Rua"/>
         </property>
@@ -43,6 +42,19 @@
             <column length="1" name="Sexo"/>
         </property>
 
+        <!-- Mapeo del supervisor de un empleado -->
+        <many-to-one class="POJOS.Empregado" name="supervisor" fetch="select">
+            <column name="NSSSupervisa" length="15"/>
+        </many-to-one>
+
+        <!-- Mapeo de los empleados supervisados por un empleado -->
+        <set fetch="select" inverse="true" lazy="true" name="supervisados" table="EDICION">
+            <key>
+                <column name="NSSSupervisa" length="15"/>
+            </key>
+            <one-to-many class="POJOS.Empregado"/>
+        </set>
+
         <!-- Mapeo de la herencia EMPREGADOFIXO -->
         <joined-subclass name="POJOS.Empregadofixo" table="EMPREGADOFIXO">
             <key column="NSS"></key>
@@ -56,7 +68,7 @@
                 <column name="Categoria"/>
             </property>
 
-            <set name="edicionProfesor" table="edicion" lazy="true">
+            <set name="edicionProfesor" table="edicion" inverse="true" lazy="true">
                 <key>
                     <column name="Profesor" not-null="true"/>
                 </key>

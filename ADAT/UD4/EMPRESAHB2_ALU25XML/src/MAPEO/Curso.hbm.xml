@@ -15,7 +15,7 @@
             <column name="Horas" />
         </property>
        <!--Mapeo de las ediciones de un curso-->
-        <list name="edicions" table="EDICION" cascade="all delete-orphan">
+        <list name="edicions" table="EDICION" cascade="all,delete-orphan">
             <key>
                 <column name="Codigo" not-null="true"/>
             </key>

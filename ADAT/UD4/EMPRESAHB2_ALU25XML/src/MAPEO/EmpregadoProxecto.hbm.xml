@@ -15,7 +15,16 @@
          <property name="horas" type="java.lang.Integer">
             <column name="Horas" />
         </property>
-        
-       
+
+        <!-- Mapeo de las relaciones -->
+        <!--El empleado que trabaja en un proyecto-->
+        <many-to-one name="empregado" class="POJOS.Empregado" update="false" insert="false" fetch="select">
+            <column name="NSSEmpregado" length="15" not-null="true" />
+        </many-to-one>
+
+        <!-- El proyecto que trabaja un empleado-->
+        <many-to-one name="proxecto" class="POJOS.Proxecto" update="false" insert="false" fetch="select">
+            <column name="NumProxecto" not-null="true" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

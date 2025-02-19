@@ -19,6 +19,7 @@
         <property name="lugar" type="string">
             <column name="Lugar" length="25"/>
         </property>
+
         <!--Mapeo de la relación muchos a uno con Curso-->
         <!--El atributo update e insert se ponen a false para que no se actualice ni inserte en la tabla Edicion-->
         <many-to-one name="curso" class="POJOS.Curso" update="false" insert="false">
@@ -27,7 +28,7 @@
 
         <!--Mapeo de la relación muchos a uno con Profesor-->
         <many-to-one name="profesor" class="POJOS.Empregadofixo" fetch="select">
-            <column name="Profesor" not-null="true"/>
+            <column name="Profesor" length="15" not-null="true"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

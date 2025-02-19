@@ -4,8 +4,12 @@ public class EmpregadoProxecto implements java.io.Serializable {
 
     //definicion de la clave compuesta
     private EmpregadoProxectoId id;
-
     private Integer horas;
+
+    // Empleado del proyecto
+    private Empregado empregado;
+    // Proyecto que tiene el empleado
+    private Proxecto proxecto;
 
     public EmpregadoProxecto() {
     }
@@ -26,4 +30,19 @@ public class EmpregadoProxecto implements java.io.Serializable {
         this.horas = horas;
     }
 
+    public Empregado getEmpregado() {
+        return empregado;
+    }
+
+    public void setEmpregado(Empregado empregado) {
+        this.empregado = empregado;
+    }
+
+    public Proxecto getProxecto() {
+        return proxecto;
+    }
+
+    public void setProxecto(Proxecto proxecto) {
+        this.proxecto = proxecto;
+    }
 }
