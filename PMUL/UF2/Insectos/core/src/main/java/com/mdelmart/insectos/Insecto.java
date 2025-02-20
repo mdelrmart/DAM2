@@ -19,7 +19,7 @@ public class Insecto {
     public Insecto(float x, float y) {
         this.x = x;
         this.y = y;
-        velocidad = 200f;
+        velocidad = 20f;
         ancho = 30f;
         alto = 30f;
         estado = Estado.DERECHA;

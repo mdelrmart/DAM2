@@ -3,6 +3,7 @@ package com.mdelmart.insectos.pantallas;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mdelmart.insectos.Assets;
 import com.mdelmart.insectos.Mundo;
 
 public class PantallaJuego extends Pantalla {
@@ -45,6 +46,8 @@ public class PantallaJuego extends Pantalla {
 
         Mundo.dibujarInsectosMuertos(main.sb, main.sr, main.srHitbox);
         Mundo.insecto.dibujar(main.sb, main.sr, main.srHitbox);
+
+        Assets.fuente.draw(main.sb, "Record: " + (int) 1, 10, Mundo.ALTO - 10);
 
         main.sb.end();
         main.srHitbox.end();

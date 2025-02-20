@@ -1,0 +1,11 @@
+Peces:
+- Velocidad aleatoria entre peces
+- Hacer v2 ¿?
+
+Insectos:
+- Al tocar con los bordes tiene que cambiar de dirección aleatoriamente a la izquierda o derecha
+- Al tocar con el ratón tiene que cambiar de dirección aleatoriamente a la izquierda o derecha
+- Implementar récord
+- Implementar elección de insectos para jugar
+
+- El bicho pasa por debajo del muerto
