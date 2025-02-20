@@ -19,7 +19,7 @@ public class Insecto {
     public Insecto(float x, float y) {
         this.x = x;
         this.y = y;
-        velocidad = 20f;
+        velocidad = 200f;
         ancho = 30f;
         alto = 30f;
         estado = Estado.DERECHA;
@@ -89,21 +89,24 @@ public class Insecto {
     }
 
     public void dibujar(SpriteBatch sb, ShapeRenderer sr, ShapeRenderer srHitboxes){
+        if (estaMuerto()) {
+            sr.rect(x, y, ancho, alto);
+            return;
+        }
+
         if(numSprite < Mundo.NUM_TEXTURAS_INSECTOS) {
             sb.draw(Assets.getTexture(numSprite), x, y, ancho, alto);
 
             if (Mundo.DEBUG){
                 srHitboxes.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
             }
-        } else {
-            sr.rect(x, y, ancho, alto);
         }
     }
 
     public void tocar() {
         numSprite = (numSprite == Mundo.NUM_TEXTURAS_INSECTOS ? 0 : numSprite + 1);
 
-        if(numSprite >= Mundo.NUM_TEXTURAS_INSECTOS) {
+        if(numSprite >= Mundo.NUM_INSECTOS) {
             estado = Estado.MUERTO;
             muerto = true;
             Mundo.agregarInsectoMuerto();

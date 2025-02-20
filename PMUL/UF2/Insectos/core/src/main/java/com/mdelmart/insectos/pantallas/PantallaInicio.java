@@ -17,23 +17,32 @@ public class PantallaInicio extends Pantalla {
     @Override
     public boolean teclaAbajo(int keycode) {
         if (keycode == Input.Keys.NUM_1) {
-            main.iniciarPantallaJuego(1);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 1;
         } else if (keycode == Input.Keys.NUM_2) {
-            main.iniciarPantallaJuego(2);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 2;
         } else if (keycode == Input.Keys.NUM_3) {
-            main.iniciarPantallaJuego(3);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 3;
         } else if (keycode == Input.Keys.NUM_4) {
-            main.iniciarPantallaJuego(4);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 4;
         } else if (keycode == Input.Keys.NUM_5) {
-            main.iniciarPantallaJuego(5);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 5;
         } else if (keycode == Input.Keys.NUM_6) {
-            main.iniciarPantallaJuego(6);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 6;
         } else if (keycode == Input.Keys.NUM_7) {
-            main.iniciarPantallaJuego(7);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 7;
         } else if (keycode == Input.Keys.NUM_8) {
-            main.iniciarPantallaJuego(8);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 8;
         } else if (keycode == Input.Keys.NUM_9) {
-            main.iniciarPantallaJuego(9);
+            main.iniciarPantallaJuego();
+            Mundo.NUM_INSECTOS = 9;
         }
 
         if (keycode == Input.Keys.F) {
@@ -41,8 +50,9 @@ public class PantallaInicio extends Pantalla {
         }
 
         if (keycode == Input.Keys.R) {
-            Mundo.eliminarRecords();
+            main.borrarRecords();
         }
+
         return true;
     }
 

@@ -12,8 +12,9 @@ public class Mundo {
     public static float ALTO = 768;
 
     public static int NUM_TEXTURAS_INSECTOS = Assets.NOMBRES_TEXTURAS_BICHOS.length;
-    public static final float TIEMPO_ENTRE_CAMBIO_DIRECCION_INSECTO = 10f;
+    public static final float TIEMPO_ENTRE_CAMBIO_DIRECCION_INSECTO = 0.25f;
     public static final boolean DEBUG = false;
+    public static int NUM_INSECTOS = 0;
 
     public static Random random = new Random();
     public static Insecto insecto = new Insecto(Mundo.ANCHO / 2, Mundo.ALTO / 2);
