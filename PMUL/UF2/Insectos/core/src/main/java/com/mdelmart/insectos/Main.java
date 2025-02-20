@@ -1,15 +1,11 @@
 package com.mdelmart.insectos;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.mdelmart.insectos.pantallas.Pantalla;
 import com.mdelmart.insectos.pantallas.PantallaInicio;
 import com.mdelmart.insectos.pantallas.PantallaJuego;
@@ -25,12 +21,16 @@ public class Main extends Game {
     @Override
     public void create() {
         Assets.cargarTexturas();
+
         sb = new SpriteBatch();
         sr = new ShapeRenderer();
         srHitbox = new ShapeRenderer();
+
         sr.setColor(Color.RED);
         srHitbox.setColor(Color.BLACK);
+
         Gdx.input.setInputProcessor(new ProcesadorDeEntrada(this));
+
         Pantalla.setMain(this);
         setScreen(new PantallaInicio());
     }
@@ -40,12 +40,13 @@ public class Main extends Game {
         sr.dispose();
         srHitbox.dispose();
         sb.dispose();
+
         Assets.liberarTexturas();
     }
 
-    public void iniciarPantallaJuego() {
+    public void iniciarPantallaJuego(int insectos) {
         getScreen().dispose();
-        setScreen(new PantallaJuego());
+        setScreen(new PantallaJuego(insectos));
     }
 
     public void iniciarPantallaInicio() {

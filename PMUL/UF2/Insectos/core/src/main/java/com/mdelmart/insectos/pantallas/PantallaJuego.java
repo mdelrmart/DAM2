@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mdelmart.insectos.Mundo;
 
 public class PantallaJuego extends Pantalla {
-    public PantallaJuego() {
+    public PantallaJuego(int insectos) {
         // Reseteamos el mundo al iniciar la pantalla
         Mundo.reiniciar();
     }
@@ -32,6 +32,7 @@ public class PantallaJuego extends Pantalla {
         ScreenUtils.clear(Color.WHITE);
 
         if (Mundo.insecto.estaMuerto()) {
+            // Si murió el insecto, volvemos a la pantalla de inicio
             main.iniciarPantallaInicio();
         }
 

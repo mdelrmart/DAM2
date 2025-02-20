@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Insecto {
-
     enum Estado {
         ARRIBA, ABAJO, IZQUIERDA, DERECHA, MUERTO
     }
@@ -20,10 +19,10 @@ public class Insecto {
     public Insecto(float x, float y) {
         this.x = x;
         this.y = y;
-        estado = Estado.DERECHA;
-        alto = 30f;
+        velocidad = 200f;
         ancho = 30f;
-        velocidad = 300f;
+        alto = 30f;
+        estado = Estado.DERECHA;
         hitbox = new Rectangle(x, y, ancho, alto);
         numSprite = 0;
         tiempoHastaCambio = 0;
@@ -92,19 +91,24 @@ public class Insecto {
     public void dibujar(SpriteBatch sb, ShapeRenderer sr, ShapeRenderer srHitboxes){
         if(numSprite < Mundo.NUM_TEXTURAS_INSECTOS) {
             sb.draw(Assets.getTexture(numSprite), x, y, ancho, alto);
-            srHitboxes.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+
+            if (Mundo.DEBUG){
+                srHitboxes.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+            }
         } else {
             sr.rect(x, y, ancho, alto);
         }
     }
 
     public void tocar() {
-        numSprite = (numSprite == Mundo.NUM_TEXTURAS_INSECTOS ? 0 : numSprite+1);
+        numSprite = (numSprite == Mundo.NUM_TEXTURAS_INSECTOS ? 0 : numSprite + 1);
+
         if(numSprite >= Mundo.NUM_TEXTURAS_INSECTOS) {
             estado = Estado.MUERTO;
             muerto = true;
             Mundo.agregarInsectoMuerto();
         }
+
     }
 
     public boolean estaMuerto() {

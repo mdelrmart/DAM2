@@ -1,14 +1,13 @@
 package com.mdelmart.insectos.pantallas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mdelmart.insectos.Assets;
 import com.mdelmart.insectos.Mundo;
 
 public class PantallaInicio extends Pantalla {
-
     int aleatorio = Mundo.random.nextInt(Mundo.NUM_TEXTURAS_INSECTOS);
 
     public PantallaInicio() {
@@ -17,8 +16,32 @@ public class PantallaInicio extends Pantalla {
 
     @Override
     public boolean teclaAbajo(int keycode) {
-        if (keycode == Input.Keys.SPACE) {
-            main.iniciarPantallaJuego();
+        if (keycode == Input.Keys.NUM_1) {
+            main.iniciarPantallaJuego(1);
+        } else if (keycode == Input.Keys.NUM_2) {
+            main.iniciarPantallaJuego(2);
+        } else if (keycode == Input.Keys.NUM_3) {
+            main.iniciarPantallaJuego(3);
+        } else if (keycode == Input.Keys.NUM_4) {
+            main.iniciarPantallaJuego(4);
+        } else if (keycode == Input.Keys.NUM_5) {
+            main.iniciarPantallaJuego(5);
+        } else if (keycode == Input.Keys.NUM_6) {
+            main.iniciarPantallaJuego(6);
+        } else if (keycode == Input.Keys.NUM_7) {
+            main.iniciarPantallaJuego(7);
+        } else if (keycode == Input.Keys.NUM_8) {
+            main.iniciarPantallaJuego(8);
+        } else if (keycode == Input.Keys.NUM_9) {
+            main.iniciarPantallaJuego(9);
+        }
+
+        if (keycode == Input.Keys.F) {
+            Gdx.app.exit();
+        }
+
+        if (keycode == Input.Keys.R) {
+            Mundo.eliminarRecords();
         }
         return true;
     }
@@ -34,10 +57,10 @@ public class PantallaInicio extends Pantalla {
     }
 
     @Override
-    public void render(float v) {
+    public void render(float delta) {
         ScreenUtils.clear(Color.WHITE);
         main.sb.begin();
-        Assets.fuente.draw(main.sb, "Presiona espacio para iniciar", Mundo.ANCHO / 2 - 170, Mundo.ALTO / 2);
+        Assets.fuente.draw(main.sb, "INSECTOS", Mundo.ANCHO / 2 - 60, Mundo.ALTO / 2 - 20);
         main.sb.draw(Assets.getTexture(aleatorio), Mundo.ANCHO / 2 - 50, Mundo.ALTO / 2,100,100);
         main.sb.end();
     }

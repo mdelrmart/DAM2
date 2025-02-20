@@ -13,11 +13,10 @@ public class Mundo {
 
     public static int NUM_TEXTURAS_INSECTOS = Assets.NOMBRES_TEXTURAS_BICHOS.length;
     public static final float TIEMPO_ENTRE_CAMBIO_DIRECCION_INSECTO = 0.25f;
+    public static final boolean DEBUG = false;
 
     public static Random random = new Random();
-
     public static Insecto insecto = new Insecto(Mundo.ANCHO / 2, Mundo.ALTO / 2);
-
     public static Array<Insecto> insectosMuertos = new Array<>();
 
     public static void comprobarClic(int screenX, int screenY, int pointer, int button) {
@@ -40,5 +39,9 @@ public class Mundo {
         for (Insecto insecto : insectosMuertos) {
             insecto.dibujar(sb, sr, srHitbox);
         }
+    }
+
+    public static void eliminarRecords() {
+        insectosMuertos.clear();
     }
 }
