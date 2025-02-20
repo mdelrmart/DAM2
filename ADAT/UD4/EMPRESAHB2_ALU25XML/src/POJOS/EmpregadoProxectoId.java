@@ -27,7 +27,7 @@ public class EmpregadoProxectoId implements java.io.Serializable {
     public void setNumProxecto(int numProxecto) {
         this.numProxecto = numProxecto;
     }
-    
+
     public boolean equals(Object other) {
         if ((this == other)) return true;
         if ((other == null)) return false;
@@ -45,8 +45,5 @@ public class EmpregadoProxectoId implements java.io.Serializable {
         result = 37 * result + this.getNumProxecto();
         return result;
     }
-
-
+    
 }
-
-
