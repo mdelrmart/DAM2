@@ -55,14 +55,7 @@ public class ConsultasHB {
 
     public static void mostrarEmpregadosTipo(String tipo) {
         sesion.beginTransaction();
-
-        String empleadoFijo = "Empregadofixo";
-        String empleadoTemporal = "Empregadotemporal";
-
-        if (tipo.equals("fijo")) {
-
-        }
-
+        
         List<Object[]> results = sesion.createQuery("""
                 select e.nss, concat(e.apelido1, ' ', isnull (e.apelido2,''), ', ', e.nome) as nome_completo, e.departamento.nomeDepartamento,
                        case type(e)
