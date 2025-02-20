@@ -7,6 +7,7 @@ import com.mdelmart.insectos.Mundo;
 
 public class PantallaJuego extends Pantalla {
     public PantallaJuego() {
+        // Reseteamos el mundo al iniciar la pantalla
         Mundo.reiniciar();
     }
 
@@ -38,9 +39,12 @@ public class PantallaJuego extends Pantalla {
 
         main.sr.begin(ShapeRenderer.ShapeType.Filled);
         main.srHitbox.begin(ShapeRenderer.ShapeType.Line);
+
         main.sb.begin();
+
         Mundo.dibujarInsectosMuertos(main.sb, main.sr, main.srHitbox);
         Mundo.insecto.dibujar(main.sb, main.sr, main.srHitbox);
+
         main.sb.end();
         main.srHitbox.end();
         main.sr.end();

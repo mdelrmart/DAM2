@@ -9,7 +9,10 @@ import com.mdelmart.insectos.Mundo;
 
 public class PantallaInicio extends Pantalla {
 
+    int aleatorio = Mundo.random.nextInt(Mundo.NUM_TEXTURAS_INSECTOS);
+
     public PantallaInicio() {
+
     }
 
     @Override
@@ -34,8 +37,8 @@ public class PantallaInicio extends Pantalla {
     public void render(float v) {
         ScreenUtils.clear(Color.WHITE);
         main.sb.begin();
-        Assets.fuente.draw(main.sb, "Presiona espacio para iniciar", Mundo.ANCHO / 2 - Assets.fuente.getRegion().getRegionWidth() / 2, Mundo.ALTO / 4 * 3);
-        main.sb.draw(Assets.getTexture(5), Mundo.ANCHO / 2 - Assets.getTexture(5).getWidth() / 2, Mundo.ALTO / 2 - Assets.getTexture(5).getHeight() / 2,200,200);
+        Assets.fuente.draw(main.sb, "Presiona espacio para iniciar", Mundo.ANCHO / 2 - 170, Mundo.ALTO / 2);
+        main.sb.draw(Assets.getTexture(aleatorio), Mundo.ANCHO / 2 - 50, Mundo.ALTO / 2,100,100);
         main.sb.end();
     }
 }

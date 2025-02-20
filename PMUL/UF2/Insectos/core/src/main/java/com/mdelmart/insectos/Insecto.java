@@ -30,6 +30,7 @@ public class Insecto {
     }
 
     public void actualiza(float delta) {
+        // Si el insecto está muerto, no se mueve
         if (estado == Estado.MUERTO) {
             return;
         }

@@ -19,11 +19,11 @@ public class Assets {
 
     public static void cargarTexturas() {
         for (String nombreFichero : NOMBRES_TEXTURAS_BICHOS) {
-            texturasInsectos.put(nombreFichero, new Texture(Gdx.files.internal(nombreFichero)));
+            texturasInsectos.put(nombreFichero, new Texture(Gdx.files.internal("insectos/" + nombreFichero)));
         }
 
         fuente = new BitmapFont(Gdx.files.internal("fuentes/fuente.fnt"));
-        fuente.getData().setScale(0.7f);
+        fuente.getData().setScale(1.5f);
         fuente.setColor(Color.BLACK);
     }
 
