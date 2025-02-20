@@ -11,8 +11,9 @@ public class Curso implements java.io.Serializable {
 
     private int codigo;
     private String nome;
-    private Integer horas; // Si en la base de datos es null no podemos poner int
-    private List<Edicion> edicions = new ArrayList<Edicion>();
+    private Integer horas;
+    //mapeo de las ediciones de un curso
+    private List<Edicion> edicions = new ArrayList();
 
     public Curso() {
     }
@@ -60,4 +61,7 @@ public class Curso implements java.io.Serializable {
     public void setEdicions(List<Edicion> edicions) {
         this.edicions = edicions;
     }
+
+    
+
 }

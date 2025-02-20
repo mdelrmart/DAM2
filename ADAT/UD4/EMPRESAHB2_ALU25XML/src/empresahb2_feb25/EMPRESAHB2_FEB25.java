@@ -24,6 +24,12 @@ public class EMPRESAHB2_FEB25 {
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         if (sesion != null) {
             System.out.println("Conexión realizada con éxito");
+
+            ConsultasHB.iniciarSesion();
+            ConsultasHB.mostrarEmpregados();
+            ConsultasHB.mostrarEmpregadosTipo("Empregadofixo");
+
+
             sesion.close();
 
         } else {
