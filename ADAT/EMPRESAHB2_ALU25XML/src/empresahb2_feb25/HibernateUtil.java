@@ -18,7 +18,7 @@ import org.hibernate.cfg.Configuration;
  * @author usuario
  */
 public class HibernateUtil {
-
+    
     private static final SessionFactory sessionFactory;
     private static StandardServiceRegistry serviceRegistry;
 
