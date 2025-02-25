@@ -1,3 +1,4 @@
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 public class Main {
@@ -22,13 +23,13 @@ public class Main {
                     introducirEvento();
                     break;
                 case 2:
-                    //Operaciones.consultarDisponibilidad();
+                    consultarDisponibilidad();
                     break;
                 case 3:
                     eliminarEvento();
                     break;
                 case 4:
-                    Operaciones.visualizarDatos();
+                    visualizarDatos();
                     break;
                 case 5:
                     System.out.println("Saliendo del programa...");
@@ -71,5 +72,15 @@ public class Main {
 
     public static void visualizarDatos() {
         Operaciones.visualizarDatos();
+    }
+
+    public static void consultarDisponibilidad() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Introduzca el número de personas que asistirán al evento: ");
+        int sitios = scanner.nextInt();
+
+        Operaciones.consultarDisponibilidad(sitios);
+
     }
 }

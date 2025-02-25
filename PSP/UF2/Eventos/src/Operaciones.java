@@ -38,33 +38,43 @@ public class Operaciones {
         }
     }
 
-    public static void consultarDisponibilidad(String nombre, int maxAsistentes) {
+    public static void consultarDisponibilidad(int maxAsistentes) {
         URL url = null;
         HttpURLConnection con = null;
         String json = "";
-        String strURL = "http://localhost/eventos/rest.php/insertarEvento";
+        String strURL = null;
+        try {
+            strURL = "http://localhost/eventos/rest.php/disponibilidadEventos?asistentes=" + URLEncoder.encode(String.valueOf(maxAsistentes), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
-            String parametros =
-                    "nombre=" + URLEncoder.encode(nombre, "UTF-8") + "&maxAsistentes=" + maxAsistentes;
-
             url = new URL(strURL);
             con = (HttpURLConnection) url.openConnection();
-
-            // le pasamos los parámetros en el cuerpo de la petición
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            PrintWriter out = new PrintWriter(con.getOutputStream());
-            out.print(parametros);
-            out.close();
-
             con.connect();
-            if (con.getResponseCode() == 201) {
-                /* Si en la inserción devolvemos un JSON con la clave generada, aquí deberíamos
-                recuperar el JSON y analizarlo para obtenerla por si la necesitamos */
-                System.out.println("Se ha insertado el evento correctamente");
+            if (con.getResponseCode() == 200) {
+                BufferedReader bufferIn = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String linea;
+
+                while ((linea = bufferIn.readLine()) != null) {
+                    json += linea;
+                }
+
+                bufferIn.close();
+
+                /* Analizamos el JSON devuelto, que sabemos que es un array de objetos cliente */
+                JSONArray datos = new JSONArray(json);
+                for (int i = 0; i < datos.length(); i++) {
+                    JSONObject cliente = datos.getJSONObject(i);
+
+                    String nombre = cliente.getString("nombre");
+                    int sitiosDisponibles = cliente.getInt("sitiosDisponibles");
+
+                    System.out.printf("Evento: %s - Sitios disponibles: %d\n", nombre, sitiosDisponibles);
+                }
             } else {
-                System.out.println("Problemas al insertar el evento. Respuesta: (" + con.getResponseCode() + ") " + con.getResponseMessage());
+                System.out.println("Problemas. Respuesta: (" + con.getResponseCode() + ") " + con.getResponseMessage());
             }
         } catch (IOException ex) {
             System.out.println("Error en la conexión");
@@ -150,7 +160,7 @@ public class Operaciones {
         URL url = null;
         HttpURLConnection con = null;
         String json = "";
-        String strURL = "http://localhost/eventos/rest.php/asistentesevento?evento=" + URLEncoder.encode(nombreEvento, "UTF-8");
+        String strURL = "http://localhost/eventos/rest.php/asistentesEvento?evento=" + URLEncoder.encode(nombreEvento, "UTF-8");
 
         try {
             url = new URL(strURL);
