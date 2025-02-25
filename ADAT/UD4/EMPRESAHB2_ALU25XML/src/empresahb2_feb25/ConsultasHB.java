@@ -120,4 +120,30 @@ public class ConsultasHB {
         sesion.getTransaction().commit();
 
     }
+
+    public static void listarEmpleadosDepartamento() {
+        sesion.beginTransaction();
+
+        List<Object[]> results = sesion.createQuery("""
+                select d.numDepartamento, d.nomeDepartamento, d.empregados.size as num_empleados
+                from Departamento d
+                order by num_empleados desc
+                """).list();
+
+        // Encabezado con alineación
+        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.printf("%-10s %-30s %-15s%n",
+                "Número", "Nombre", "Núm. de empleados");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        // Imprimir filas de empleados
+        for (Object[] campos : results) {
+            System.out.printf("%-10s %-30s %-15s%n",
+                    campos[0], campos[1], campos[2]);
+        }
+
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        sesion.getTransaction().commit();
+    }
 }
