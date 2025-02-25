@@ -27,7 +27,8 @@ public class EMPRESAHB2_FEB25 {
 
             ConsultasHB.iniciarSesion();
             ConsultasHB.mostrarEmpregados();
-            ConsultasHB.mostrarEmpregadosTipo("Empregadofixo");
+            ConsultasHB.mostrarEmpregadosTipo("fijo");
+            ConsultasHB.mostrarEmpleadosNacidosAPartirDe("1970");
 
 
             sesion.close();

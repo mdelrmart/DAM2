@@ -40,8 +40,6 @@ public class Empregadofixo extends Empregado implements java.io.Serializable {
         this.categoria = categoria;
     }
 
-
-
     public Double getSalario() {
         return this.salario;
     }
