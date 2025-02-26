@@ -15,6 +15,9 @@ public class Edicion implements java.io.Serializable {
     private Date data;
     private String lugar;
 
+    //1
+    private String nssProfesor;
+
     // D.6
     // Mapeo de los empleados que participan en un curso
     private Collection<Empregado> empregados = new ArrayList();
@@ -22,6 +25,18 @@ public class Edicion implements java.io.Serializable {
     public Edicion() {
     }
 
+    public Edicion(EdicionId id, Date data, String lugar) {
+        this.id = id;
+        this.data = data;
+        this.lugar = lugar;
+    }
+
+    public Edicion(EdicionId id, Date data, String lugar, String nssProfesor) {
+        this.id = id;
+        this.data = data;
+        this.lugar = lugar;
+        this.nssProfesor = nssProfesor;
+    }
 
     public EdicionId getId() {
         return this.id;
@@ -54,5 +69,13 @@ public class Edicion implements java.io.Serializable {
 
     public void setEmpregados(Collection<Empregado> empregados) {
         this.empregados = empregados;
+    }
+
+    public String getNssProfesor() {
+        return nssProfesor;
+    }
+
+    public void setNssProfesor(String nssProfesor) {
+        this.nssProfesor = nssProfesor;
     }
 }

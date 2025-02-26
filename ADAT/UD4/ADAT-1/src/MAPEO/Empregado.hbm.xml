@@ -88,6 +88,38 @@
                 <column name="Numero" not-null="true"/>
             </many-to-many>
         </set>
+
+        <!-- 2 -->
+        <!-- Mapeo de un familiar como componente, sin ser entidad independiente -->
+        <list name="familiares" table="familiar">
+            <key>
+                <column name="NSS_Empregado" not-null="true" />
+            </key>
+            <list-index column="Numero" base="1" />
+            <composite-element class="POJOS.Familiar">
+                <property name="nss" type="string">
+                    <column name="NSS" not-null="true" unique="true"/>
+                </property>
+                <property name="nome" type="string">
+                    <column name="Nome" length="25" not-null="true"/>
+                </property>
+                <property name="apelido1" type="string">
+                    <column name="Apelido1" length="25" not-null="true"/>
+                </property>
+                <property name="apelido2" type="string">
+                    <column name="Apelido2" length="25"/>
+                </property>
+                <property name="dataNacimento" type="date">
+                    <column name="data_nacimento" length="10"/>
+                </property>
+                <property name="parentesco" type="string">
+                    <column name="Parentesco" length="20"/>
+                </property>
+                <property name="sexo" type="java.lang.Character">
+                    <column name="Sexo" length="1"/>
+                </property>
+            </composite-element>
+        </list>
     </class>
     
 </hibernate-mapping>

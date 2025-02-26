@@ -20,6 +20,11 @@
             <column name="Lugar" length="25" />
         </property>
 
+        <!-- 1 -->
+        <property name="nssProfesor" type="string">
+            <column name="Profesor" length="25" />
+        </property>
+
         <!-- D.6 -->
         <!-- Mapeo de los empregados que asisten a una edición de un curso como bag -->
         <bag name="empregados" table="EDICIONCURSO_EMPREGADO" lazy="true" fetch="select">

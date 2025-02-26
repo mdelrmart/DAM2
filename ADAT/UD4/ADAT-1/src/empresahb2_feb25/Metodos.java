@@ -183,7 +183,7 @@ public class Metodos {
             return;
         }
         edicion.getEmpregados().add(empregado);
-        empregado.getCursos().add(edicion);
+        empregado.getEdiciones().add(edicion);
 
         try {
             tx = sesion.beginTransaction();

@@ -5,13 +5,12 @@
  */
 package empresahb2_feb25;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
-import POJOS.Edicion;
-import POJOS.EdicionId;
-import POJOS.Proxecto;
-import POJOS.Vehiculo;
+import POJOS.*;
 import org.hibernate.Session;
 
 /**
@@ -52,6 +51,23 @@ public class EMPRESAHB2_FEB25 {
 
         //D.6
         //Metodos.insertarEmpregadoAEdicionCurso("2525252", new EdicionId(1,1), sesion);
+
+
+
+        //1
+        // No funciona por temas de clave foránea y herencia
+        //Curso curso = new Curso(301, "Curso de Java", 100);
+        //Edicion edicion = new Edicion(new EdicionId(301, 1), Date.valueOf(LocalDate.of(2021, 5, 12)), "PONTEVEDRA", "0999900");
+        //Operaciones.anhadirCursoYEdicion(curso, edicion, sesion);
+
+        //2
+        //Familiar fam = new Familiar("12345609A", "Paco", "Terranjausen", "Estevez", Date.valueOf(LocalDate.of(2000,5,12)), "Amego", Character.valueOf('M'));
+        //Operaciones.anhadirFamiliar("0999900", fam, sesion);
+
+
+        //4
+        //Operaciones.borrarEmpregadoDeProxecto("0010010", 8, sesion);
+
 
         System.exit(0);
     }

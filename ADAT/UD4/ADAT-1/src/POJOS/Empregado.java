@@ -1,8 +1,6 @@
 package POJOS;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Empregado implements java.io.Serializable {
 
@@ -20,7 +18,7 @@ public class Empregado implements java.io.Serializable {
     private String provincia;
 
     // D.1
-    // Mapeo del departamento que pertenece un empleado
+    // Mapeo del departamento al que pertenece un empleado
     // (Mapeo de los empleados de un departamento)
     private Departamento departamento;
 
@@ -41,6 +39,9 @@ public class Empregado implements java.io.Serializable {
     // D.6
     // Mapeo de los cursos en los que participa un empleado
     private Set<Edicion> ediciones = new HashSet<>();
+
+    // Ej2
+    private List<Familiar> familiares = new ArrayList<>();
 
     public Empregado() {
     }
@@ -197,5 +198,13 @@ public class Empregado implements java.io.Serializable {
 
     public void setEdiciones(Set<Edicion> ediciones) {
         this.ediciones = ediciones;
+    }
+
+    public List<Familiar> getFamiliares() {
+        return familiares;
+    }
+
+    public void setFamiliares(List<Familiar> familiares) {
+        this.familiares = familiares;
     }
 }
