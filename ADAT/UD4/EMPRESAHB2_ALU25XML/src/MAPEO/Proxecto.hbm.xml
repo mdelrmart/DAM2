@@ -8,9 +8,7 @@
             <column name="NumProxecto" />
             <generator class="increment" />
         </id>
-        <many-to-one name="departamento" class="POJOS.Departamento" fetch="select">
-            <column name="NumDepartControla" not-null="true" />
-        </many-to-one>
+
         <property name="nomeProxecto" type="string">
             <column name="NomeProxecto" length="25" not-null="true" unique="true" />
         </property>
@@ -24,5 +22,12 @@
             </key>
             <one-to-many class="POJOS.EmpregadoProxecto" />
         </bag>
+
+        <!-- D.2 -->
+        <!-- Mapeo de los proyectos de un departamento como bag -->
+        <many-to-one name="departamento" class="POJOS.Departamento" fetch="select">
+            <column name="NumDepartControla" not-null="true" />
+        </many-to-one>
+
     </class>
 </hibernate-mapping>

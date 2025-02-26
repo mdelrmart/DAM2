@@ -28,13 +28,25 @@ public class Proxecto implements java.io.Serializable {
         this.lugar = lugar;
     }
 
+    public Proxecto(int numProxecto, String nomeProxecto, String lugar) {
+        this.numProxecto = numProxecto;
+        this.nomeProxecto = nomeProxecto;
+        this.lugar = lugar;
+    }
+
     public Proxecto(int numProxecto, Departamento departamento, String nomeProxecto) {
         this.numProxecto = numProxecto;
         this.departamento = departamento;
         this.nomeProxecto = nomeProxecto;
     }
 
- 
+    public Proxecto(int numProxecto, Collection<EmpregadoProxecto> empregadoProxectos, String lugar, String nomeProxecto, Departamento departamento) {
+        this.numProxecto = numProxecto;
+        this.empregadoProxectos = empregadoProxectos;
+        this.lugar = lugar;
+        this.nomeProxecto = nomeProxecto;
+        this.departamento = departamento;
+    }
 
     public int getNumProxecto() {
         return this.numProxecto;

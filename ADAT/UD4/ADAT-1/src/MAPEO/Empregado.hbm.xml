@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-feb-2023 8:57:24 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class catalog="EMPRESAHB2_25" name="POJOS.Empregado" schema="dbo" table="EMPREGADO">
+        <id name="nss" type="string">
+            <column length="15" name="NSS"/>
+            <generator class="assigned"/>
+        </id>
+    
+        <property name="nome" type="string">
+            <column length="25" name="Nome" not-null="true"/>
+        </property>
+        <property name="apelido1" type="string">
+            <column length="25" name="Apelido1" not-null="true"/>
+        </property>
+        <property name="apelido2" type="string">
+            <column length="25" name="Apelido2"/>
+        </property>
+       
+        <property name="rua" type="string">
+            <column length="30" name="Rua"/>
+        </property>
+        <property name="numeroCalle" type="java.lang.Integer">
+            <column name="Numero_Calle"/>
+        </property>
+        <property name="piso" type="string">
+            <column length="4" name="Piso"/>
+        </property>
+        <property name="cp" type="string">
+            <column length="5" name="CP"/>
+        </property>
+        <property name="localidade" type="string">
+            <column length="25" name="Localidade"/>
+        </property>
+        <property name="provincia" type="string">
+            <column length="15" name="Provincia"/>
+        </property>     
+        <property name="dataNacemento" type="timestamp">
+            <column length="23" name="DataNacemento"/>
+        </property>
+        <property name="sexo" type="java.lang.Character">
+            <column length="1" name="Sexo"/>
+        </property>
+
+        <!-- D.1 -->
+        <!-- Mapeo del departamento al que pertenece un empleado -->
+        <many-to-one name="departamento" class="POJOS.Departamento" fetch="select">
+            <column name="NumDepartamentoPertenece" not-null="true" length="15"/>
+        </many-to-one>
+
+        <!-- D.1 -->
+        <!--Mapeo del empleado que los supervisa -->
+        <many-to-one name="supervisor" class="POJOS.Empregado" fetch="select">
+            <column name="nsssupervisa" not-null="true" length="15"/>
+        </many-to-one>
+
+        <!-- D.1 -->
+        <!--Mapeo del empleado que los supervisa -->
+        <set name="supervisados" table="EMPREGADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NSSSupervisa" not-null="true" length="15"/>
+            </key>
+            <one-to-many class="POJOS.Empregado"/>
+        </set>
+
+        <!-- D.3 -->
+        <!-- Mapeo de los proyectos de un empleado como set -->
+        <set name="proxectos" table="EMPREGADO_PROXECTO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NSSEmpregado" not-null="true" length="15"/>
+            </key>
+            <one-to-many class="POJOS.EmpregadoProxecto"/>
+        </set>
+
+        <!-- D.4 -->
+        <!-- Mapeo del vehiculo de un empleado -->
+        <one-to-one name="vehiculo" class="POJOS.Vehiculo" cascade="all" fetch="select"/>
+
+        <!-- D.6 -->
+        <!-- Mapeo de los cursos en los que participa un empleado -->
+        <set name="ediciones" table="EDICIONCURSO_EMPREGADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nss" not-null="true"/>
+            </key>
+            <many-to-many class="POJOS.Edicion">
+                <column name="Codigo" not-null="true"/>
+                <column name="Numero" not-null="true"/>
+            </many-to-many>
+        </set>
+    </class>
+    
+</hibernate-mapping>

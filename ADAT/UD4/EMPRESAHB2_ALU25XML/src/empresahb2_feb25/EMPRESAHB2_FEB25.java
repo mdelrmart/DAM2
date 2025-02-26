@@ -8,6 +8,8 @@ package empresahb2_feb25;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import POJOS.Departamento;
+import POJOS.Proxecto;
 import org.hibernate.Session;
 
 /**
@@ -25,12 +27,15 @@ public class EMPRESAHB2_FEB25 {
         if (sesion != null) {
             System.out.println("Conexión realizada con éxito");
 
-            ConsultasHB.iniciarSesion();
+            //ConsultasHB.iniciarSesion();
             //ConsultasHB.mostrarEmpregados();
             //ConsultasHB.mostrarEmpregadosTipo("fijo");
             //ConsultasHB.mostrarEmpleadosNacidosAPartirDe("1970");
-            ConsultasHB.listarEmpleadosDepartamento();
+            //ConsultasHB.listarEmpleadosDepartamento();
 
+            // D.2
+            Proxecto pr = new Proxecto(1, "Proxecto 1", "Mercadona");
+            Metodos.asignarProxectoDepartamento(pr, 1, sesion);
 
             sesion.close();
 

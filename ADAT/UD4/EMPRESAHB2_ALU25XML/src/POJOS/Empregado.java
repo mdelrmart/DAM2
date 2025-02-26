@@ -27,21 +27,25 @@ public class Empregado implements java.io.Serializable {
     private Set<Empregado> supervisados = new HashSet(0);
     //mapear familiares como colección List
     private List<Familiar> familiares = new ArrayList();
-    
+
     //mapear componente los telefonos
     private Map<String, String> telefonos = new HashMap();
+
+    // D.1
     //mapeo del departamento que pertenece un empleado
     private Departamento departamento;
+
     //mapeo de los empreados proyectos 
     private Set<EmpregadoProxecto> empregadoProxectos = new HashSet(0);
-   //las ediciones de cursa un alumno
-    private Set <Edicion> ediciones = new HashSet();
-     //mapeo del vehiculo del empleado
+    //las ediciones de cursa un alumno
+    private Set<Edicion> ediciones = new HashSet();
+    //mapeo del vehiculo del empleado
     private Vehiculo vehiculo;
 
     public Empregado() {
     }
- public Empregado(String nss) {
+
+    public Empregado(String nss) {
         this.nss = nss;
     }
 
@@ -123,7 +127,7 @@ public class Empregado implements java.io.Serializable {
         this.sexo = sexo;
     }
 
-   
+
     public Map<String, String> getTelefonos() {
         return telefonos;
     }
@@ -148,7 +152,7 @@ public class Empregado implements java.io.Serializable {
         this.ediciones = ediciones;
     }
 
-   
+
     public Vehiculo getVehiculo() {
         return this.vehiculo;
     }
