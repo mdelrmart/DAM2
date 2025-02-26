@@ -26,10 +26,10 @@ public class EMPRESAHB2_FEB25 {
             System.out.println("Conexión realizada con éxito");
 
             ConsultasHB.iniciarSesion();
-            //ConsultasHB.mostrarEmpregados();
+            ConsultasHB.mostrarEmpregados();
             //ConsultasHB.mostrarEmpregadosTipo("fijo");
             //ConsultasHB.mostrarEmpleadosNacidosAPartirDe("1970");
-            ConsultasHB.listarEmpleadosDepartamento();
+            //ConsultasHB.listarEmpleadosDepartamento();
 
 
             sesion.close();

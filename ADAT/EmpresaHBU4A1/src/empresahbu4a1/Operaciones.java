@@ -265,6 +265,47 @@ public class Operaciones {
 
     }
 
+    public static void insertarEmpregadoYFamiliar(String nss, Empregado empregado, Familiar familiar, Session session) {
+        Transaction tx = null;
+
+        if (empregado != null) {
+            session.save(empregado);
+            empregado.getFamiliares().add(familiar);
+
+            try {
+                tx = session.beginTransaction();
+                tx.commit();
+                System.out.println("Familiar insertado correctamente.");
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                System.out.println("Error al insertar. " + e.getMessage());
+            }
+        }
+    }
+
+    public static void insertarEmpregadoFamiliarYTelefono(Empregado empregado, Familiar familiar, Telefono telefono, Session session) {
+        Transaction tx = null;
+
+        if (empregado != null) {
+            session.save(empregado);
+            empregado.getFamiliares().add(familiar);
+            empregado.getTelefonos().put(telefono.getNumero(),telefono.getInformacion());
+
+            try {
+                tx = session.beginTransaction();
+                tx.commit();
+                System.out.println("Familiar insertado correctamente.");
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                System.out.println("Error al insertar. " + e.getMessage());
+            }
+        }
+    }
+
     public static void insertarFamiliarFix(String nss, Familiar familiar, Session session) {
         Transaction tx = null;
 

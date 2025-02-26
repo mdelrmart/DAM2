@@ -45,10 +45,10 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=EmpresaHB</property>
     <property name="hibernate.connection.username">sa</property>
     <property name="hibernate.connection.password">abc123.</property>
-    <!--
+
     <mapping resource="mapeo/Departamento.hbm.xml"/>
     <mapping resource="mapeo/Empregado.hbm.xml"/>
     <mapping resource="mapeo/Proxecto.hbm.xml"/>
-    -->
+
   </session-factory>
 </hibernate-configuration>

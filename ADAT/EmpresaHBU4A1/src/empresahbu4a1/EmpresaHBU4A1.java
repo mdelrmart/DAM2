@@ -77,8 +77,12 @@ public class EmpresaHBU4A1 {
 
         //OperacionesTelefono.borrarTelefonoEmpleado("52485145F", tel, sesion);
 
-        Familiar fam = new Familiar("12345609A", "Paco", "Terranjausen", "Estevez", Date.valueOf(LocalDate.of(2000,5,12)), "Amego", Character.valueOf('M'));
-        Operaciones.insertarFamiliar("54785128M", fam, sesion);
+        Empregado empregado = new Empregado("11114444A", "Miguel", "Gutierrez");
+        Familiar fam = new Familiar("256521254B", "Paco", "Terranjausen", "Estevez", Date.valueOf(LocalDate.of(2000,5,12)), "Amego", Character.valueOf('M'));
+        Telefono tel = new Telefono("movil", "623123457");
+        //Operaciones.insertarFamiliar("54785128M", fam, sesion);
+        //Operaciones.insertarEmpregadoYFamiliar(empregado.getNss(),empregado,fam,sesion);
+        Operaciones.insertarEmpregadoFamiliarYTelefono(empregado,fam,tel,sesion);
 
         // Cerramos la sesión
         Operaciones.cerrarSesion(sesion);

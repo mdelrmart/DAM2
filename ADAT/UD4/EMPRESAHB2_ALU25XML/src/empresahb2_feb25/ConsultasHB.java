@@ -24,7 +24,6 @@ public class ConsultasHB {
     }
 
     public static void mostrarEmpregados() {
-        sesion.beginTransaction();
         List<Object[]> results = sesion.createQuery("""
                 select e.nss, concat(e.apelido1, ' ', isnull (e.apelido2,''), ', ', e.nome) as nome_completo, e.departamento.nomeDepartamento,
                 case type(e)
@@ -49,8 +48,6 @@ public class ConsultasHB {
         }
 
         System.out.println("---------------------------------------------------------------------------------------------");
-
-        sesion.getTransaction().commit();
     }
 
     public static void mostrarEmpregadosTipo(String tipo) {
@@ -63,7 +60,7 @@ public class ConsultasHB {
             return;
         }
 
-        sesion.beginTransaction();
+        //sesion.beginTransaction();
 
         List<Object[]> results = sesion.createQuery("""
                 select e.nss, concat(e.apelido1, ' ', isnull (e.apelido2,''), ', ', e.nome) as nome_completo, e.departamento.nomeDepartamento,
@@ -90,11 +87,11 @@ public class ConsultasHB {
 
         System.out.println("---------------------------------------------------------------------------------------------");
 
-        sesion.getTransaction().commit();
+        //sesion.getTransaction().commit();
     }
 
     public static void mostrarEmpleadosNacidosAPartirDe(String anho) {
-        sesion.beginTransaction();
+        //sesion.beginTransaction();
 
         List<Object[]> results = sesion.createQuery("""
                 select e.nss, concat(e.apelido1, ' ', isnull (e.apelido2,''), ', ', e.nome) as nome_completo, e.departamento.nomeDepartamento, 
@@ -117,12 +114,12 @@ public class ConsultasHB {
 
         System.out.println("---------------------------------------------------------------------------------------------");
 
-        sesion.getTransaction().commit();
+        //sesion.getTransaction().commit();
 
     }
 
     public static void listarEmpleadosDepartamento() {
-        sesion.beginTransaction();
+        //sesion.beginTransaction();
 
         List<Object[]> results = sesion.createQuery("""
                 select d.numDepartamento, d.nomeDepartamento, d.empregados.size as num_empleados
@@ -144,6 +141,6 @@ public class ConsultasHB {
 
         System.out.println("---------------------------------------------------------------------------------------------");
 
-        sesion.getTransaction().commit();
+        //sesion.getTransaction().commit();
     }
 }
